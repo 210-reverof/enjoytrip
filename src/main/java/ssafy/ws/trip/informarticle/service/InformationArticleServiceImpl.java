@@ -21,14 +21,12 @@ public class InformationArticleServiceImpl implements InformArticleService{
 
 	@Override
 	public void writeArticle(InformArticleDto informArticleDto) throws SQLException {
-		// TODO Auto-generated method stub
-		
+		informArticleRepository.writeArticle(informArticleDto);
 	}
 
 	@Override
 	public List<InformArticleDto> listArticle() throws SQLException {
-		// TODO Auto-generated method stub
-		return null;
+		return informArticleRepository.listArticle();
 	}
 
 	@Override
@@ -40,7 +38,7 @@ public class InformationArticleServiceImpl implements InformArticleService{
 	@Override
 	public InformArticleDto getArticle(int articleNo) throws SQLException {
 		// TODO Auto-generated method stub
-		return null;
+		return informArticleRepository.getArticle(articleNo);
 	}
 
 	@Override

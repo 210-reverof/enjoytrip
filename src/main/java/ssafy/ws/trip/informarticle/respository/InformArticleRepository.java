@@ -11,7 +11,8 @@ import ssafy.ws.trip.informarticle.dto.InformArticleDto;
 @Mapper
 public interface InformArticleRepository {
 	void writeArticle(InformArticleDto informArticleDto) throws SQLException;
-	List<InformArticleDto> listArticle(Map<String, Object> param) throws SQLException;
+//	List<InformArticleDto> listArticle(Map<String, Object> param) throws SQLException;
+	List<InformArticleDto> listArticle() throws SQLException;
 	int getTotalArticleCount(Map<String, Object> param) throws SQLException;
 	InformArticleDto getArticle(int articleNo) throws SQLException;
 	void updateHit(int articleNo) throws SQLException;
