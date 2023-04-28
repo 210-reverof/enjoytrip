@@ -67,6 +67,7 @@ public class UserController {
 	public ModelAndView delete(@PathVariable("id") String id) throws Exception {
 		ModelAndView mv = new ModelAndView();
 		userService.deleteUser(id);
+		
 		mv.setViewName("redirect:/index");
 		
 		return mv;
