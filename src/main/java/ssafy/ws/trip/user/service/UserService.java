@@ -7,4 +7,5 @@ public interface UserService {
 	UserDto loginUser(String userId, String userPwd) throws Exception;
 	UserDto getUserInfo(String userId) throws Exception;
 	UserDto modifyUserInfo(UserDto userDto) throws Exception;
+	void deleteUser(String userId) throws Exception;
 }
