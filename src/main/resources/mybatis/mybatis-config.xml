@@ -10,7 +10,7 @@
   
   <mappers>
     <mapper resource="mybatis/InformArticleMapper.xml"/>
-    <mapper resource="mybatis/ShereArticleMapper.xml"/>
+    <mapper resource="mybatis/ShareArticleMapper.xml"/>
     <mapper resource="mybatis/UserMapper.xml"/>
   </mappers>
 
