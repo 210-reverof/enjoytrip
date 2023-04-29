@@ -4,14 +4,15 @@ import java.sql.SQLException;
 import java.util.List;
 import java.util.Map;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import ssafy.ws.trip.informarticle.dto.InformArticleDto;
 import ssafy.ws.trip.informarticle.respository.InformArticleRepository;
 
-@Service
 public class InformationArticleServiceImpl implements InformArticleService{
 	
+	@Autowired
 	private InformArticleRepository informArticleRepository;
 
 	public InformationArticleServiceImpl(InformArticleRepository informArticleRepository) {
@@ -61,3 +62,4 @@ public class InformationArticleServiceImpl implements InformArticleService{
 	
 
 }
+

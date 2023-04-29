@@ -12,7 +12,7 @@
 		<result column="createdat" property="createdAt"/>
 	</resultMap>
 	
-	<insert id="writeArticle" parameterType="">
+	<insert id="writeArticle">
 		insert into informarticle (user_id, title, content, hit, createdat)
 		values (#{userId}, #{title}, #{content}, 0, now())
 	</insert>

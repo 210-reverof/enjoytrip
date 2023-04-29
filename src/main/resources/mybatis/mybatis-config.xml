@@ -5,7 +5,9 @@
 <configuration>
   
   <typeAliases>
+  	<typeAlias type="ssafy.ws.trip.user.dto.UserDto" alias="UserDto"/>
   	<typeAlias type="ssafy.ws.trip.informarticle.dto.InformArticleDto" alias="InformArticleDto"/>
+  	<typeAlias type="ssafy.ws.trip.sharearticle.dto.ShareArticleDto" alias="ShareArticleDto"/>
   </typeAliases>
   
   <mappers>
