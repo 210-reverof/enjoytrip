@@ -49,7 +49,7 @@
 
   <body>
     <!-- BootStrap Navigation Bar Sample -->
-    <%@ include file="/common/confirm.jsp" %>
+    <%@ include file="/WEB-INF/views/common/confirm.jsp" %>
 
     <!-- 캐러셀 이미지 슬라이드 시작-->
     <div class="container text-center">
