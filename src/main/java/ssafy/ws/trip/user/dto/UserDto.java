@@ -7,6 +7,11 @@ public class UserDto {
 	private String email;
 	
 	public UserDto() {}
+	
+	public UserDto(String id, String pw) {
+		this.id = id;
+		this.pw = pw;
+	}
 
 	public UserDto(String id, String pw, String name, String email) {
 		this.id = id;

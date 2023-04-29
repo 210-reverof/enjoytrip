@@ -17,22 +17,22 @@ String root = request.getContextPath();
           <ul class="nav col-12 col-lg-auto me-lg-auto mb-2 justify-content-center mb-md-0 align-items-center">
             <!--<img src="/wyimg/grean-obj-3.png" alt="">-->
             <li>
-              <a href="<%= root %>/index.jsp" class="nav-link mx-5 p-3 ps-5 px-2 fs-1" style="color: SeaGreen">Enjoy Trip</a>
+              <a href="<%= root %>/" class="nav-link mx-5 p-3 ps-5 px-2 fs-1" style="color: SeaGreen">Enjoy Trip</a>
             </li>
             <li>
-              <a href="<%= root %>/trip/search.jsp" class="nav-link ps-5 px-2 fs-5" style="color: ForestGreen">지역별여행지</a>
+              <a href="<%= root %>/searchpage" class="nav-link ps-5 px-2 fs-5" style="color: ForestGreen">지역별여행지</a>
             </li>
             <li>
-              <a href="<%= root %>/user?action=myroute&userid=${userinfo.id}" class="nav-link ps-3 px-2 fs-5" style="color: SkyBlue">나의여행계획</a>
+              <a href="<%= root %>/routepage/userid=${userinfo.id}" class="nav-link ps-3 px-2 fs-5" style="color: SkyBlue">나의여행계획</a>
             </li>
             <li>
               <a href="#" class="nav-link ps-3 px-2 fs-5" style="color: Crimson">핫플자랑하기</a>
             </li>
             <li>
-              <a href="<%= root %>/article?action=list" class="nav-link ps-3 px-2 fs-5" style="color: Plum">여행정보공유</a>
+              <a href="<%= root %>/sharearticlelistpage" class="nav-link ps-3 px-2 fs-5" style="color: Plum">여행정보공유</a>
             </li>
             <li>
-              <a href="<%= root %>/informarticle?action=list" class="nav-link ps-3 px-2 fs-5" style="color: Plum">공지사항</a>
+              <a href="<%= root %>/informarticlelistpage" class="nav-link ps-3 px-2 fs-5" style="color: Plum">공지사항</a>
             </li>
           </ul>
 
@@ -43,7 +43,7 @@ String root = request.getContextPath();
               class="btn fs-5"
               style="color: SeaGreen"
               id="btnlogout"
-              href="<%= root %>/user?action=logout"
+              href="<%= root %>/user/logout"
             >로그아웃
             </a>
             <button
@@ -112,36 +112,25 @@ String root = request.getContextPath();
         <div
           class="d-flex flex-wrap align-items-center justify-content-center justify-content-lg-start"
         >
-          <ul
-            class="nav col-12 col-lg-auto me-lg-auto mb-2 justify-content-center mb-md-0 align-items-center"
-          >
+          <ul class="nav col-12 col-lg-auto me-lg-auto mb-2 justify-content-center mb-md-0 align-items-center">
             <!--<img src="/wyimg/grean-obj-3.png" alt="">-->
             <li>
-              <a
-                href="<%= root %>/index.jsp"
-                class="nav-link mx-5 p-3 ps-5 px-2 fs-1"
-                style="color: SeaGreen"
-                >Enjoy Trip</a
-              >
+              <a href="<%= root %>/" class="nav-link mx-5 p-3 ps-5 px-2 fs-1" style="color: SeaGreen">Enjoy Trip</a>
             </li>
             <li>
-              <a href="<%= root %>/trip/search.jsp" class="nav-link ps-5 px-2 fs-5" style="color: ForestGreen"
-                >지역별여행지</a
-              >
+              <a href="<%= root %>/searchpage" class="nav-link ps-5 px-2 fs-5" style="color: ForestGreen">지역별여행지</a>
             </li>
             <li>
-              <a href="<%= root %>/user?action=myroute" class="nav-link ps-3 px-2 fs-5" style="color: SkyBlue">나의여행계획</a>
+              <a href="<%= root %>/routepage/userid=${userinfo.id}" class="nav-link ps-3 px-2 fs-5" style="color: SkyBlue">나의여행계획</a>
             </li>
             <li>
               <a href="#" class="nav-link ps-3 px-2 fs-5" style="color: Crimson">핫플자랑하기</a>
             </li>
             <li>
-              <a href="<%= root %>/article?action=list" class="nav-link ps-3 px-2 fs-5" style="color: Plum"
-                >여행정보공유</a
-              >
+              <a href="<%= root %>/sharearticlelistpage" class="nav-link ps-3 px-2 fs-5" style="color: Plum">여행정보공유</a>
             </li>
             <li>
-              <a href="<%= root %>/informarticle?action=list" class="nav-link ps-3 px-2 fs-5" style="color: Plum">공지사항</a>
+              <a href="<%= root %>/informarticlelistpage" class="nav-link ps-3 px-2 fs-5" style="color: Plum">공지사항</a>
             </li>
           </ul>
 
@@ -187,7 +176,7 @@ String root = request.getContextPath();
             ></button>
           </div>
           <div class="modal-body p-5 pt-0">
-            <form id="form-login" method="POST" action="<%= root %>/user" >
+            <form id="form-login" method="POST" action="<%= root %>/user/login" enctype="text">
 	              <div class="form-floating mb-3">
 	                <input type="text" class="form-control rounded-3" name="id" id="inputid" placeholder="Id" />
 	                <label for="floatingInput">SSAFY</label>
@@ -197,8 +186,7 @@ String root = request.getContextPath();
 	                />
 	                <label for="floatingPassword">1234</label>
 	              </div>
-	              <input type="hidden" name="action" value="login" />
-	              <input class="w-100 mb-2 btn btn-lg rounded-3 btn-primary" type="submit" id="btnlogin2" value = "로그인" onclick="javascript:login();" />
+	              <input class="w-100 mb-2 btn btn-lg rounded-3 btn-primary" type="submit" id="btnlogin2" value = "로그인" />
             </form>
           </div>
         </div>

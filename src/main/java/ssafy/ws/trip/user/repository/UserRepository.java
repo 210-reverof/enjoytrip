@@ -6,8 +6,8 @@ import java.util.List;
 import ssafy.ws.trip.user.dto.UserDto;
 
 public interface UserRepository {
-	void joinUser(UserDto userDto) throws SQLException;
-	UserDto loginUser(String userId, String userPwd) throws SQLException;
+	void insertUser(UserDto userDto) throws SQLException;
+	UserDto selectOne(UserDto userDto) throws SQLException;
 	UserDto getUserInfo(String userId) throws SQLException;
 	UserDto modifyUserInfo(UserDto userDto) throws SQLException;
 	void addRoute(String userid, int contentid, double latitude, double longitude) throws SQLException;

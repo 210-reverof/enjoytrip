@@ -8,7 +8,29 @@ public class MainController {
 	
 	@GetMapping("/") 
 	public String index() {
-		System.out.println("indeeex");
 		return "index";
+	}
+	
+	@GetMapping("/searchpage") 
+	public String search() {
+		return "/trip/search";
+	}
+	
+	@GetMapping("/routepage") 
+	public String route() {
+		return "/trip/my_route";
+	}
+	
+	
+	// TODO :: 수정 요함
+	@GetMapping("/sharelistpage") 
+	public String sharelist() {
+		return "/sharearticle/list";
+	}
+	
+	// TODO :: 수정 요함
+	@GetMapping("/informlistpage") 
+	public String informlist() {
+		return "/informarticle/list";
 	}
 }

@@ -141,7 +141,7 @@
 
   <body>
     <!-- BootStrap Navigation Bar Sample -->
-    <%@ include file="/common/confirm.jsp" %>
+    <%@ include file="/WEB-INF/views/common/confirm.jsp" %>
 
     <div class="container text-center">
       <!--원영 시작-->
@@ -307,7 +307,7 @@
       type="text/javascript"
       src="//dapi.kakao.com/v2/maps/sdk.js?appkey=e4cbdf27c43a803ff3c0f8fa1a9ec113&libraries=services,clusterer,drawing"
     ></script>
-    <script src="<%= root %>/res/js/wyfunctions.js"></script>
+    <script src="<%= root %>/WEB-INF/js/wyfunctions.js"></script>
     <script src="https://kit.fontawesome.com/64df31442a.js" crossorigin="anonymous"></script>
   </body>
 </html>

@@ -30,32 +30,31 @@ public class UserController {
 		ModelAndView mv = new ModelAndView();
 		userService.joinUser(userDto);
 		
-		mv.setViewName("redirect:/index");
+		mv.setViewName("redirect:index");
 		return mv;
 	}
 	
 	@PostMapping("/login")
-	public ModelAndView login(@RequestBody UserDto userDto, HttpServletRequest req) throws Exception {
+	public ModelAndView login(UserDto userDto, HttpServletRequest req) throws Exception {
 		ModelAndView mv = new ModelAndView();
-		userService.loginUser(userDto.getId(), userDto.getPw());
-		userDto = userService.getUserInfo(userDto.getId());
+		UserDto user = userService.loginUser(userDto.getId(), userDto.getPw());
 		HttpSession session = req.getSession();
-		session.setAttribute("userid", userDto);
-		mv.setViewName("redirect:/index");
+		session.setAttribute("userinfo", user);
+		mv.setViewName("redirect:/");
 		return mv;
 	}
 	
-	@GetMapping("/logout/{id}")
+	@GetMapping("/logout")
 	public ModelAndView logout(HttpServletRequest req) throws Exception {
 		ModelAndView mv = new ModelAndView();
 		HttpSession session = req.getSession();
 		session.invalidate();
-		mv.setViewName("redirect:/index");
+		mv.setViewName("redirect:/");
 		return mv;
 	}
 	
 	@PutMapping("/update")
-	public ModelAndView userUpdate(@RequestBody UserDto userDto) throws Exception {
+	public ModelAndView userUpdate(UserDto userDto) throws Exception {
 		ModelAndView mv = new ModelAndView();
 		userService.modifyUserInfo(userDto);
 		mv.setViewName("redirect:/index");
