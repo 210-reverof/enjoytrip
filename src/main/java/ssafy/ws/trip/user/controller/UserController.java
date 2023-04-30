@@ -30,7 +30,7 @@ public class UserController {
 		ModelAndView mv = new ModelAndView();
 		userService.joinUser(userDto);
 		
-		mv.setViewName("redirect:index");
+		mv.setViewName("redirect:/");
 		return mv;
 	}
 	
@@ -57,17 +57,19 @@ public class UserController {
 	public ModelAndView userUpdate(UserDto userDto) throws Exception {
 		ModelAndView mv = new ModelAndView();
 		userService.modifyUserInfo(userDto);
-		mv.setViewName("redirect:/index");
+		mv.setViewName("redirect:/");
 		
 		return mv;
 	}
 	
 	@DeleteMapping("/delete/{id}")
-	public ModelAndView delete(@PathVariable("id") String id) throws Exception {
+	public ModelAndView delete(@PathVariable("id") String id, HttpServletRequest req) throws Exception {
 		ModelAndView mv = new ModelAndView();
+		HttpSession session = req.getSession();
+		session.invalidate();
 		userService.deleteUser(id);
 		
-		mv.setViewName("redirect:/index");
+		mv.setViewName("redirect:/");
 		
 		return mv;
 	}
