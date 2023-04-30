@@ -34,21 +34,31 @@ public class InformArticleController {
 		this.informArticleService = informArticleService;
 	}
 	
-	@GetMapping("/list")
+	@GetMapping("")
 	public ModelAndView list(@RequestParam Map<String, String> map) throws Exception {
-		System.out.printf("list parameter pgno : {}\n", map.get("pgno"));
+		System.out.println("inform");
 		ModelAndView mav = new ModelAndView();
-//		List<InformArticleDto> list = informArticleService.listArticle(map);
 		List<InformArticleDto> list = informArticleService.listArticle();
-//		PageNavigation pageNavigation = informArticleService.makePageNavigation(map);
 		mav.addObject("articles", list);
-//		mav.addObject("navigation", pageNavigation);
-//		mav.addObject("pgno", map.get("pgno"));
-//		mav.addObject("key", map.get("key"));
-//		mav.addObject("word", map.get("word"));
 		mav.setViewName("/trip/informlist");
 		return mav;
 	}
+	
+//	@GetMapping("/list")
+//	public ModelAndView list(@RequestParam Map<String, String> map) throws Exception {
+//		System.out.printf("list parameter pgno : {}\n", map.get("pgno"));
+//		ModelAndView mav = new ModelAndView();
+////		List<InformArticleDto> list = informArticleService.listArticle(map);
+//		List<InformArticleDto> list = informArticleService.listArticle();
+////		PageNavigation pageNavigation = informArticleService.makePageNavigation(map);
+//		mav.addObject("articles", list);
+////		mav.addObject("navigation", pageNavigation);
+////		mav.addObject("pgno", map.get("pgno"));
+////		mav.addObject("key", map.get("key"));
+////		mav.addObject("word", map.get("word"));
+//		mav.setViewName("/trip/informlist");
+//		return mav;
+//	}
 	
 	@GetMapping("/view")
 	public String view(@RequestParam("articleno") int articleNo, @RequestParam Map<String, String> map, Model model)
@@ -69,17 +79,19 @@ public class InformArticleController {
 //		model.addAttribute("pgno", map.get("pgno"));
 //		model.addAttribute("key", map.get("key"));
 //		model.addAttribute("word", map.get("word"));
-		return "trip/makinginformlist";
+		return "/trip/makinginformlist";
 	}
 	
 	@PostMapping("/write")
-	public String write(InformArticleDto informArticleDt,HttpSession session,
+	public String write(InformArticleDto informArticleDto ,HttpSession session,
 			RedirectAttributes redirectAttributes) throws SQLException {
-		informArticleService.writeArticle(informArticleDt);
-		redirectAttributes.addAttribute("pgno", "1");
-		redirectAttributes.addAttribute("key", "");
-		redirectAttributes.addAttribute("word", "");
-		return "redirect:/article/list";
+		System.out.println("post write");
+		System.out.println(informArticleDto.toString());
+		informArticleService.writeArticle(informArticleDto);
+//		redirectAttributes.addAttribute("pgno", "1");
+//		redirectAttributes.addAttribute("key", "");
+//		redirectAttributes.addAttribute("word", "");
+		return "redirect:/informarticle";
 	}
 	
 	

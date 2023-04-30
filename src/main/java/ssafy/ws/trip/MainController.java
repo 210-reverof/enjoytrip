@@ -29,8 +29,9 @@ public class MainController {
 	}
 	
 	// TODO :: 수정 요함
-	@GetMapping("/informlistpage") 
-	public String informlist() {
-		return "/informarticle/list";
-	}
+//	@GetMapping("/informarticlelistpage") 
+//	public String informlist() {
+//		System.out.println("inform");
+//		return "/informarticle/list";
+//	}
 }

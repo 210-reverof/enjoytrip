@@ -12,11 +12,25 @@
 		<result column="createdat" property="createdAt"/>
 	</resultMap>
 	
-	<insert id="writeArticle">
+	<insert id="writeArticle" parameterType="InformArticleDto">
 		insert into informarticle (user_id, title, content, hit, createdat)
 		values (#{userId}, #{title}, #{content}, 0, now())
 	</insert>
 	
+	<select id="listArticle" resultMap="InformArticleDto">
+		select article_no, user_id, title, content, hit, createdat
+		from informarticle
+	</select>
+	
+	
+<!-- 	void writeArticle(InformArticleDto informArticleDto) throws SQLException;
+	List<InformArticleDto> listArticle() throws SQLException;
+	int getTotalArticleCount(Map<String, Object> param) throws SQLException;
+	InformArticleDto getArticle(int articleNo) throws SQLException;
+	void updateHit(int articleNo) throws SQLException;
+	
+	void modifyArticle(InformArticleDto InformArticleDto) throws SQLException;
+	void deleteArticle(int articleNo) throws SQLException; -->
 	
 	
 </mapper>

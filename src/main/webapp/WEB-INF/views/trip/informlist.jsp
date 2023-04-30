@@ -29,7 +29,7 @@
     </style>
   </head>
   <body>
-	<%@ include file="/common/confirm.jsp" %>
+    <%@ include file="/WEB-INF/views/common/confirm.jsp" %>
 	
       <div class="row justify-content-center">
         <div class="col-lg-8 col-md-10 col-sm-12">
@@ -115,12 +115,12 @@
       titles.forEach(function (title) {
         title.addEventListener("click", function () {
           console.log(this.getAttribute("data-no"));
-          location.href = "${root}/informarticle?action=view&articleno=" + this.getAttribute("data-no");
+          location.href = "${root}/informarticle/view?articleno=" + this.getAttribute("data-no");
         });
       });
 
       document.querySelector("#btn-mv-register").addEventListener("click", function () {
-        location.href = "${root}/informarticle?action=makinglist";
+        location.href = "${root}/informarticle/makinglist";
       });
       
       document.querySelector("#btn-search").addEventListener("click", function () {
@@ -141,4 +141,4 @@
         });
       });
     </script>
-<%@ include file="/common/footer.jsp" %>
+<%-- <%@ include file="/common/footer.jsp" %> --%>
