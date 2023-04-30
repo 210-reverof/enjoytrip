@@ -71,7 +71,7 @@ public class UserController {
 		return mv;
 	}
 	
-	@DeleteMapping("/delete/{id}")
+	@GetMapping("/delete/{id}")
 	public ModelAndView delete(@PathVariable("id") String id, HttpServletRequest req) throws Exception {
 		ModelAndView mv = new ModelAndView();
 		HttpSession session = req.getSession();

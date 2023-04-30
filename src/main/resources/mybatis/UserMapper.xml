@@ -14,4 +14,9 @@
 		where id = #{id} and pw = #{pw}
 	</select>
 	
+	<delete id="deleteOne" parameterType="String">
+		delete from user
+		where id = #{id}
+	</delete>
+	
 </mapper>

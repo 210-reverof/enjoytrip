@@ -96,7 +96,7 @@ String root = request.getContextPath();
               <input type="hidden" name="action" value="modify" />
               <input class="w-100 mb-2 btn btn-lg rounded-3 btn-primary" type="submit" id="btn-modify" value = "정보 수정" />
             </form>
-            <a class="w-100 mb-2 btn btn-lg rounded-3 btn-primary" href="<%= root %>/user/delete/${usedinfo.id}" id="btn-modify">회원 탈퇴</a>
+            <a class="w-100 mb-2 btn btn-lg rounded-3 btn-primary" href="<%= root %>/user/delete/${userinfo.id}" id="btn-modify">회원 탈퇴</a>
           </div>
         </div>
       </div>

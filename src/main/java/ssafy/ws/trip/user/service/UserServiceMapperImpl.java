@@ -37,7 +37,7 @@ public class UserServiceMapperImpl implements UserService  {
 
 	@Override
 	public void deleteUser(String userId) throws Exception {
-		// TODO Auto-generated method stub
+		session.getMapper(UserRepository.class).deleteOne(userId);
 		
 	}
 
