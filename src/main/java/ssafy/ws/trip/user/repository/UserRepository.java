@@ -10,6 +10,5 @@ public interface UserRepository {
 	UserDto selectOne(UserDto userDto) throws SQLException;
 	UserDto getUserInfo(String userId) throws SQLException;
 	UserDto modifyUserInfo(UserDto userDto) throws SQLException;
-	void addRoute(String userid, int contentid, double latitude, double longitude) throws SQLException;
-	void deleteRoute(String userid, int contentid) throws SQLException;
+	void deleteOne(String id) throws SQLException;
 }
