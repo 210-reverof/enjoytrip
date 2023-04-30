@@ -15,6 +15,7 @@ public class UserServiceMapperImpl implements UserService  {
 
 	@Override
 	public void joinUser(UserDto userDto) throws Exception {
+		session.getMapper(UserRepository.class).insertUser(userDto);
 	}
 
 	@Override

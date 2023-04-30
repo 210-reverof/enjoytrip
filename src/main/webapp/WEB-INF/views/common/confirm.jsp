@@ -94,13 +94,9 @@ String root = request.getContextPath();
                 <label for="floatingPassword">email</label>
               </div>
               <input type="hidden" name="action" value="modify" />
-              <input class="w-100 mb-2 btn btn-lg rounded-3 btn-primary" type="submit" id="btn-modify" value = "정보 수정" onclick="javascript:modify();" />
+              <input class="w-100 mb-2 btn btn-lg rounded-3 btn-primary" type="submit" id="btn-modify" value = "정보 수정" />
             </form>
-            <form id="form-modify" method="POST" action="<%= root %>/user" >
-            	<input type="hidden" class="form-control rounded-3" name="action" value="deleteuser" />
-              <input type="hidden" class="form-control rounded-3" name="id" value="${userinfo.id}" />
-              <input class="w-100 mb-2 btn btn-lg rounded-3 btn-primary" type="submit" id="btn-modify" value = "회원 탈퇴" onclick="javascript:modify();" />
-            </form>
+            <a class="w-100 mb-2 btn btn-lg rounded-3 btn-primary" href="<%= root %>/user/delete/${usedinfo.id}" id="btn-modify">회원 탈퇴</a>
           </div>
         </div>
       </div>
@@ -208,7 +204,7 @@ String root = request.getContextPath();
             ></button>
           </div>
           <div class="modal-body p-5 pt-0">
-             <form id="form-signup" method="POST" action="<%= root %>/user" >
+             <form id="form-signup" method="POST" action="<%= root %>/user/join" >
               <div class="form-floating mb-3">
               	<input type="text" class="form-control rounded-3" name="name" id="floatingPassword" placeholder="Name" />
                 <label for="floatingPassword">사용자 이름</label>
@@ -229,8 +225,7 @@ String root = request.getContextPath();
                 <input type="email" class="form-control rounded-3" name="email" id="floatingPassword" placeholder="Email" />
                 <label for="floatingPassword">SSAFY@SSAFY.com</label>
               </div>
-              <input type="hidden" name="action" value="join" />
-              <input class="w-100 mb-2 btn btn-lg rounded-3 btn-primary" type="submit" id="btn-join" value = "회원가입" onclick="javascript:join();" />
+              <input class="w-100 mb-2 btn btn-lg rounded-3 btn-primary" type="submit" id="btn-join" value = "회원가입" />
             </form>
           </div>
         </div>

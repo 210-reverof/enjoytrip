@@ -1,5 +1,7 @@
 package ssafy.ws.trip.user.controller;
 
+import java.util.Map;
+
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
@@ -12,6 +14,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
 import ssafy.ws.trip.user.dto.UserDto;
@@ -26,11 +29,17 @@ public class UserController {
 	private UserService userService;
 	
 	@PostMapping("/join")
-	public ModelAndView joinUser(@RequestBody UserDto userDto) throws Exception {
+	public ModelAndView joinUser(@RequestParam Map<String, String> map) throws Exception {
 		ModelAndView mv = new ModelAndView();
-		userService.joinUser(userDto);
-		
 		mv.setViewName("redirect:/");
+		String pw = map.get("pw");
+		String pwcheck = map.get("pwcheck");
+		if (!pw.equals(pwcheck)) {
+			mv.addObject("msg", "비밀번호를 확인해주세요");
+			return mv;
+		}
+		userService.joinUser(new UserDto(map.get("id"), pw, map.get("name"), map.get("email")));
+		
 		return mv;
 	}
 	
