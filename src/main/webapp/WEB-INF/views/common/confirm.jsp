@@ -72,7 +72,7 @@ String root = request.getContextPath();
             ></button>
           </div>
           <div class="modal-body p-5 pt-0">
-            <form id="form-modify" method="POST" action="<%= root %>/user" >
+            <form id="form-modify" method="POST" action="<%= root %>/user/modify" >
               <div class="form-floating mb-3">
                 <input type="text" class="form-control rounded-3" name="name" id="floatingPassword" placeholder="Name" value="${userinfo.name}" />
                 <label for="floatingPassword">name</label>
@@ -93,7 +93,6 @@ String root = request.getContextPath();
                 <input type="email" class="form-control rounded-3" name="email" id="floatingPassword" placeholder="Email" value="${userinfo.email}" />
                 <label for="floatingPassword">email</label>
               </div>
-              <input type="hidden" name="action" value="modify" />
               <input class="w-100 mb-2 btn btn-lg rounded-3 btn-primary" type="submit" id="btn-modify" value = "정보 수정" />
             </form>
             <a class="w-100 mb-2 btn btn-lg rounded-3 btn-primary" href="<%= root %>/user/delete/${userinfo.id}" id="btn-modify">회원 탈퇴</a>

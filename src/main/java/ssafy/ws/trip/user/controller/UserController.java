@@ -62,10 +62,12 @@ public class UserController {
 		return mv;
 	}
 	
-	@PutMapping("/update")
-	public ModelAndView userUpdate(UserDto userDto) throws Exception {
+	@PostMapping("/modify")
+	public ModelAndView userUpdate(UserDto userDto, HttpServletRequest req) throws Exception {
 		ModelAndView mv = new ModelAndView();
-		userService.modifyUserInfo(userDto);
+		UserDto user = userService.modifyUserInfo(userDto);
+		HttpSession session = req.getSession();
+		session.setAttribute("userinfo", user);
 		mv.setViewName("redirect:/");
 		
 		return mv;

@@ -9,6 +9,6 @@ public interface UserRepository {
 	void insertUser(UserDto userDto) throws SQLException;
 	UserDto selectOne(UserDto userDto) throws SQLException;
 	UserDto getUserInfo(String userId) throws SQLException;
-	UserDto modifyUserInfo(UserDto userDto) throws SQLException;
+	void updateOne(UserDto userDto) throws SQLException;
 	void deleteOne(String id) throws SQLException;
 }

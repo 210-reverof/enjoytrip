@@ -31,8 +31,8 @@ public class UserServiceMapperImpl implements UserService  {
 
 	@Override
 	public UserDto modifyUserInfo(UserDto userDto) throws Exception {
-		// TODO Auto-generated method stub
-		return null;
+		session.getMapper(UserRepository.class).updateOne(userDto);
+		return session.getMapper(UserRepository.class).selectOne(userDto);
 	}
 
 	@Override
