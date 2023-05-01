@@ -2,6 +2,7 @@ package ssafy.ws.trip.route.controller;
 
 import javax.servlet.http.HttpSession;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -16,21 +17,22 @@ import ssafy.ws.trip.user.dto.UserDto;
 @RequestMapping("/route")
 public class RouteController {
 	
+	@Autowired
 	RouteService routeService;
 	
 	@GetMapping("/mvroute")
 	public ModelAndView mvmyroute(HttpSession session) throws Exception {
 		ModelAndView mv = new ModelAndView();
-		UserDto user = (UserDto) session.getAttribute("userinfo");
-		
-		if (user == null) {
-			mv.addObject("msg", "로그인 후 이용가능합니다.");
-			mv.setViewName("redirect:/");
-			return mv;
-		}
-		
-		mv.addObject("myroute", routeService.selectMyList());
-		mv.setViewName("redirect:/mvroute");
+//		UserDto user = (UserDto) session.getAttribute("userinfo");
+//		
+//		if (user == null) {
+//			mv.addObject("msg", "로그인 후 이용가능합니다.");
+//			mv.setViewName("redirect:/");
+//			return mv;
+//		}
+//		
+//		mv.addObject("myroute", routeService.selectMyList());
+		mv.setViewName("/trip/myroute");
 		return mv;
 	}
 	

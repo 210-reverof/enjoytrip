@@ -13,6 +13,7 @@
   	<typeAlias type="ssafy.ws.trip.attraction.dto.GugunDto" alias="GugunDto"/>
   	<typeAlias type="ssafy.ws.trip.route.dto.RouteDto" alias="RouteDto"/>
   	<typeAlias type="ssafy.ws.trip.route.dto.RouteResDto" alias="RouteResDto"/>
+  	<typeAlias type="ssafy.ws.trip.route.dto.RouteAttrDto" alias="RouteAttrDto"/>
   </typeAliases>
   
   <mappers>
