@@ -64,7 +64,9 @@ public class InformArticleController {
 		System.out.println("view articleNo : "+ articleNo);
 		InformArticleDto informArticleDto = informArticleService.getArticle(articleNo);
 		UserDto userDto = (UserDto) session.getAttribute("userinfo");
-		informArticleDto.setUserId(userDto.getId());
+		if(userDto != null) {
+			informArticleDto.setUserId(userDto.getId());
+		}
 		informArticleDto.setArticleNo(articleNo);
 		System.out.println("view obj ::"+informArticleDto.toString());
 		informArticleService.updateHit(articleNo);
@@ -104,9 +106,11 @@ public class InformArticleController {
 			throws Exception {
 		System.out.println("modify parameter pgno : "+ map.get("pgno"));
 		InformArticleDto informArticleDto = informArticleService.getArticle(articleNo);
-		UserDto userDto = (UserDto) session.getAttribute("userinfo");
-		informArticleDto.setUserId(userDto.getId());
 		informArticleDto.setArticleNo(articleNo);
+		UserDto userDto = (UserDto) session.getAttribute("userinfo");
+		if(userDto != null) {
+			informArticleDto.setUserId(userDto.getId());
+		}
 		System.out.println(informArticleDto.toString());
 		model.addAttribute("article", informArticleDto);
 		model.addAttribute("pgno", map.get("pgno"));
@@ -119,6 +123,7 @@ public class InformArticleController {
 	public String modify(InformArticleDto informArticleDto, @RequestParam Map<String, String> map,
 			RedirectAttributes redirectAttributes) throws Exception {
 		System.out.println("post modify parameter pgno : "+ map.get("pgno"));
+		System.out.println(":: post modify ::" + informArticleDto.toString());
 		informArticleService.modifyArticle(informArticleDto);
 		redirectAttributes.addAttribute("pgno", map.get("pgno"));
 		redirectAttributes.addAttribute("key", map.get("key"));

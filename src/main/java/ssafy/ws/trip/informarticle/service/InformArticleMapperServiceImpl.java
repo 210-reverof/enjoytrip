@@ -33,7 +33,7 @@ public class InformArticleMapperServiceImpl implements InformArticleService{
 		Map<String, Object> param = new HashMap<String, Object>();
 		String key = map.get("key");
 		if("user_id".equals(key))
-			key = "user_id";
+			key = "b.user_id";
 		param.put("key", key == null ? "" : key);
 		param.put("word", map.get("word") == null ? "" : map.get("word"));
 		int pgNo = Integer.parseInt(map.get("pgno") == null ? "1" : map.get("pgno"));
@@ -101,7 +101,6 @@ public class InformArticleMapperServiceImpl implements InformArticleService{
 		pageNavigation.setEndRange(endRange);
 		pageNavigation.makeNavigator();
 		
-		System.out.println("page :: total : "+totalCount + ", totalPageCount : " +totalPageCount);
 		return pageNavigation;
 	}
 	

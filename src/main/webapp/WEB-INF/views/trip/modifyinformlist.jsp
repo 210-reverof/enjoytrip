@@ -51,7 +51,12 @@
   <body>
     <!-- BootStrap Navigation Bar Sample -->
     <%@ include file="/WEB-INF/views/common/confirm.jsp" %>
-
+	<c:if test="${empty userinfo}">
+        <script>
+        alert("로그인 해주세요.");
+        location.href = "${root}/informarticle?pgno=1&key=&word=";
+        </script>
+    </c:if>
 
       <!--구분선 구분선 구분선 구분선 구분선 구분선 구분선 구분선 구분선 -->
       <!--구분선 구분선 구분선 구분선 구분선 구분선 구분선 구분선 구분선 -->

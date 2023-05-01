@@ -40,9 +40,21 @@
         <div class="col-lg-8 col-md-10 col-sm-12">
           <div class="row align-self-center mb-2">
             <div class="col-md-2 text-start">
-              <button type="button" id="btn-mv-register" class="btn btn-outline-primary btn-sm">
-                글쓰기
-              </button>
+            <c:if test="${article ne null}">
+            	<button type="button" id="btn-mv-register" class="btn btn-outline-primary btn-sm">
+					글쓰기
+				</button>
+		        <script>
+			        document.querySelector("#btn-mv-register").addEventListener("click", function () {
+			      	  let form = document.querySelector("#form-param");
+			            form.setAttribute("action", "${root}/informarticle/makinglist");
+			            form.submit();
+			        });
+		        </script>
+		    </c:if>
+              <!-- <button type="button" id="btn-mv-register" class="btn btn-outline-primary btn-sm">
+                	글쓰기
+              </button> -->
             </div>
             <div class="col-md-7 offset-3">
               <form class="d-flex" id="form-search" action="">
@@ -55,8 +67,8 @@
                   aria-label="검색조건"
                 >
                   <option selected>검색조건</option>
-                  <option value="article_no">글번호</option>
-                  <option value="subject">제목</option>
+                  <!-- <option value="article_no">글번호</option> -->
+                  <option value="title">제목</option>
                   <option value="user_id">작성자</option>
                 </select>
                 <div class="input-group input-group-sm">
