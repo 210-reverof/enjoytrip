@@ -50,7 +50,7 @@
 
   <body>
     <!-- BootStrap Navigation Bar Sample -->
-   <%@ include file="/common/confirm.jsp" %>
+    <%@ include file="/WEB-INF/views/common/confirm.jsp" %>
 
       <!--구분선 구분선 구분선 구분선 구분선 구분선 구분선 구분선 구분선 -->
       <!--구분선 구분선 구분선 구분선 구분선 구분선 구분선 구분선 구분선 -->
@@ -69,7 +69,7 @@
   
           <div class="container">
             <form id="form-register" method="post" action="">
-            <input type="hidden" name="userid" value="${userinfo.id}">
+            <input type="hidden" name="userId" value="${userinfo.id}">
             <input type="hidden" name="action" value="write">
               <div class="pt-4 pb-4">
                 <!-- <label for="subject">제목</label> -->
@@ -77,8 +77,8 @@
                 <input
                   type="text"
                   class="form-control"
-                  id="subject"
-                  name="subject"
+                  id="title"
+                  name="title"
                   placeholder="제목을 입력하세요."
                 />
                 제목을 입력하세요
@@ -105,7 +105,7 @@
               </a>
             </div>
             <div class=" col-md-1 ms-2 text-nowrap">
-              <a class="btn btn-danger" href="<%= root %>/article?action=list">
+              <a class="btn btn-danger" href="<%= root %>/informarticle?pgno=1&key=&word=">
                 <!-- <i class="fas fa-table me-1"></i> -->
                 <i class="fas fa-edit"></i> 목록
               </a>
@@ -204,7 +204,7 @@
     
     <script>
       document.querySelector("#btn-register").addEventListener("click", function () {
-        if (!document.querySelector("#subject").value) {
+        if (!document.querySelector("#title").value) {
           alert("제목 입력!!");
           return;
         } else if (!document.querySelector("#content").value) {
@@ -212,7 +212,7 @@
           return;
         } else {
           let form = document.querySelector("#form-register");
-          form.setAttribute("action", "${root}/article");
+          form.setAttribute("action", "${root}/informarticle?pgno=1&key=&word=");
           form.submit();
         }
       });

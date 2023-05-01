@@ -29,7 +29,7 @@
     </style>
   </head>
   <body>
-	<%@ include file="/common/confirm.jsp" %>
+    <%@ include file="/WEB-INF/views/common/confirm.jsp" %>
 	
       <div class="row justify-content-center">
         <div class="col-lg-8 col-md-10 col-sm-12">
@@ -103,24 +103,37 @@
         </div>
       </div>
     </div>
-    <form id="form-param" method="get" action="">
+    <!-- <form id="form-param" method="get" action="">
       <input type="hidden" id="p-action" name="action" value="">
       <input type="hidden" id="p-pgno" name="pgno" value="">
       <input type="hidden" id="p-key" name="key" value="">
       <input type="hidden" id="p-word" name="word" value="">
+    </form> -->
+    <form id="form-param" method="get" action="">
+      <input type="hidden" name="pgno" id="pgno" value="${pgno}">
+      <input type="hidden" name="key" value="${key}">
+      <input type="hidden" name="word" value="${word}">
+    </form>
+    <form id="form-no-param" method="get" action="${root}/informarticle/view">
+      <input type="hidden" name="pgno" value="${pgno}">
+      <input type="hidden" name="key" value="${key}">
+      <input type="hidden" name="word" value="${word}">
+      <input type="hidden" id="articleno" name="articleno" value="">
     </form>
     </body>
     <script>
       let titles = document.querySelectorAll(".article-title");
       titles.forEach(function (title) {
         title.addEventListener("click", function () {
-          console.log(this.getAttribute("data-no"));
-          location.href = "${root}/informarticle?action=view&articleno=" + this.getAttribute("data-no");
+            document.querySelector("#articleno").value = this.getAttribute("data-no");
+            document.querySelector("#form-no-param").submit();
         });
       });
 
       document.querySelector("#btn-mv-register").addEventListener("click", function () {
-        location.href = "${root}/informarticle?action=makinglist";
+    	  let form = document.querySelector("#form-param");
+          form.setAttribute("action", "${root}/informarticle/makinglist");
+          form.submit();
       });
       
       document.querySelector("#btn-search").addEventListener("click", function () {
@@ -129,7 +142,7 @@
           form.submit();
       });
       
-      let pages = document.querySelectorAll(".page-link");
+      /* let pages = document.querySelectorAll(".page-link");
       pages.forEach(function (page) {
         page.addEventListener("click", function () {
           console.log(this.parentNode.getAttribute("data-pg"));
@@ -139,6 +152,17 @@
        	  document.querySelector("#p-word").value = "${param.word}";
           document.querySelector("#form-param").submit();
         });
+      }); */
+      
+      let pages = document.querySelectorAll(".page-link");
+      pages.forEach(function (page) {
+        page.addEventListener("click", function () {
+       	  document.querySelector("#pgno").value = this.parentNode.getAttribute("data-pg");
+          let form = document.querySelector("#form-param");
+          form.setAttribute("action", "${root}/informarticle");
+          form.submit();
+        });
       });
+      
     </script>
-<%@ include file="/common/footer.jsp" %>
+<%-- <%@ include file="/common/footer.jsp" %> --%>

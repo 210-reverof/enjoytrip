@@ -50,7 +50,7 @@
 
   <body>
     <!-- BootStrap Navigation Bar Sample -->
-   <%@ include file="/common/confirm.jsp" %>
+    <%@ include file="/WEB-INF/views/common/confirm.jsp" %>
 
       <!--구분선 구분선 구분선 구분선 구분선 구분선 구분선 구분선 구분선 -->
       <!--구분선 구분선 구분선 구분선 구분선 구분선 구분선 구분선 구분선 -->
@@ -70,15 +70,15 @@
           <div class="container">
             <form id="form-register" method="post" action="">
             <input type="hidden" name="userid" value="${userinfo.id}">
-            <input type="hidden" name="action" value="write">
+            <!-- <input type="hidden" name="action" value="write"> -->
               <div class="pt-4 pb-4">
                 <!-- <label for="subject">제목</label> -->
                 제목
                 <input
                   type="text"
                   class="form-control"
-                  id="subject"
-                  name="subject"
+                  id="title"
+                  name="title"
                   placeholder="제목을 입력하세요."
                 />
                 제목을 입력하세요
@@ -204,7 +204,7 @@
     
     <script>
       document.querySelector("#btn-register").addEventListener("click", function () {
-        if (!document.querySelector("#subject").value) {
+        if (!document.querySelector("#title").value) {
           alert("제목 입력!!");
           return;
         } else if (!document.querySelector("#content").value) {
@@ -212,7 +212,7 @@
           return;
         } else {
           let form = document.querySelector("#form-register");
-          form.setAttribute("action", "${root}/informarticle");
+          form.setAttribute("action", "${root}/informarticle/write");
           form.submit();
         }
       });

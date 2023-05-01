@@ -50,7 +50,7 @@
 
   <body>
     <!-- BootStrap Navigation Bar Sample -->
-    <%@ include file="/common/confirm.jsp" %>
+    <%@ include file="/WEB-INF/views/common/confirm.jsp" %>
 
 
       <!--구분선 구분선 구분선 구분선 구분선 구분선 구분선 구분선 구분선 -->
