@@ -35,16 +35,14 @@
     <div class="container">
       <!--원영 시작-->
       <!-- 관광지 검색 start -->
-      <div id="search-top-label" class="fs-1 text-center">여행 경로 추가하기</div>
-      
-      <form id="insert-form" method="POST" action="<%= root %>/route/insert">
-      	<input type="hidden" name="title" value="제목1제목1"/>
-  		<input type="hidden" name="list" value="${list}" />	
-      	<input type="submit" class="btn btn-outline-primary btn-sm" value="완료"/>
-      </form>
+      <div id="search-top-label" class="fs-1 text-center">여행 경로 생성하기</div>
       
       <div id ="my-route-panel" class="container text-start">
           <div id="search-top-label" class="fs-4">현재 나의 여행 경로</div>
+          <div id ="insert-route-panel">
+		      <input id="insert-title-text" type="text" name="title" value="여행 경로 이름"/>
+		      <button id="insert-button" class="btn btn-outline-primary btn-sm">생성 완료</button>
+      	 </div>
       </div>
       <div id="route-panel"
         class="search-cards m-4 row row-cols-1 row-cols-md-2 row-cols-lg-4 g-4 d-flex"

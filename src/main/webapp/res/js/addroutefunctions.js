@@ -9,6 +9,7 @@ var types = [12, 14, 15, 25, 28, 32, 38, 39];
 var originTypeNums = [12, 14, 15, 25, 28, 32, 38, 39];
 var currResults = [];
 const route = [];
+const attractions = [];
 
 window.onload = init();
 
@@ -23,6 +24,7 @@ function init() {
         .then((response) => response.json())
         .then((data) => makeDetailOption(data));
     
+    document.getElementById("")
     document.getElementById("select-all-btn").addEventListener("click", selectAll);
     var checks = document.getElementsByClassName("form-check-input");
 
@@ -30,6 +32,25 @@ function init() {
         checks[i].addEventListener("click", selectType);
     }
     getTrips();
+
+    const insertButton = document.getElementById("insert-button");
+    insertButton.addEventListener("click", insertButtonAction);
+}
+
+function insertButtonAction() {
+    var titleInput = document.getElementById("insert-title-text");
+    var title = titleInput.value;
+    
+    fetch("/enjoytrip/route/insert", {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json'
+        },
+        body: JSON.stringify({ attractions, title })
+      })
+      .then(response => response.json())
+      .then(data => console.log(data))
+      .catch(error => console.error(error));
 }
 
 function fetchAllAreas(areaUrl) {
@@ -190,7 +211,7 @@ function addCard(result) {
         input2.innerHTML = "추가";
         input2.onclick = function() {
             route.push(result);
-            console.log(route);
+            attractions.push(result.contentId);
             getRoutes();
         };
         form.appendChild(input2);
@@ -271,7 +292,7 @@ function addRouteCard(result, idx) {
     input2.innerHTML = "삭제";;
     input2.onclick = function() {
         route.splice(idx, 1);
-        console.log(route);
+        attractions.splice(idx, 1);
         getRoutes();
     };
     form.appendChild(input2);

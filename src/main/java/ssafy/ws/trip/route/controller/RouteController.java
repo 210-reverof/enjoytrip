@@ -2,6 +2,7 @@ package ssafy.ws.trip.route.controller;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 
 import javax.servlet.http.HttpSession;
 
@@ -10,6 +11,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.ModelAndView;
 
@@ -48,12 +50,14 @@ public class RouteController {
 	}
 	
 	@PostMapping("/insert")
-	public ModelAndView insert(String title, ArrayList<Integer> attrids, HttpSession session) throws Exception {
+	public ModelAndView insert(@RequestBody Map<String, Object> requestBody, HttpSession session) throws Exception {
 		ModelAndView mv = new ModelAndView();
 		UserDto user = (UserDto) session.getAttribute("userinfo");
+		List<Integer> attrids = (List<Integer>) requestBody.get("attractions");
+	    String title = (String) requestBody.get("title");
 		System.out.println(new RouteDto(user.getId(), title, attrids));
 		
-	//	routeService.insertRoute(new RouteDto(user.getId(), title, attrids));
+		//routeService.insertRoute(new RouteDto(user.getId(), title, attrids));
 		mv.setViewName("redirect:/mvroute");
 		return mv;
 	}
