@@ -50,8 +50,13 @@
 
   <body>
     <!-- BootStrap Navigation Bar Sample -->
-    <%@ include file="/common/confirm.jsp" %>
-
+    <%@ include file="/WEB-INF/views/common/confirm.jsp" %>
+	<c:if test="${empty userinfo}">
+        <script>
+        alert("로그인 해주세요.");
+        location.href = "${root}/sharearticle?pgno=1&key=&word=";
+        </script>
+    </c:if>
 
       <!--구분선 구분선 구분선 구분선 구분선 구분선 구분선 구분선 구분선 -->
       <!--구분선 구분선 구분선 구분선 구분선 구분선 구분선 구분선 구분선 -->
@@ -63,32 +68,30 @@
     <div class="sb-nav-fixed">
       <div class="mt-5 pt-5">
         <div class="container px-4">
-          <h1 class="mt-4 d-flex justify-content-center">좋은 정보 공유해요!</h1>
+          <h1 class="mt-4 d-flex justify-content-center">좋은 글 공유해요</h1>
           <div class="container rounded bg-success bg-opacity-75 text-white text-center fs-2 p-4">
             글수정
           </div>
   
           <div class="container">
-            <form id="form-modify" action="/insertProc" method="post">
-            <input type="hidden" name="action" value="modify">
-            <input type="hidden" name="userid" value="${userinfo.id}">
-          	<input type="hidden" name="articleno" value="${article.articleNo}">
+            <form id="form-modify-inform" method="POST" action="" >
+          	  <input type="hidden" name="pgno" value="${pgno}">
+		      <input type="hidden" name="key" value="${key}">
+		   	  <input type="hidden" name="word" value="${word}">
+          	  <input type="hidden" name="articleNo" value="${article.articleNo}">
               <div class="pt-4 pb-4">
-                <!-- <label for="subject">제목</label> -->
-                제목
+                <label for="title">제목</label>
                 <input
                   type="text"
                   class="form-control"
-                  id="subject"
-                  name="subject"
+                  id="title"
+                  name="title"
                   placeholder="${article.title}"
                 />
-                제목을 입력하세요
+               	 제목을 입력하세요
               </div>
-  
               <div class="pb-4">
-                <!-- <label for="content">내용</label> -->
-                내용
+                <label for="content">내용</label>
                 <textarea
                   class="form-control"
                   id="content"
@@ -97,19 +100,15 @@
                   placeholder="${article.content}"
                 ></textarea>
               </div>
+              <div class=" col-md-1 text-nowrap">
+	            <button type="button" id="btn-modify-inform" class="btn btn-outline-primary mb-3">
+					글수정
+	            </button>
+	            <button type="button" id="btn-list" class="btn btn-outline-danger mb-3">
+	               	목록으로이동...
+	            </button>
+	          </div>
             </form>
-          </div>
-          <div class="d-flex flex-column flex-sm-row justify-content-between">
-            <div class=" col-md-1 text-nowrap">
-              <button type="button" id="btn-modify" class="btn btn-outline-primary mb-3">
-                글수정
-              </button>
-            </div>
-            <div class=" col-md-1 ms-2 text-nowrap">
-              <a type="button" id="btn-list" href="<%= root %>/article?action=list" class="btn btn-outline-danger mb-3">
-                목록으로이동...
-              </a>
-            </div>
           </div>
         </div>
       </main>
@@ -202,21 +201,33 @@
       </footer>
     </div>
     
+    <form id="form-param" method="get" action="">
+      <input type="hidden" id="pgno" name="pgno" value="${pgno}">
+      <input type="hidden" id="key" name="key" value="${key}">
+      <input type="hidden" id="word" name="word" value="${word}">
+    </form>
     <script>
-      document.querySelector("#btn-modify").addEventListener("click", function () {
-        if (!document.querySelector("#subject").value) {
+      document.querySelector("#btn-modify-inform").addEventListener("click", function () {
+    	if (!document.querySelector("#title").value) {
           alert("제목 입력!!");
           return;
         } else if (!document.querySelector("#content").value) {
           alert("내용 입력!!");
           return;
         } else {
-          let form = document.querySelector("#form-modify");
-          form.setAttribute("action", "<%= root %>/article");
+          let form = document.querySelector("#form-modify-inform");
+          form.setAttribute("action", "${root}/sharearticle/modify");
           form.submit();
         }
       });
       
+      document.querySelector("#btn-list").addEventListener("click", function () {
+         	if(confirm("취소를 하시면 작성중인 글은 삭제됩니다.\n취소하시겠습니까?")) {
+         		let form = document.querySelector("#form-param");
+            	form.setAttribute("action", "${root}/sharearticle");
+              form.submit();
+        	}
+       });
     </script>
 
     <script

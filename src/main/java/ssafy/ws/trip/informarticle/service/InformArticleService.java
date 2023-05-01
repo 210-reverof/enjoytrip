@@ -9,7 +9,6 @@ import ssafy.ws.trip.informarticle.dto.InformArticleDto;
 
 public interface InformArticleService {
 	void writeArticle(InformArticleDto informArticleDto) throws SQLException;
-//	List<InformArticleDto> listArticle(Map<String, Object> param) throws SQLException;
 	List<InformArticleDto> listArticle(Map<String, String> map) throws SQLException;
 	int getTotalArticleCount(Map<String, Object> param) throws SQLException;
 	InformArticleDto getArticle(int articleNo) throws SQLException;

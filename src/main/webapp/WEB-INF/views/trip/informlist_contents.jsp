@@ -237,7 +237,7 @@
 	<script>
     document.querySelector("#btn-list").addEventListener("click", function () {
         let form = document.querySelector("#form-param");
-        form.setAttribute("action", "${root}/informarticle/list");
+        form.setAttribute("action", "${root}/informarticle");
         form.submit();
     });
     </script>
