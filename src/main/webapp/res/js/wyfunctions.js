@@ -12,6 +12,7 @@ var currResults = [];
 window.onload = init();
 
 function init() {
+	console.log("please here");
     fetchAllAreas(areaUrl);
     document.getElementById("select-all-btn").addEventListener("click", selectAll);
     var checks = document.getElementsByClassName("form-check-input");
