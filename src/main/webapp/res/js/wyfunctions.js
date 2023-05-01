@@ -3,8 +3,8 @@
 // 13 : 지역 기반 관광정보조회
 let serviceKey = "M3KVNZZ77dEKVDzXocK%2BBbXaXghygQd25WflNl70WZA9pOgx2ihFZSzaJbarptjUqHil53iFe%2F1oNLZtbi0DHg%3D%3D";
 let areaUrl = "https://apis.data.go.kr/B551011/KorService1/areaCode1?serviceKey="+serviceKey+"&numOfRows=10&pageNo=1&MobileOS=ETC&MobileApp=AppTest&_type=json";
-var currAreaNum = -1;
-var currSigunguNum = -1;
+var currAreaNum = 1;
+var currSigunguNum = 1;
 var types = [12, 14, 15, 25, 28, 32, 38, 39];
 var originTypeNums = [12, 14, 15, 25, 28, 32, 38, 39];
 var currResults = [];
@@ -12,14 +12,23 @@ var currResults = [];
 window.onload = init();
 
 function init() {
-	console.log("please here");
     fetchAllAreas(areaUrl);
+    var currSel = document.getElementById("search-area-sel")
+    currAreaNum = 1;
+    currSigunguNum = -1;
+    
+    let areaDetailUrl = "https://apis.data.go.kr/B551011/KorService1/areaCode1?serviceKey=M3KVNZZ77dEKVDzXocK%2BBbXaXghygQd25WflNl70WZA9pOgx2ihFZSzaJbarptjUqHil53iFe%2F1oNLZtbi0DHg%3D%3D&numOfRows=10&pageNo=1&MobileOS=ETC&MobileApp=AppTest&areaCode=" + currAreaNum + "&_type=json";
+    fetch(areaDetailUrl)
+        .then((response) => response.json())
+        .then((data) => makeDetailOption(data));
+    
     document.getElementById("select-all-btn").addEventListener("click", selectAll);
     var checks = document.getElementsByClassName("form-check-input");
 
     for (i = 0; i < checks.length; i++) {
         checks[i].addEventListener("click", selectType);
     }
+    getTrips();
 }
 
 function fetchAllAreas(areaUrl) {
@@ -61,7 +70,11 @@ function makeDetailOption(data) {
     let sel = document.getElementById("search-area-detail-sel");
 
     areas.forEach(function (area) {
-    let opt = document.createElement("option");
+        if (currSigunguNum == -1) { 
+            currSigunguNum = area.code;
+            getTrips();
+        }
+        let opt = document.createElement("option");
         opt.setAttribute("value", area.code);
         opt.appendChild(document.createTextNode(area.name));
         sel.appendChild(opt);
@@ -98,26 +111,29 @@ function selectType() {
 
 function getTrips() {
     currResults = [];
+    typesStr = "0";
     for (i = 0; i < types.length; i++) {
-        let tripsUrl = "https://apis.data.go.kr/B551011/KorService1/areaBasedList1?serviceKey=M3KVNZZ77dEKVDzXocK%2BBbXaXghygQd25WflNl70WZA9pOgx2ihFZSzaJbarptjUqHil53iFe%2F1oNLZtbi0DHg%3D%3D&numOfRows=10&pageNo=1&MobileOS=ETC&MobileApp=AppTest&_type=json&listYN=Y&arrange=A&contentTypeId=" + types[i] + "&areaCode=" + currAreaNum + "&sigunguCode=" + currSigunguNum;
-        fetch(tripsUrl)
-            .then((response) => response.json())
-            .then((data) => getResults(data));
+        typesStr += "," + types[i];
     }
+    
+    // let tripsUrl = "https://apis.data.go.kr/B551011/KorService1/areaBasedList1?serviceKey=M3KVNZZ77dEKVDzXocK%2BBbXaXghygQd25WflNl70WZA9pOgx2ihFZSzaJbarptjUqHil53iFe%2F1oNLZtbi0DHg%3D%3D&numOfRows=10&pageNo=1&MobileOS=ETC&MobileApp=AppTest&_type=json&listYN=Y&arrange=A&contentTypeId=" + types[i] + "&areaCode=" + currAreaNum + "&sigunguCode=" + currSigunguNum;
+    let tripsUrl = "http://localhost:8080/enjoytrip/attraction/list?sido=" + currAreaNum + "&gugun=" + currSigunguNum +"&types=" + typesStr;
+
+    fetch(tripsUrl)
+        .then((response) => response.json())
+        .then((data) => getResults(data));
 }
 
 function getResults(result) {
-    if (!result.response.body.items.item) return;
     var cardPanel = document.getElementById("card-panel");
 
     let originCnt = cardPanel.children.length;
     for (i = 0; i < originCnt; i++){
         cardPanel.children[0].remove();
     }
-    
-    var tmp = result.response.body.items.item;
-    for (i = 0; i < tmp.length; i++) {
-        excute(tmp[i]);
+
+    for (i = 0; i < result.length; i++) {
+        excute(result[i]);
     }
 }
 
@@ -151,7 +167,7 @@ function addCard(result) {
         cardBodyEl.appendChild(buttonEl);
 
         var imgEl = document.createElement("img");
-        imgEl.setAttribute("src", result.firstimage);
+        imgEl.setAttribute("src", result.firstImage);
         imgEl.setAttribute("class", "card-img-top");
 
         var cardEl = document.createElement("div");
@@ -168,13 +184,12 @@ function addCard(result) {
 }
 
 function addMarker(result) {
-    console.log(result);
     var place = {
         title: result.title,
         addr1: result.addr1,
-        firstimage: result.firstimage,
-        x: result.mapx,
-        y: result.mapy,
+        firstimage: result.firstImage,
+        x: result.longitude,
+        y: result.latitude,
     }
     displayMarker(place);
 }

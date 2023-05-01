@@ -152,14 +152,14 @@
         <div class="row">
           <div class="d-inline-flex p-2">
             <select id="search-area-sel" class="form-select mx-2" onchange="changeAreaSel()">
-              <option value="-1" selected>지역선택</option>
+              <!-- <option value="-1" selected>지역선택</option> -->
             </select>
             <select
               id="search-area-detail-sel"
               class="form-select mx-2"
               onchange="changeSigunguSel()"
             >
-              <option value="-1" selected>구군선택</option>
+              <!-- <option value="-1" selected>구군선택</option> -->
             </select>
           </div>
 
