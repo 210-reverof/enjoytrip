@@ -16,125 +16,14 @@
       href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.9.1/font/bootstrap-icons.css"
     />
     <link rel="preconnect" href="https://fonts.googleapis.com" />
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link rel="preconnect" href="https://fonts.gstatic.com" />
     <link
       href="https://fonts.googleapis.com/css2?family=Gowun+Dodum&display=swap"
       rel="stylesheet"
     />
     <style>
-      /* 캐러셀(이미지슬라이드) 이미지 크기변경 */
-      .carousel-inner {
-        width: 100%;
-        height: 400px;
-        /* 이미지 높이 변경 */
-      }
-
-      .carousel-item {
-        width: 100%;
-        height: 100%;
-      }
-
-      .d-block {
-        display: block;
-        width: 100%;
-        height: 100%;
-      }
-
       body {
         font-family: "Gowun Dodum", sans-serif;
-      }
-
-      .wrap {
-        position: absolute;
-        left: 0;
-        bottom: 40px;
-        width: 288px;
-        height: 132px;
-        margin-left: -144px;
-        text-align: left;
-        overflow: hidden;
-        font-size: 12px;
-        font-family: "Malgun Gothic", dotum, "돋움", sans-serif;
-        line-height: 1.5;
-      }
-      .wrap * {
-        padding: 0;
-        margin: 0;
-      }
-      .wrap .info {
-        width: 286px;
-        height: 120px;
-        border-radius: 5px;
-        border-bottom: 2px solid #ccc;
-        border-right: 1px solid #ccc;
-        overflow: hidden;
-        background: #fff;
-      }
-      .wrap .info:nth-child(1) {
-        border: 0;
-        box-shadow: 0px 1px 2px #888;
-      }
-      .info .title {
-        padding: 5px 0 0 10px;
-        height: 30px;
-        background: #eee;
-        border-bottom: 1px solid #ddd;
-        font-size: 18px;
-        font-weight: bold;
-      }
-      .info .close {
-        position: absolute;
-        top: 10px;
-        right: 10px;
-        color: #888;
-        width: 17px;
-        height: 17px;
-        background: url("https://t1.daumcdn.net/localimg/localimages/07/mapapidoc/overlay_close.png");
-      }
-      .info .close:hover {
-        cursor: pointer;
-      }
-      .info .body {
-        position: relative;
-        overflow: hidden;
-      }
-      .info .desc {
-        position: relative;
-        margin: 13px 0 0 90px;
-        height: 75px;
-      }
-      .desc .ellipsis {
-        overflow: hidden;
-        text-overflow: ellipsis;
-        white-space: nowrap;
-      }
-      .desc .jibun {
-        font-size: 11px;
-        color: #888;
-        margin-top: -2px;
-      }
-      .info .img {
-        position: absolute;
-        top: 6px;
-        left: 5px;
-        width: 73px;
-        height: 71px;
-        border: 1px solid #ddd;
-        color: #888;
-        overflow: hidden;
-      }
-      .info:after {
-        content: "";
-        position: absolute;
-        margin-left: -12px;
-        left: 50%;
-        bottom: 0;
-        width: 22px;
-        height: 12px;
-        background: url("https://t1.daumcdn.net/localimg/localimages/07/mapapidoc/vertex_white.png");
-      }
-      .info .link {
-        color: #5085bb;
       }
     </style>
   </head>
@@ -146,24 +35,23 @@
     <div class="container">
       <!--원영 시작-->
       <!-- 관광지 검색 start -->
-      <div id="search-top-label" class="fs-1 text-center">나의 여행 계획</div>
+      <div id="search-top-label" class="fs-1 text-center">여행 경로 추가하기</div>
+      
+      <form method="POST" action="<%= root %>/route/insert">
+      	<input type="hidden" name="title" value="제목1제목1"/>
+  		<input type="hidden" name="list" value="${list}" />	
+      	<input type="submit" value="추가하기"/>
+      </form>
       
       <div id ="my-route-panel" class="container text-start">
-          <div id="search-top-label" class="fs-4">현재 나의 여행</div>
+          <div id="search-top-label" class="fs-4">현재 나의 여행 경로</div>
       </div>
       <div id="route-panel"
         class="search-cards m-4 row row-cols-1 row-cols-md-2 row-cols-lg-4 g-4 d-flex"
       >
         <!--내 여행 카드 시작-->
         <!--내 여행 카드 끝-->
-      </div>
-      <div id ="weight-panel" class="container text-start mb-2">
-          <div id="weight-label" class="fs-6">여행지 개수 : ${fn:length(mycids)}</div>
-          <div id="weight-label" class="fs-6">최소 이동 거리 : ${minweight} km </div>
-      </div>
-      
-      
-      
+      </div>   
       <div id ="adding" class="container text-start">
           <div id="search-top-label" class="fs-4">추가하기</div>
       </div>      
@@ -259,14 +147,6 @@
     </div>
 
     <svg xmlns="http://www.w3.org/2000/svg" style="display: none">
-      <symbol id="bootstrap" viewBox="0 0 118 94">
-        <title>Bootstrap</title>
-        <path
-          fill-rule="evenodd"
-          clip-rule="evenodd"
-          d="M24.509 0c-6.733 0-11.715 5.893-11.492 12.284.214 6.14-.064 14.092-2.066 20.577C8.943 39.365 5.547 43.485 0 44.014v5.972c5.547.529 8.943 4.649 10.951 11.153 2.002 6.485 2.28 14.437 2.066 20.577C12.794 88.106 17.776 94 24.51 94H93.5c6.733 0 11.714-5.893 11.491-12.284-.214-6.14.064-14.092 2.066-20.577 2.009-6.504 5.396-10.624 10.943-11.153v-5.972c-5.547-.529-8.934-4.649-10.943-11.153-2.002-6.484-2.28-14.437-2.066-20.577C105.214 5.894 100.233 0 93.5 0H24.508zM80 57.863C80 66.663 73.436 72 62.543 72H44a2 2 0 01-2-2V24a2 2 0 012-2h18.437c9.083 0 15.044 4.92 15.044 12.474 0 5.302-4.01 10.049-9.119 10.88v.277C75.317 46.394 80 51.21 80 57.863zM60.521 28.34H49.948v14.934h8.905c6.884 0 10.68-2.772 10.68-7.727 0-4.643-3.264-7.207-9.012-7.207zM49.948 49.2v16.458H60.91c7.167 0 10.964-2.876 10.964-8.281 0-5.406-3.903-8.178-11.425-8.178H49.948z"
-        ></path>
-      </symbol>
       <symbol id="facebook" viewBox="0 0 16 16">
         <path
           d="M16 8.049c0-4.446-3.582-8.05-8-8.05C3.58 0-.002 3.603-.002 8.05c0 4.017 2.926 7.347 6.75 7.951v-5.625h-2.03V8.05H6.75V6.275c0-2.017 1.195-3.131 3.022-3.131.876 0 1.791.157 1.791.157v1.98h-1.009c-.993 0-1.303.621-1.303 1.258v1.51h2.218l-.354 2.326H9.25V16c3.824-.604 6.75-3.934 6.75-7.951z"
@@ -324,294 +204,7 @@
       type="text/javascript"
       src="//dapi.kakao.com/v2/maps/sdk.js?appkey=e4cbdf27c43a803ff3c0f8fa1a9ec113&libraries=services,clusterer,drawing"
     ></script>
-    <script>
-    let serviceKey = "M3KVNZZ77dEKVDzXocK%2BBbXaXghygQd25WflNl70WZA9pOgx2ihFZSzaJbarptjUqHil53iFe%2F1oNLZtbi0DHg%3D%3D";
-    let areaUrl = "https://apis.data.go.kr/B551011/KorService1/areaCode1?serviceKey="+serviceKey+"&numOfRows=10&pageNo=1&MobileOS=ETC&MobileApp=AppTest&_type=json";
-    var currAreaNum = -1;
-    var currSigunguNum = -1;
-    var types = [12, 14, 15, 25, 28, 32, 38, 39];
-    var originTypeNums = [12, 14, 15, 25, 28, 32, 38, 39];
-    var currResults = [];
-    const cids = ${mycids};
-
-    window.onload = init();
-
-    function init() {
-        fetchAllAreas(areaUrl);
-        document.getElementById("select-all-btn").addEventListener("click", selectAll);
-        var checks = document.getElementsByClassName("form-check-input");
-        getRoutes();
-
-        for (i = 0; i < checks.length; i++) {
-            checks[i].addEventListener("click", selectType);
-        }
-    }
-
-    function fetchAllAreas(areaUrl) {
-        fetch(areaUrl)
-      .then((response) => response.json())
-      .then((data) => makeOption(data));
-    }
-
-    function makeOption(data) {
-        let areas = data.response.body.items.item;
-        let sel = document.getElementById("search-area-sel");
-        areas.forEach(function (area) {
-        let opt = document.createElement("option");
-            opt.setAttribute("value", area.code);
-            opt.appendChild(document.createTextNode(area.name));
-            sel.appendChild(opt);
-        });
-    }
-
-    function changeAreaSel() {
-        let detailSel = document.getElementById("search-area-detail-sel");
-        let cnt = detailSel.options.length;
-        for (i = 0; i < cnt; i++) {
-            detailSel.options[0].remove();
-        }
-
-        var currSel = document.getElementById("search-area-sel")
-        currAreaNum = currSel.options[currSel.selectedIndex].value;
-        currSigunguNum = -1;
-        
-        let areaDetailUrl = "https://apis.data.go.kr/B551011/KorService1/areaCode1?serviceKey=M3KVNZZ77dEKVDzXocK%2BBbXaXghygQd25WflNl70WZA9pOgx2ihFZSzaJbarptjUqHil53iFe%2F1oNLZtbi0DHg%3D%3D&numOfRows=10&pageNo=1&MobileOS=ETC&MobileApp=AppTest&areaCode=" + currAreaNum + "&_type=json";
-        fetch(areaDetailUrl)
-            .then((response) => response.json())
-            .then((data) => makeDetailOption(data));
-    } 
-
-    function makeDetailOption(data) {
-        let areas = data.response.body.items.item;
-        let sel = document.getElementById("search-area-detail-sel");
-
-        areas.forEach(function (area) {
-        let opt = document.createElement("option");
-            opt.setAttribute("value", area.code);
-            opt.appendChild(document.createTextNode(area.name));
-            sel.appendChild(opt);
-        });
-    }
-
-    function changeSigunguSel() {
-        var currSel = document.getElementById("search-area-detail-sel")
-        currSigunguNum = currSel.options[currSel.selectedIndex].value;
-        getTrips();
-    }
-
-    function selectAll() {
-        types = [12, 14, 15, 25, 28, 32, 38, 39];
-        var checks = document.getElementsByClassName("form-check-input");
-
-        for (i = 0; i < checks.length; i++) {
-            checks[i].checked = true;
-        }
-        getTrips();
-    }
-
-    function selectType() {
-        types = [];
-        var checks = document.getElementsByClassName("form-check-input");
-
-        for (i = 0; i < checks.length; i++) {
-            if (checks[i].checked) {
-                types.push(originTypeNums[i]);
-            }
-        }
-        getTrips();
-    }
-
-    function getTrips() {
-        currResults = [];
-        for (i = 0; i < types.length; i++) {
-            let tripsUrl = "https://apis.data.go.kr/B551011/KorService1/areaBasedList1?serviceKey=M3KVNZZ77dEKVDzXocK%2BBbXaXghygQd25WflNl70WZA9pOgx2ihFZSzaJbarptjUqHil53iFe%2F1oNLZtbi0DHg%3D%3D&numOfRows=10&pageNo=1&MobileOS=ETC&MobileApp=AppTest&_type=json&listYN=Y&arrange=A&contentTypeId=" + types[i] + "&areaCode=" + currAreaNum + "&sigunguCode=" + currSigunguNum;
-            fetch(tripsUrl)
-                .then((response) => response.json())
-                .then((data) => getResults(data));
-        }
-    }
-
-    function getResults(result) {
-        if (!result.response.body.items.item) return;
-        var cardPanel = document.getElementById("card-panel");
-
-        let originCnt = cardPanel.children.length;
-        for (i = 0; i < originCnt; i++){
-            cardPanel.children[0].remove();
-        }
-        
-        var tmp = result.response.body.items.item;
-        for (i = 0; i < tmp.length; i++) {
-            excute(tmp[i]);
-        }
-    }
-
-    function excute(currResult) {
-        addCard(currResult);
-    }
-
-    function addCard(result) {
-        var cardPanel = document.getElementById("card-panel");
-
-            var titleEl = document.createElement("h5");
-            titleEl.setAttribute("class", "card-title");
-            titleEl.appendChild(document.createTextNode(result.title));
-
-            var pEl = document.createElement("p");
-            pEl.setAttribute("class", "card-text");
-            pEl.appendChild(document.createTextNode(result.addr1));
-            
-            var form = document.createElement("form");
-            form.action = "${root}/user";
-            form.method = "post";
-            
-            var input0 = document.createElement("input");
-            input0.setAttribute("type", "hidden");
-            input0.setAttribute("name", "action");
-            input0.setAttribute("value", "addroute");
-            form.appendChild(input0);
-            
-            var input1 = document.createElement("input");
-            input1.setAttribute("type", "hidden");
-            input1.setAttribute("name", "contentid");
-            input1.setAttribute("value", result.contentid);
-            form.appendChild(input1);
-            
-            var input101 = document.createElement("input");
-            input101.setAttribute("type", "hidden");
-            input101.setAttribute("name", "longitude");
-            input101.setAttribute("value", result.mapx);
-            form.appendChild(input101);
-            
-            var input102 = document.createElement("input");
-            input102.setAttribute("type", "hidden");
-            input102.setAttribute("name", "latitude");
-            input102.setAttribute("value", result.mapy);
-            form.appendChild(input102);
-            
-            var input11 = document.createElement("input");
-            input11.setAttribute("type", "hidden");
-            input11.setAttribute("name", "userid");
-            input11.setAttribute("value", "${userinfo.id}");
-            form.appendChild(input11);
-            
-            var input2 = document.createElement("input");
-            input2.setAttribute("type", "submit");
-            input2.setAttribute("class", "w-100 mb-2 btn btn-lg rounded-3 btn-primary");
-            input2.setAttribute("value", "추가");
-            form.appendChild(input2);
-
-            var cardBodyEl = document.createElement("div");
-            cardBodyEl.setAttribute("class", "card-body");
-            cardBodyEl.appendChild(titleEl);
-            cardBodyEl.appendChild(pEl);
-            cardBodyEl.appendChild(form);
-
-            var imgEl = document.createElement("img");
-            imgEl.setAttribute("src", result.firstimage);
-            imgEl.setAttribute("class", "card-img-top");
-
-            var cardEl = document.createElement("div");
-            cardEl.setAttribute("class", "card m-2");
-            cardEl.setAttribute("style", "width: 18rem");
-            cardEl.appendChild(imgEl);
-            cardEl.appendChild(cardBodyEl);
-
-            var colEl = document.createElement("div");
-            colEl.setAttribute("class", "col");
-        colEl.appendChild(cardEl);
-        
-        cardPanel.appendChild(colEl);
-    }
-    
-    function getRoutes() {
-        var cardPanel = document.getElementById("route-panel");
-
-        let originCnt = cardPanel.children.length;
-        for (i = 0; i < originCnt; i++){
-            cardPanel.children[0].remove();
-        }
-        
-    	for (i = 0; i < cids.length; i++) {
-            let tripsUrl = "https://apis.data.go.kr/B551011/KorService1/detailCommon1?serviceKey=M3KVNZZ77dEKVDzXocK%2BBbXaXghygQd25WflNl70WZA9pOgx2ihFZSzaJbarptjUqHil53iFe%2F1oNLZtbi0DHg%3D%3D&MobileOS=ETC&MobileApp=AppTest&_type=json&contentId="+ cids[i] +"&defaultYN=Y&firstImageYN=Y&areacodeYN=Y&catcodeYN=Y&addrinfoYN=Y&mapinfoYN=Y&overviewYN=Y";
-            fetch(tripsUrl)
-                .then((response) => response.json())
-                .then((data) => getRouteResults(data));
-        }
-    }
-    
-    function getRouteResults(result) {
-        if (!result.response.body.items.item) return;
-        
-        var tmp = result.response.body.items.item;
-        for (i = 0; i < tmp.length; i++) {
-        	addRouteCard(tmp[i]);
-        }
-    }
-    
-    function addRouteCard(result) {
-        var cardPanel = document.getElementById("route-panel");
-
-        var titleEl = document.createElement("h5");
-        titleEl.setAttribute("class", "card-title");
-        titleEl.appendChild(document.createTextNode(result.title));
-
-        var pEl = document.createElement("p");
-        pEl.setAttribute("class", "card-text");
-        pEl.appendChild(document.createTextNode(result.addr1));
-        
-        var form = document.createElement("form");
-        form.action = "${root}/user";
-        form.method = "post";
-        
-        var input0 = document.createElement("input");
-        input0.setAttribute("type", "hidden");
-        input0.setAttribute("name", "action");
-        input0.setAttribute("value", "deleteroute");
-        form.appendChild(input0);
-        
-        var input1 = document.createElement("input");
-        input1.setAttribute("type", "hidden");
-        input1.setAttribute("name", "contentid");
-        input1.setAttribute("value", result.contentid);
-        form.appendChild(input1);
-        
-        var input11 = document.createElement("input");
-        input11.setAttribute("type", "hidden");
-        input11.setAttribute("name", "userid");
-        input11.setAttribute("value", "${userinfo.id}");
-        form.appendChild(input11);
-        
-        var input2 = document.createElement("input");
-        input2.setAttribute("type", "submit");
-        input2.setAttribute("class", "w-100 mb-2 btn btn-lg rounded-3 btn-primary");
-        input2.setAttribute("value", "삭제");
-        form.appendChild(input2);
-
-        var imgEl = document.createElement("img");
-        imgEl.setAttribute("src", result.firstimage);
-        imgEl.setAttribute("class", "card-img-top");
-        
-        var cardBodyEl = document.createElement("div");
-        cardBodyEl.setAttribute("class", "card-body");
-        cardBodyEl.appendChild(titleEl);
-        cardBodyEl.appendChild(pEl);
-        cardBodyEl.appendChild(form);
-
-        var cardEl = document.createElement("div");
-        cardEl.setAttribute("class", "card m-2");
-        cardEl.setAttribute("style", "width: 18rem");
-        cardEl.appendChild(imgEl);
-        cardEl.appendChild(cardBodyEl);
-
-        var colEl = document.createElement("div");
-        colEl.setAttribute("class", "col");
-        colEl.appendChild(cardEl);
-        
-        cardPanel.appendChild(colEl);
-    }
-    
-    </script>
+    <script type="text/javascript" src="<%= root %>/res/js/addroutefunctions.js"></script>
     <script src="https://kit.fontawesome.com/64df31442a.js" crossorigin="anonymous"></script>
   </body>
 </html>

@@ -7,8 +7,8 @@ import ssafy.ws.trip.route.dto.RouteResDto;
 
 public interface RouteService {
 	List<RouteResDto> selectMyList() throws Exception;
-	void insertRoute(RouteDto routes) throws Exception;
-	void updateRoute(RouteDto routes) throws Exception;
+	void insertRoute(RouteDto RouteDto) throws Exception;
+	void updateRoute(RouteDto RouteDto) throws Exception;
 	void deleteRoute(int routeId) throws Exception;
 	RouteResDto selectRoute(int routeId) throws Exception;
 }
