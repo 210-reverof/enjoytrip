@@ -14,7 +14,6 @@
       crossorigin="anonymous"
     />
     <link href="${root}/assets/css/app.css" rel="stylesheet" />
-    <link href="${root}/assets/css/app.css" rel="stylesheet" />
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link
@@ -29,35 +28,52 @@
     </style>
   </head>
   <body>
-	<%@ include file="/common/confirm.jsp" %>
+    <%@ include file="/WEB-INF/views/common/confirm.jsp" %>
 	
       <div class="row justify-content-center">
         <div class="col-lg-8 col-md-10 col-sm-12">
           <h2 class="my-3 py-3 shadow-sm bg-light text-center">
-            <mark class="sky">글목록</mark>
+            <mark class="sky">여행 정보 공유</mark>
           </h2>
         </div>
         <div class="col-lg-8 col-md-10 col-sm-12">
           <div class="row align-self-center mb-2">
             <div class="col-md-2 text-start">
-              <button type="button" id="btn-mv-register" class="btn btn-outline-primary btn-sm">
-                글쓰기
-              </button>
+            <c:if test="${not empty userinfo}">
+            	<button type="button" id="btn-mv-register" class="btn btn-outline-primary btn-sm">
+					글쓰기
+				</button>
+		        <script>
+			        document.querySelector("#btn-mv-register").addEventListener("click", function () {
+			      	  let form = document.querySelector("#form-param");
+			            form.setAttribute("action", "${root}/sharearticle/makinglist");
+			            form.submit();
+			        });
+		        </script>
+		    </c:if>
+              <!-- <button type="button" id="btn-mv-register" class="btn btn-outline-primary btn-sm">
+                	글쓰기
+              </button> -->
             </div>
             <div class="col-md-7 offset-3">
               <form class="d-flex" id="form-search" action="">
                 <input type="hidden" name="action" value="list"/>
                 <input type="hidden" name="pgno" value="1"/>
                 <select
-                  name="sort-sel"
-                  id="sort-sel"
-                  onchange="changeSelect()"
-                  class="form-select form-select-sm"
+                  name="key"
+                  id="key"
+                  class="form-select form-select-sm ms-5 me-1 w-50"
                   aria-label="검색조건"
                 >
-                  <option selected value="new">최신 순</option>
-                  <option value="hit">조회 순</option>
+                  <option selected>검색조건</option>
+                  <!-- <option value="article_no">글번호</option> -->
+                  <option value="title">제목</option>
+                  <option value="user_id">작성자</option>
                 </select>
+                <div class="input-group input-group-sm">
+                  <input type="text" name="word" id="word" class="form-control" placeholder="검색어..." />
+                  <button id="btn-search" class="btn btn-dark" type="button">검색</button>
+                </div>
               </form>
             </div>
           </div>
@@ -99,50 +115,47 @@
       </div>
     </div>
     <form id="form-param" method="get" action="">
-      <input type="hidden" id="p-action" name="action" value="">
-      <input type="hidden" id="p-pgno" name="pgno" value="">
-      <input type="hidden" id="p-key" name="key" value="">
-      <input type="hidden" id="p-word" name="word" value="">
+      <input type="hidden" name="pgno" id="pgno" value="${pgno}">
+      <input type="hidden" name="key" value="${key}">
+      <input type="hidden" name="word" value="${word}">
+    </form>
+    <form id="form-no-param" method="get" action="${root}/sharearticle/view">
+      <input type="hidden" name="pgno" value="${pgno}">
+      <input type="hidden" name="key" value="${key}">
+      <input type="hidden" name="word" value="${word}">
+      <input type="hidden" id="articleno" name="articleno" value="">
     </form>
     </body>
     <script>
       let titles = document.querySelectorAll(".article-title");
-      
-      function changeSelect(){
-    	    var langSelect = document.getElementById("sort-sel");
-    	     
-    	    var selectValue = langSelect.options[langSelect.selectedIndex].value;
-    	    
-    	    location.href = "${root}/article?action=view&type=" + selectValue;
-    	}
-      
       titles.forEach(function (title) {
         title.addEventListener("click", function () {
-          console.log(this.getAttribute("data-no"));
-          location.href = "${root}/article?action=view&articleno=" + this.getAttribute("data-no");
+            document.querySelector("#articleno").value = this.getAttribute("data-no");
+            document.querySelector("#form-no-param").submit();
         });
       });
 
       document.querySelector("#btn-mv-register").addEventListener("click", function () {
-        location.href = "${root}/article?action=makinglist";
+    	  let form = document.querySelector("#form-param");
+          form.setAttribute("action", "${root}/sharearticle/makinglist");
+          form.submit();
       });
       
       document.querySelector("#btn-search").addEventListener("click", function () {
     	  let form = document.querySelector("#form-search");
-          form.setAttribute("action", "${root}/article");
+          form.setAttribute("action", "${root}/sharearticle");
           form.submit();
       });
       
       let pages = document.querySelectorAll(".page-link");
       pages.forEach(function (page) {
         page.addEventListener("click", function () {
-          console.log(this.parentNode.getAttribute("data-pg"));
-          document.querySelector("#p-action").value = "list";
-       	  document.querySelector("#p-pgno").value = this.parentNode.getAttribute("data-pg");
-       	  document.querySelector("#p-key").value = "${param.key}";
-       	  document.querySelector("#p-word").value = "${param.word}";
-          document.querySelector("#form-param").submit();
+       	  document.querySelector("#pgno").value = this.parentNode.getAttribute("data-pg");
+          let form = document.querySelector("#form-param");
+          form.setAttribute("action", "${root}/sharearticle");
+          form.submit();
         });
       });
+      
     </script>
-<%@ include file="/common/footer.jsp" %>
+<%-- <%@ include file="/common/footer.jsp" %> --%>

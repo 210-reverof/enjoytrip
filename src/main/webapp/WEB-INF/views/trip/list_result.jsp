@@ -50,7 +50,7 @@
 
   <body>
     <!-- BootStrap Navigation Bar Sample -->
-    <%@ include file="/common/confirm.jsp" %>
+    <%@ include file="/WEB-INF/views/common/confirm.jsp" %>
 
 
       <!--구분선 구분선 구분선 구분선 구분선 구분선 구분선 구분선 구분선 -->
@@ -63,13 +63,13 @@
     <div class="sb-nav-fixed">
       <div class="mt-5 pt-5">
         <div class="container px-4">
-          <h1 class="mt-4 d-flex justify-content-center">좋은 정보 공유해요!</h1>
+          <h1 class="mt-4 d-flex justify-content-center">좋은 글 공유해요</h1>
 
           <div class="container rounded bg-secondary bg-opacity-25 text-primary text-center fs-2 p-4 mb-2">
             등록 완료
             <div class="text-secondary text-center fs-4">글작성이 완료되었습니다</div>
             <div class="d-flex justify-content-center text-nowrap">
-              <a class="btn btn-outline-primary" href="<%= root %>/res/list_contents.jsp">
+              <a class="btn btn-outline-primary" href="${root}/trip/informlist_contents">
                 <!-- <i class="fas fa-table me-1"></i> -->
                 <i class="fas fa-edit"></i> 등록글 보기
               </a>
@@ -79,7 +79,7 @@
             등록 실패
             <div class="text-danger text-center fs-4">글작성이 완료되었습니다</div>
             <div class="d-flex justify-content-center text-nowrap">
-              <a class="btn btn-outline-danger" href="<%= root %>/trip/list.jsp">
+              <a class="btn btn-outline-danger" href="${root }/sharearticle?pgno=1&key=&word=">
                 <!-- <i class="fas fa-table me-1"></i> -->
                 <i class="fas fa-edit"></i> 목록 이동
               </a>

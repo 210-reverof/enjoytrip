@@ -14,7 +14,6 @@
       crossorigin="anonymous"
     />
     <link href="${root}/assets/css/app.css" rel="stylesheet" />
-    <link href="${root}/assets/css/app.css" rel="stylesheet" />
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link
@@ -29,20 +28,32 @@
     </style>
   </head>
   <body>
-	<%@ include file="/common/confirm.jsp" %>
+    <%@ include file="/WEB-INF/views/common/confirm.jsp" %>
 	
       <div class="row justify-content-center">
         <div class="col-lg-8 col-md-10 col-sm-12">
           <h2 class="my-3 py-3 shadow-sm bg-light text-center">
-            <mark class="sky">글목록</mark>
+            <mark class="sky">공 지 사 항</mark>
           </h2>
         </div>
         <div class="col-lg-8 col-md-10 col-sm-12">
           <div class="row align-self-center mb-2">
             <div class="col-md-2 text-start">
-              <button type="button" id="btn-mv-register" class="btn btn-outline-primary btn-sm">
-                글쓰기
-              </button>
+            <c:if test="${not empty userinfo}">
+            	<button type="button" id="btn-mv-register" class="btn btn-outline-primary btn-sm">
+					글쓰기
+				</button>
+		        <script>
+			        document.querySelector("#btn-mv-register").addEventListener("click", function () {
+			      	  let form = document.querySelector("#form-param");
+			            form.setAttribute("action", "${root}/informarticle/makinglist");
+			            form.submit();
+			        });
+		        </script>
+		    </c:if>
+              <!-- <button type="button" id="btn-mv-register" class="btn btn-outline-primary btn-sm">
+                	글쓰기
+              </button> -->
             </div>
             <div class="col-md-7 offset-3">
               <form class="d-flex" id="form-search" action="">
@@ -55,8 +66,8 @@
                   aria-label="검색조건"
                 >
                   <option selected>검색조건</option>
-                  <option value="article_no">글번호</option>
-                  <option value="subject">제목</option>
+                  <!-- <option value="article_no">글번호</option> -->
+                  <option value="title">제목</option>
                   <option value="user_id">작성자</option>
                 </select>
                 <div class="input-group input-group-sm">
@@ -103,24 +114,37 @@
         </div>
       </div>
     </div>
-    <form id="form-param" method="get" action="">
+    <!-- <form id="form-param" method="get" action="">
       <input type="hidden" id="p-action" name="action" value="">
       <input type="hidden" id="p-pgno" name="pgno" value="">
       <input type="hidden" id="p-key" name="key" value="">
       <input type="hidden" id="p-word" name="word" value="">
+    </form> -->
+    <form id="form-param" method="get" action="">
+      <input type="hidden" name="pgno" id="pgno" value="${pgno}">
+      <input type="hidden" name="key" value="${key}">
+      <input type="hidden" name="word" value="${word}">
+    </form>
+    <form id="form-no-param" method="get" action="${root}/informarticle/view">
+      <input type="hidden" name="pgno" value="${pgno}">
+      <input type="hidden" name="key" value="${key}">
+      <input type="hidden" name="word" value="${word}">
+      <input type="hidden" id="articleno" name="articleno" value="">
     </form>
     </body>
     <script>
       let titles = document.querySelectorAll(".article-title");
       titles.forEach(function (title) {
         title.addEventListener("click", function () {
-          console.log(this.getAttribute("data-no"));
-          location.href = "${root}/informarticle?action=view&articleno=" + this.getAttribute("data-no");
+            document.querySelector("#articleno").value = this.getAttribute("data-no");
+            document.querySelector("#form-no-param").submit();
         });
       });
 
       document.querySelector("#btn-mv-register").addEventListener("click", function () {
-        location.href = "${root}/informarticle?action=makinglist";
+    	  let form = document.querySelector("#form-param");
+          form.setAttribute("action", "${root}/informarticle/makinglist");
+          form.submit();
       });
       
       document.querySelector("#btn-search").addEventListener("click", function () {
@@ -129,7 +153,7 @@
           form.submit();
       });
       
-      let pages = document.querySelectorAll(".page-link");
+      /* let pages = document.querySelectorAll(".page-link");
       pages.forEach(function (page) {
         page.addEventListener("click", function () {
           console.log(this.parentNode.getAttribute("data-pg"));
@@ -139,6 +163,17 @@
        	  document.querySelector("#p-word").value = "${param.word}";
           document.querySelector("#form-param").submit();
         });
+      }); */
+      
+      let pages = document.querySelectorAll(".page-link");
+      pages.forEach(function (page) {
+        page.addEventListener("click", function () {
+       	  document.querySelector("#pgno").value = this.parentNode.getAttribute("data-pg");
+          let form = document.querySelector("#form-param");
+          form.setAttribute("action", "${root}/informarticle");
+          form.submit();
+        });
       });
+      
     </script>
-<%@ include file="/common/footer.jsp" %>
+<%-- <%@ include file="/common/footer.jsp" %> --%>

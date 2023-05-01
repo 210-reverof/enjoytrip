@@ -29,10 +29,10 @@ String root = request.getContextPath();
               <a href="#" class="nav-link ps-3 px-2 fs-5" style="color: Crimson">핫플자랑하기</a>
             </li>
             <li>
-              <a href="<%= root %>/sharearticlelistpage" class="nav-link ps-3 px-2 fs-5" style="color: Plum">여행정보공유</a>
+              <a href="${root}/sharearticle?pgno=1&key=&word=" class="nav-link ps-3 px-2 fs-5" style="color: Plum">여행정보공유</a>
             </li>
             <li>
-              <a href="<%= root %>/informarticlelistpage" class="nav-link ps-3 px-2 fs-5" style="color: Plum">공지사항</a>
+              <a href="${root}/informarticle?pgno=1&key=&word=" class="nav-link ps-3 px-2 fs-5" style="color: Plum">공지사항</a>
             </li>
           </ul>
 
@@ -122,10 +122,10 @@ String root = request.getContextPath();
               <a href="#" class="nav-link ps-3 px-2 fs-5" style="color: Crimson">핫플자랑하기</a>
             </li>
             <li>
-              <a href="<%= root %>/sharearticlelistpage" class="nav-link ps-3 px-2 fs-5" style="color: Plum">여행정보공유</a>
+              <a href="${root}/sharearticle?pgno=1&key=&word=" class="nav-link ps-3 px-2 fs-5" style="color: Plum">여행정보공유</a>
             </li>
             <li>
-              <a href="<%= root %>/informarticlelistpage" class="nav-link ps-3 px-2 fs-5" style="color: Plum">공지사항</a>
+              <a href="${root}/informarticle?pgno=1&key=&word=" class="nav-link ps-3 px-2 fs-5" style="color: Plum">공지사항</a>
             </li>
           </ul>
 

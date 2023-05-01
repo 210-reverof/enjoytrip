@@ -49,7 +49,7 @@
 
   <body>
     <!-- BootStrap Navigation Bar Sample -->
-    <%@ include file="/common/confirm.jsp" %>
+    <%@ include file="/WEB-INF/views/common/confirm.jsp" %>
 
 
       <!--구분선 구분선 구분선 구분선 구분선 구분선 구분선 구분선 구분선 -->
@@ -59,17 +59,23 @@
       <!--구분선 구분선 구분선 구분선 구분선 구분선 구분선 구분선 구분선 -->
       <!--구분선 구분선 구분선 구분선 구분선 구분선 구분선 구분선 구분선 -->
       <!--원영 시작-->
+    <c:if test="${article eq null}">
+        <script>
+        alert("글이 삭제되었거나 부적절한 URL 접근입니다.");
+        location.href = "${root}/sharearticle?pgno=1&key=&word=";
+        </script>
+    </c:if>
     <div class="sb-nav-fixed">
       <div class="mt-5 pt-5">
         <div class="container px-4">
-          <h1 class="mt-4 d-flex justify-content-center">좋은 정보 공유해요!</h1>
+          <h1 class="mt-4 d-flex justify-content-center">좋은 글 공유해요</h1>
 
           <div class="container rounded bg-secondary bg-opacity-25 text-secondary fs-2 p-4 mb-2">
             ${article.title}
             
             <div class="row  mt-2">
               <div class="col-1">
-                <img src="<%= root %>/res/img/junimg04.png" class="rounded-circle w-100" alt="noimg" />
+                <img src="${root}/res/img/junimg04.png" class="rounded-circle w-100" alt="noimg" />
               </div>
               <div class="col fs-4 text-dark">
                 ${article.userId}<br>
@@ -82,23 +88,55 @@
           </div>
           <div class="d-flex justify-content-end">
             <div class="text-nowrap ms-2">
-              <a class="btn btn-outline-primary" href="<%= root %>/article?action=list">
+              <a class="btn btn-outline-primary" href="${root}/sharearticle?pgno=1&key=&word=">
                 <!-- <i class="fas fa-table me-1"></i> -->
                 <i class="fas fa-edit"></i> 글목록
               </a>
             </div>
-            <div class="text-nowrap ms-2">
-              <a class="btn btn-outline-success btn-mv-modify" href = "<%= root %>/article?action=mvmodify&articleno=${article.articleNo}">
+            <c:if test="${not empty userinfo}">
+	            <c:if test="${userinfo.id eq article.userId}">
+	                  <button type="button" id="btn-mv-modify" class="btn btn-outline-success mb-3 ms-1">
+	                    글수정
+	                  </button>
+	                  <button type="button" id="btn-delete" class="btn btn-outline-danger mb-3 ms-1">
+	                    글삭제
+	                  </button>
+	                  <form id="form-no-param" method="get" action="${root}/sharearticle">
+	                      <input type="hidden" id="npgno" name="pgno" value="${pgno}">
+	                      <input type="hidden" id="nkey" name="key" value="${key}">
+	                      <input type="hidden" id="nword" name="word" value="${word}">
+	                      <input type="hidden" id="articleno" name="articleno" value="${article.articleNo}">
+	                  </form>
+	                  <script>
+	                      document.querySelector("#btn-mv-modify").addEventListener("click", function () {
+	                        let form = document.querySelector("#form-no-param");
+	                           form.setAttribute("action", "${root}/sharearticle/modify");
+	                        form.submit();
+	                      });
+	                      
+	                    document.querySelector("#btn-delete").addEventListener("click", function () {
+	                        if(confirm("정말 삭제하시겠습니까?")) {
+	                            let form = document.querySelector("#form-no-param");
+	                                form.setAttribute("action", "${root}/sharearticle/delete");
+	                              form.submit();
+	                        }
+	                    });
+	                  </script>
+	              </c:if>
+		   	  </c:if>
+            
+            <%-- <div class="text-nowrap ms-2">
+              <a class="btn btn-outline-success btn-mv-modify" href = "${root}/sharearticle/modify?articleno=${article.articleNo}">
                 <!-- <i class="fas fa-table me-1"></i> -->
                 <i class="fas fa-edit"></i>  글수정
               </a>
             </div>
             <div class="text-nowrap ms-2">
-              <a class="btn btn-outline-danger btn-delete" href="<%= root %>/article?action=delete&articleno=${article.articleNo}">
+              <a class="btn btn-outline-danger btn-delete" href="${root}/sharearticle/delete?articleno=${article.articleNo}">
                 <!-- <i class="fas fa-table me-1"></i> -->
                 <i class="fas fa-edit"></i>  글삭제
               </a>
-            </div>
+            </div> --%>
           </div>
           
         </div>
@@ -161,7 +199,7 @@
         />
       </symbol>
     </svg>
-    <div class="container">
+     <div class="container">
       <footer class="py-5">
         <div class="d-flex flex-column flex-sm-row justify-content-between py-4 my-4 border-top">
           <p>&copy; 2023 Company, Inc. All rights reserved.</p>
@@ -191,18 +229,18 @@
         </div>
       </footer>
     </div>
-    <script>
-    document.querySelector("#btn-mv-modify").addEventListener("click", function () {
-        alert("글수정하자!!!");
-        location.href = "${root}/article?action=mvmodify&articleno=${article.articleNo}";
-      });
-    
-      document.querySelector("#btn-delete").addEventListener("click", function () {
-        alert("글삭제하자!!!");
-        location.href = "${root}/article?action=delete&articleno=${article.articleNo}";
-      });
+    <form id="form-param" method="get" action="">
+      <input type="hidden" id="pgno" name="pgno" value="${pgno}">
+      <input type="hidden" id="key" name="key" value="${key}">
+      <input type="hidden" id="word" name="word" value="${word}">
+    </form>
+	<script>
+    document.querySelector("#btn-list").addEventListener("click", function () {
+        let form = document.querySelector("#form-param");
+        form.setAttribute("action", "${root}/sharearticle");
+        form.submit();
+    });
     </script>
-
     <script
       src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js"
       integrity="sha384-kenU1KFdBIe4zVF0s0G1M5b4hcpxyD9F7jL+jjXkk+Q2h455rYXK/7HAuoJl+0I4"

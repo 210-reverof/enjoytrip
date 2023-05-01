@@ -46,4 +46,10 @@ public class InformArticleDto {
 	public void setCreatedAt(String createdAt) {
 		this.createdAt = createdAt;
 	}
+	@Override
+	public String toString() {
+		return "InformArticleDto [articleNo=" + articleNo + ", userId=" + userId + ", title=" + title + ", content="
+				+ content + ", hit=" + hit + ", createdAt=" + createdAt + "]";
+	}
+	
 }
