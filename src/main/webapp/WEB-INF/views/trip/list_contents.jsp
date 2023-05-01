@@ -69,7 +69,7 @@
             
             <div class="row  mt-2">
               <div class="col-1">
-                <img src="<%= root %>/res/img/junimg04.png" class="rounded-circle w-100" alt="noimg" />
+                <img src="${root}/res/img/junimg04.png" class="rounded-circle w-100" alt="noimg" />
               </div>
               <div class="col fs-4 text-dark">
                 ${article.userId}<br>
@@ -82,19 +82,19 @@
           </div>
           <div class="d-flex justify-content-end">
             <div class="text-nowrap ms-2">
-              <a class="btn btn-outline-primary" href="<%= root %>/article?action=list">
+              <a class="btn btn-outline-primary" href="${root}/article?action=list">
                 <!-- <i class="fas fa-table me-1"></i> -->
                 <i class="fas fa-edit"></i> 글목록
               </a>
             </div>
             <div class="text-nowrap ms-2">
-              <a class="btn btn-outline-success btn-mv-modify" href = "<%= root %>/article?action=mvmodify&articleno=${article.articleNo}">
+              <a class="btn btn-outline-success btn-mv-modify" href = "${root}/article?action=mvmodify&articleno=${article.articleNo}">
                 <!-- <i class="fas fa-table me-1"></i> -->
                 <i class="fas fa-edit"></i>  글수정
               </a>
             </div>
             <div class="text-nowrap ms-2">
-              <a class="btn btn-outline-danger btn-delete" href="<%= root %>/article?action=delete&articleno=${article.articleNo}">
+              <a class="btn btn-outline-danger btn-delete" href="${root}/article?action=delete&articleno=${article.articleNo}">
                 <!-- <i class="fas fa-table me-1"></i> -->
                 <i class="fas fa-edit"></i>  글삭제
               </a>

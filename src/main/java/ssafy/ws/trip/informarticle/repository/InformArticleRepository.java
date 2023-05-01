@@ -1,4 +1,4 @@
-package ssafy.ws.trip.informarticle.respository;
+package ssafy.ws.trip.informarticle.repository;
 
 import java.sql.SQLException;
 import java.util.List;
@@ -12,7 +12,7 @@ import ssafy.ws.trip.informarticle.dto.InformArticleDto;
 public interface InformArticleRepository {
 	void writeArticle(InformArticleDto informArticleDto) throws SQLException;
 //	List<InformArticleDto> listArticle(Map<String, Object> param) throws SQLException;
-	List<InformArticleDto> listArticle() throws SQLException;
+	List<InformArticleDto> listArticle(Map<String, Object> map) throws SQLException;
 	int getTotalArticleCount(Map<String, Object> param) throws SQLException;
 	InformArticleDto getArticle(int articleNo) throws SQLException;
 	void updateHit(int articleNo) throws SQLException;
