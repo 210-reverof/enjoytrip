@@ -9,6 +9,8 @@
   	<typeAlias type="ssafy.ws.trip.informarticle.dto.InformArticleDto" alias="InformArticleDto"/>
   	<typeAlias type="ssafy.ws.trip.sharearticle.dto.ShareArticleDto" alias="ShareArticleDto"/>
   	<typeAlias type="ssafy.ws.trip.attraction.dto.AttractionDto" alias="AttractionDto"/>
+  	<typeAlias type="ssafy.ws.trip.attraction.dto.SidoDto" alias="SidoDto"/>
+  	<typeAlias type="ssafy.ws.trip.attraction.dto.GugunDto" alias="GugunDto"/>
   </typeAliases>
   
   <mappers>

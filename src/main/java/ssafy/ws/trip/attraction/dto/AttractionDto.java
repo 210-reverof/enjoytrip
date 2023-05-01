@@ -18,72 +18,95 @@ public class AttractionDto {
 	String gugunName;
 	double latitude;
 	double longitude;
+	
 	public int getContentId() {
 		return contentId;
 	}
+	
 	public void setContentId(int contentId) {
 		this.contentId = contentId;
 	}
+	
 	public int getContentTypeId() {
 		return contentTypeId;
 	}
+	
 	public void setContentTypeId(int contentTypeId) {
 		this.contentTypeId = contentTypeId;
 	}
+	
 	public String getOverview() {
 		return overview;
 	}
+	
 	public void setOverview(String overview) {
 		this.overview = overview;
 	}
+	
 	public String getTitle() {
 		return title;
 	}
+	
 	public void setTitle(String title) {
 		this.title = title;
 	}
+	
 	public String getAddr1() {
 		return addr1;
 	}
+	
 	public void setAddr1(String addr1) {
 		this.addr1 = addr1;
 	}
+	
 	public String getFirstImage() {
 		return firstImage;
 	}
+	
 	public void setFirstImage(String firstImage) {
 		this.firstImage = firstImage;
 	}
+	
 	public int getSidoCode() {
 		return sidoCode;
 	}
+	
 	public void setSidoCode(int sidoCode) {
 		this.sidoCode = sidoCode;
 	}
+	
 	public String getSidoName() {
 		return sidoName;
 	}
+	
 	public void setSidoName(String sidoName) {
 		this.sidoName = sidoName;
 	}
+	
 	public int getGugunCode() {
 		return gugunCode;
 	}
+	
 	public void setGugunCode(int gugunCode) {
 		this.gugunCode = gugunCode;
 	}
+	
 	public String getGugunName() {
 		return gugunName;
 	}
+	
 	public void setGugunName(String gugunName) {
 		this.gugunName = gugunName;
 	}
+	
 	public double getLatitude() {
 		return latitude;
 	}
+	
 	public void setLatitude(double latitude) {
 		this.latitude = latitude;
 	}
+	
 	public double getLongitude() {
 		return longitude;
 	}
