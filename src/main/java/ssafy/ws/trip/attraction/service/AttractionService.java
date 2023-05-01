@@ -11,4 +11,5 @@ public interface AttractionService {
 	List<AttractionDto> selectList(int sidoCode, int gugunCode, int[] types);
 	List<SidoDto> selectSidoList();
 	List<GugunDto> selectGugunList(int sidoCode);
+	List<AttractionDto> selectIdList(int[] types);
 }

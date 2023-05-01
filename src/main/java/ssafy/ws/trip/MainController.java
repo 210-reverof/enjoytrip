@@ -16,10 +16,10 @@ public class MainController {
 		return "/trip/search";
 	}
 	
-	@GetMapping("/routepage") 
-	public String route() {
-		return "/trip/my_route";
-	}
+//	@GetMapping("/routepage") 
+//	public String route() {
+//		return "/trip/my_route";
+//	}
 	
 	
 	// TODO :: 수정 요함

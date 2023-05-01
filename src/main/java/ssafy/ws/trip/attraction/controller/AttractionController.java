@@ -34,6 +34,12 @@ public class AttractionController {
 		return attractionService.selectList(sido, gugun, types);
 	}
 	
+	@GetMapping("/idlist")
+	public List<AttractionDto> idlist(@RequestParam("types") int[] ids) throws Exception {
+		System.out.println("idlist: " + attractionService.selectIdList(ids));
+		return attractionService.selectIdList(ids);
+	}
+	
 	@GetMapping("/sido")
 	public List<SidoDto> sido() throws Exception {
 		return attractionService.selectSidoList();

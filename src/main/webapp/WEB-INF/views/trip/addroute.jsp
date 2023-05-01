@@ -37,10 +37,10 @@
       <!-- 관광지 검색 start -->
       <div id="search-top-label" class="fs-1 text-center">여행 경로 추가하기</div>
       
-      <form method="POST" action="<%= root %>/route/insert">
+      <form id="insert-form" method="POST" action="<%= root %>/route/insert">
       	<input type="hidden" name="title" value="제목1제목1"/>
   		<input type="hidden" name="list" value="${list}" />	
-      	<input type="submit" value="추가하기"/>
+      	<input type="submit" class="btn btn-outline-primary btn-sm" value="완료"/>
       </form>
       
       <div id ="my-route-panel" class="container text-start">
@@ -60,14 +60,12 @@
         <div class="row">
           <div class="d-inline-flex p-2">
             <select id="search-area-sel" class="form-select mx-2" onchange="changeAreaSel()">
-              <option value="-1" selected>지역선택</option>
             </select>
             <select
               id="search-area-detail-sel"
               class="form-select mx-2"
               onchange="changeSigunguSel()"
             >
-              <option value="-1" selected>구군선택</option>
             </select>
           </div>
 

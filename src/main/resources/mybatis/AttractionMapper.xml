@@ -36,4 +36,16 @@
 	            #{type, jdbcType=INTEGER}
 	        </foreach>
 	</select>
+	
+	<select id="selectIdList" resultType="AttractionDto">
+	    SELECT i.content_id AS contentId, content_type_id AS contentTypeId, overview, title, addr1, first_image AS firstImage, i.sido_code AS sidoCode, s.sido_name AS sidoName, i.gugun_code AS gugunCode, g.gugun_name AS gugunName, latitude, longitude
+	    FROM attraction_info i
+	    JOIN attraction_description d ON i.content_id = d.content_id 
+	    JOIN sido s ON i.sido_code = s.sido_code
+	    JOIN gugun g ON i.sido_code = g.sido_code AND i.gugun_code = g.gugun_code
+	    WHERE content_type_id IN
+	        <foreach item="type" index="index" collection="types" open="(" separator="," close=")">
+	            #{type, jdbcType=INTEGER}
+	        </foreach>
+	</select>
 </mapper>

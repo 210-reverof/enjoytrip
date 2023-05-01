@@ -23,7 +23,7 @@ String root = request.getContextPath();
               <a href="<%= root %>/searchpage" class="nav-link ps-5 px-2 fs-5" style="color: ForestGreen">지역별여행지</a>
             </li>
             <li>
-              <a href="<%= root %>/routepage/userid=${userinfo.id}" class="nav-link ps-3 px-2 fs-5" style="color: SkyBlue">나의여행계획</a>
+              <a href="<%= root %>/route/mvroute" class="nav-link ps-3 px-2 fs-5" style="color: SkyBlue">나의여행계획</a>
             </li>
             <li>
               <a href="#" class="nav-link ps-3 px-2 fs-5" style="color: Crimson">핫플자랑하기</a>
@@ -116,7 +116,7 @@ String root = request.getContextPath();
               <a href="<%= root %>/searchpage" class="nav-link ps-5 px-2 fs-5" style="color: ForestGreen">지역별여행지</a>
             </li>
             <li>
-              <a href="<%= root %>/routepage/userid=${userinfo.id}" class="nav-link ps-3 px-2 fs-5" style="color: SkyBlue">나의여행계획</a>
+              <a href="<%= root %>/route/mvroute" class="nav-link ps-3 px-2 fs-5" style="color: SkyBlue">나의여행계획</a>
             </li>
             <li>
               <a href="#" class="nav-link ps-3 px-2 fs-5" style="color: Crimson">핫플자랑하기</a>

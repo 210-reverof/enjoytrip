@@ -206,7 +206,7 @@ var mapContainer = document.getElementById("map"), // 지도의 중심좌표
 
     var overlay = new daum.maps.CustomOverlay({
       position: mapOption.latlng,
-      content: content,
+      content: content
     });
     function overLay(marker, tmp) {
       overlay = new kakao.maps.CustomOverlay({

@@ -42,4 +42,10 @@ public class AttractionServiceMapperImpl implements AttractionService {
 		return session.getMapper(AttractionRepository.class).selectGugunList(sidoCode);
 	}
 
+
+	@Override
+	public List<AttractionDto> selectIdList(int[] types) {
+		return session.getMapper(AttractionRepository.class).selectIdList(types);
+	}
+
 }
