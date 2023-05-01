@@ -46,4 +46,10 @@ public class ShareArticleDto {
 	public void setCreatedAt(String createdAt) {
 		this.createdAt = createdAt;
 	}
+	@Override
+	public String toString() {
+		return "ShareArticleDto [articleNo=" + articleNo + ", userId=" + userId + ", title=" + title + ", content="
+				+ content + ", hit=" + hit + ", createdAt=" + createdAt + "]";
+	}
+	
 }

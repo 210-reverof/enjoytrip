@@ -62,15 +62,15 @@
     <div class="sb-nav-fixed">
       <div class="mt-5 pt-5">
         <div class="container px-4">
-          <h1 class="mt-4 d-flex justify-content-center">좋은 정보 공유해요!</h1>
+          <h1 class="mt-4 d-flex justify-content-center">좋은 글 공유해요</h1>
           <div class="container rounded bg-success bg-opacity-75 text-white text-center fs-2 p-4">
             글작성
           </div>
   
           <div class="container">
             <form id="form-register" method="post" action="">
-            <input type="hidden" name="userId" value="${userinfo.id}">
-            <input type="hidden" name="action" value="write">
+            <input type="hidden" name="userid" value="${userinfo.id}">
+            <!-- <input type="hidden" name="action" value="write"> -->
               <div class="pt-4 pb-4">
                 <!-- <label for="subject">제목</label> -->
                 제목
@@ -105,7 +105,7 @@
               </a>
             </div>
             <div class=" col-md-1 ms-2 text-nowrap">
-              <a class="btn btn-danger" href="<%= root %>/informarticle?pgno=1&key=&word=">
+              <a class="btn btn-danger" href="<%= root %>/sharearticle?action=list">
                 <!-- <i class="fas fa-table me-1"></i> -->
                 <i class="fas fa-edit"></i> 목록
               </a>
@@ -212,7 +212,7 @@
           return;
         } else {
           let form = document.querySelector("#form-register");
-          form.setAttribute("action", "${root}/informarticle?pgno=1&key=&word=");
+          form.setAttribute("action", "${root}/sharearticle/write");
           form.submit();
         }
       });

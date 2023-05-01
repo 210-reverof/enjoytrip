@@ -93,36 +93,37 @@
                 <i class="fas fa-edit"></i> 글목록
               </a>
             </div>
-            
-            <c:if test="${userinfo.id eq article.userId}">
-                  <button type="button" id="btn-mv-modify" class="btn btn-outline-success mb-3 ms-1">
-                    글수정
-                  </button>
-                  <button type="button" id="btn-delete" class="btn btn-outline-danger mb-3 ms-1">
-                    글삭제
-                  </button>
-                  <form id="form-no-param" method="get" action="${root}/informarticle">
-                      <input type="hidden" id="npgno" name="pgno" value="${pgno}">
-                      <input type="hidden" id="nkey" name="key" value="${key}">
-                      <input type="hidden" id="nword" name="word" value="${word}">
-                      <input type="hidden" id="articleno" name="articleno" value="${article.articleNo}">
-                  </form>
-                  <script>
-                      document.querySelector("#btn-mv-modify").addEventListener("click", function () {
-                        let form = document.querySelector("#form-no-param");
-                           form.setAttribute("action", "${root}/informarticle/modify");
-                        form.submit();
-                      });
-                      
-                    document.querySelector("#btn-delete").addEventListener("click", function () {
-                        if(confirm("정말 삭제하시겠습니까?")) {
-                            let form = document.querySelector("#form-no-param");
-                                form.setAttribute("action", "${root}/informarticle/delete");
-                              form.submit();
-                        }
-                    });
-                  </script>
-              </c:if>
+            <c:if test="${not empty userinfo}">
+	            <c:if test="${userinfo.id eq article.userId}">
+	                  <button type="button" id="btn-mv-modify" class="btn btn-outline-success mb-3 ms-1">
+	                    글수정
+	                  </button>
+	                  <button type="button" id="btn-delete" class="btn btn-outline-danger mb-3 ms-1">
+	                    글삭제
+	                  </button>
+	                  <form id="form-no-param" method="get" action="${root}/informarticle">
+	                      <input type="hidden" id="npgno" name="pgno" value="${pgno}">
+	                      <input type="hidden" id="nkey" name="key" value="${key}">
+	                      <input type="hidden" id="nword" name="word" value="${word}">
+	                      <input type="hidden" id="articleno" name="articleno" value="${article.articleNo}">
+	                  </form>
+	                  <script>
+	                      document.querySelector("#btn-mv-modify").addEventListener("click", function () {
+	                        let form = document.querySelector("#form-no-param");
+	                           form.setAttribute("action", "${root}/informarticle/modify");
+	                        form.submit();
+	                      });
+	                      
+	                    document.querySelector("#btn-delete").addEventListener("click", function () {
+	                        if(confirm("정말 삭제하시겠습니까?")) {
+	                            let form = document.querySelector("#form-no-param");
+	                                form.setAttribute("action", "${root}/informarticle/delete");
+	                              form.submit();
+	                        }
+	                    });
+	                  </script>
+	              </c:if>
+		   	  </c:if>
             
             <%-- <div class="text-nowrap ms-2">
               <a class="btn btn-outline-success btn-mv-modify" href = "${root}/informarticle/modify?articleno=${article.articleNo}">
@@ -236,7 +237,7 @@
 	<script>
     document.querySelector("#btn-list").addEventListener("click", function () {
         let form = document.querySelector("#form-param");
-        form.setAttribute("action", "${root}/informarticle/list");
+        form.setAttribute("action", "${root}/informarticle");
         form.submit();
     });
     </script>

@@ -1,4 +1,4 @@
-package ssafy.ws.trip.informarticle.controller;
+package ssafy.ws.trip.sharearticle.controller;
 
 import java.sql.SQLException;
 import java.util.HashMap;
@@ -21,17 +21,17 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import ch.qos.logback.classic.spi.STEUtil;
 import ssafy.ws.trip.config.PageNavigation;
-import ssafy.ws.trip.informarticle.dto.InformArticleDto;
-import ssafy.ws.trip.informarticle.service.InformArticleService;
+import ssafy.ws.trip.sharearticle.dto.ShareArticleDto;
+import ssafy.ws.trip.sharearticle.service.ShareArticleService;
 import ssafy.ws.trip.user.dto.UserDto;
 
 @Controller
-@RequestMapping("/informarticle")
-public class InformArticleController {
+@RequestMapping("/sharearticle")
+public class ShareArticleController {
 	
 	@Autowired
-	@Qualifier("InformArticleMapperServiceImpl")
-	private InformArticleService informArticleService;
+	@Qualifier("ShareArticleMapperServiceImpl")
+	private ShareArticleService shareArticleService;
 	
 //	@GetMapping("")
 //	public ModelAndView list() throws Exception {
@@ -47,14 +47,14 @@ public class InformArticleController {
 	public ModelAndView list(@RequestParam Map<String, String> map) throws Exception {
 		System.out.println("list parameter pgno : "+ map.get("pgno"));
 		ModelAndView mav = new ModelAndView();
-		List<InformArticleDto> list = informArticleService.listArticle(map);
-		PageNavigation pageNavigation = informArticleService.makePageNavigation(map);
+		List<ShareArticleDto> list = shareArticleService.listArticle(map);
+		PageNavigation pageNavigation = shareArticleService.makePageNavigation(map);
 		mav.addObject("articles", list);
 		mav.addObject("navigation", pageNavigation);
 		mav.addObject("pgno", map.get("pgno"));
 		mav.addObject("key", map.get("key"));
 		mav.addObject("word", map.get("word"));
-		mav.setViewName("/trip/informlist");
+		mav.setViewName("/trip/list");
 		return mav;
 	}
 	
@@ -62,19 +62,19 @@ public class InformArticleController {
 	public String view(@RequestParam("articleno") int articleNo, HttpSession session, @RequestParam Map<String, String> map, Model model)
 			throws Exception {
 		System.out.println("view articleNo : "+ articleNo);
-		InformArticleDto informArticleDto = informArticleService.getArticle(articleNo);
+		ShareArticleDto shareArticleDto = shareArticleService.getArticle(articleNo);
 		UserDto userDto = (UserDto) session.getAttribute("userinfo");
 		if(userDto != null) {
-			informArticleDto.setUserId(userDto.getId());
+			shareArticleDto.setUserId(userDto.getId());
 		}
-		informArticleDto.setArticleNo(articleNo);
-		System.out.println("view obj ::"+informArticleDto.toString());
-		informArticleService.updateHit(articleNo);
-		model.addAttribute("article", informArticleDto);
+		shareArticleDto.setArticleNo(articleNo);
+		System.out.println("view obj ::"+shareArticleDto.toString());
+		shareArticleService.updateHit(articleNo);
+		model.addAttribute("article", shareArticleDto);
 		model.addAttribute("pgno", map.get("pgno"));
 		model.addAttribute("key", map.get("key"));
 		model.addAttribute("word", map.get("word"));
-		return "/trip/informlist_contents";
+		return "/trip/list_contents";
 	}
 	
 	@GetMapping("/makinglist")
@@ -83,20 +83,20 @@ public class InformArticleController {
 		model.addAttribute("pgno", map.get("pgno"));
 		model.addAttribute("key", map.get("key"));
 		model.addAttribute("word", map.get("word"));
-		return "/trip/makinginformlist";
+		return "/trip/makinglist";
 	}
 	
 	@PostMapping("/write")
-	public String write(InformArticleDto informArticleDto ,HttpSession session,
+	public String write(ShareArticleDto shareArticleDto ,HttpSession session,
 			RedirectAttributes redirectAttributes) throws SQLException {
-		System.out.println("post write " + informArticleDto.toString());
+		System.out.println("post write " + shareArticleDto.toString());
 		UserDto userDto = (UserDto) session.getAttribute("userinfo");
-		informArticleDto.setUserId(userDto.getId());
-		informArticleService.writeArticle(informArticleDto);
+		shareArticleDto.setUserId(userDto.getId());
+		shareArticleService.writeArticle(shareArticleDto);
 		redirectAttributes.addAttribute("pgno", "1");
 		redirectAttributes.addAttribute("key", "");
 		redirectAttributes.addAttribute("word", "");
-		return "redirect:/informarticle";
+		return "redirect:/sharearticle";
 	}
 	
 	
@@ -105,41 +105,41 @@ public class InformArticleController {
 			@RequestParam Map<String, String> map, Model model)
 			throws Exception {
 		System.out.println("modify parameter pgno : "+ map.get("pgno"));
-		InformArticleDto informArticleDto = informArticleService.getArticle(articleNo);
-		informArticleDto.setArticleNo(articleNo);
+		ShareArticleDto shareArticleDto = shareArticleService.getArticle(articleNo);
+		shareArticleDto.setArticleNo(articleNo);
 		UserDto userDto = (UserDto) session.getAttribute("userinfo");
 		if(userDto != null) {
-			informArticleDto.setUserId(userDto.getId());
+			shareArticleDto.setUserId(userDto.getId());
 		}
-		System.out.println(informArticleDto.toString());
-		model.addAttribute("article", informArticleDto);
+		System.out.println(shareArticleDto.toString());
+		model.addAttribute("article", shareArticleDto);
 		model.addAttribute("pgno", map.get("pgno"));
 		model.addAttribute("key", map.get("key"));
 		model.addAttribute("word", map.get("word"));
-		return "trip/modifyinformlist";
+		return "trip/modifylist";
 	}
 //
 	@PostMapping("/modify")
-	public String modify(InformArticleDto informArticleDto, @RequestParam Map<String, String> map,
+	public String modify(ShareArticleDto shareArticleDto, @RequestParam Map<String, String> map,
 			RedirectAttributes redirectAttributes) throws Exception {
 		System.out.println("post modify parameter pgno : "+ map.get("pgno"));
-		System.out.println(":: post modify ::" + informArticleDto.toString());
-		informArticleService.modifyArticle(informArticleDto);
+		System.out.println(":: post modify ::" + shareArticleDto.toString());
+		shareArticleService.modifyArticle(shareArticleDto);
 		redirectAttributes.addAttribute("pgno", map.get("pgno"));
 		redirectAttributes.addAttribute("key", map.get("key"));
 		redirectAttributes.addAttribute("word", map.get("word"));
-		return "redirect:/informarticle";
+		return "redirect:/sharearticle";
 	}
 
 	@GetMapping("/delete")
 	public String delete(@RequestParam("articleno") int articleNo, @RequestParam Map<String, String> map,
 			RedirectAttributes redirectAttributes) throws Exception {
 		System.out.println("delete "+articleNo);
-		informArticleService.deleteArticle(articleNo);
+		shareArticleService.deleteArticle(articleNo);
 		redirectAttributes.addAttribute("pgno", map.get("pgno"));
 		redirectAttributes.addAttribute("key", map.get("key"));
 		redirectAttributes.addAttribute("word", map.get("word"));
-		return "redirect:/informarticle";
+		return "redirect:/sharearticle";
 	}
 	
 }

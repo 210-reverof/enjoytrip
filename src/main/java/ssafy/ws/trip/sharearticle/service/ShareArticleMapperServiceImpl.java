@@ -1,4 +1,4 @@
-package ssafy.ws.trip.informarticle.service;
+package ssafy.ws.trip.sharearticle.service;
 
 import java.sql.SQLException;
 import java.util.HashMap;
@@ -12,23 +12,23 @@ import org.springframework.stereotype.Service;
 
 import ssafy.ws.trip.config.PageNavigation;
 import ssafy.ws.trip.config.SizeConstant;
-import ssafy.ws.trip.informarticle.dto.InformArticleDto;
-import ssafy.ws.trip.informarticle.repository.InformArticleRepository;
+import ssafy.ws.trip.sharearticle.dto.ShareArticleDto;
+import ssafy.ws.trip.sharearticle.repository.ShareArticleRepository;
 
-@Service("InformArticleMapperServiceImpl")
-public class InformArticleMapperServiceImpl implements InformArticleService{
+@Service("ShareArticleMapperServiceImpl")
+public class ShareArticleMapperServiceImpl implements ShareArticleService{
 
 	@Autowired
 	SqlSession session;
 	
 	@Override
-	public void writeArticle(InformArticleDto informArticleDto) throws SQLException {
+	public void writeArticle(ShareArticleDto shareArticleDto) throws SQLException {
 		System.out.println("service writeArticle");
-		session.getMapper(InformArticleRepository.class).writeArticle(informArticleDto);
+		session.getMapper(ShareArticleRepository.class).writeArticle(shareArticleDto);
 	}
 
 	@Override
-	public List<InformArticleDto> listArticle(Map<String, String> map) throws SQLException {
+	public List<ShareArticleDto> listArticle(Map<String, String> map) throws SQLException {
 		System.out.println("servivceImplTESt------------------");
 		Map<String, Object> param = new HashMap<String, Object>();
 		String key = map.get("key");
@@ -41,37 +41,37 @@ public class InformArticleMapperServiceImpl implements InformArticleService{
 		param.put("start", start);
 		param.put("listsize", SizeConstant.LIST_SIZE);
 		System.out.println("list paging :" + start + " , ");
-		return session.getMapper(InformArticleRepository.class).listArticle(param);
+		return session.getMapper(ShareArticleRepository.class).listArticle(param);
 	}
 
 	@Override
 	public int getTotalArticleCount(Map<String, Object> param) throws SQLException {
 		System.out.println("service getTotalArticleCount");
-		return session.getMapper(InformArticleRepository.class).getTotalArticleCount(param);
+		return session.getMapper(ShareArticleRepository.class).getTotalArticleCount(param);
 	}
 
 	@Override
-	public InformArticleDto getArticle(int articleNo) throws SQLException {
+	public ShareArticleDto getArticle(int articleNo) throws SQLException {
 		System.out.println("service getArticle");
-		return session.getMapper(InformArticleRepository.class).getArticle(articleNo);
+		return session.getMapper(ShareArticleRepository.class).getArticle(articleNo);
 	}
 
 	@Override
 	public void updateHit(int articleNo) throws SQLException {
 		System.out.println("service updateHit");
-		session.getMapper(InformArticleRepository.class).updateHit(articleNo);
+		session.getMapper(ShareArticleRepository.class).updateHit(articleNo);
 	}
 
 	@Override
-	public void modifyArticle(InformArticleDto InformArticleDto) throws SQLException {
+	public void modifyArticle(ShareArticleDto shareArticleDto) throws SQLException {
 		System.out.println("service modifyArticle");
-		session.getMapper(InformArticleRepository.class).modifyArticle(InformArticleDto);
+		session.getMapper(ShareArticleRepository.class).modifyArticle(shareArticleDto);
 	}
 
 	@Override
 	public void deleteArticle(int articleNo) throws SQLException {
 		System.out.println("service deleteArticle");
-		session.getMapper(InformArticleRepository.class).deleteArticle(articleNo);
+		session.getMapper(ShareArticleRepository.class).deleteArticle(articleNo);
 	}
 
 	@Override
@@ -91,7 +91,7 @@ public class InformArticleMapperServiceImpl implements InformArticleService{
 			key = "user_id";
 		param.put("key", key == null ? "" : key);
 		param.put("word", map.get("word") == null ? "" : map.get("word"));
-		int totalCount = session.getMapper(InformArticleRepository.class).getTotalArticleCount(param);
+		int totalCount = session.getMapper(ShareArticleRepository.class).getTotalArticleCount(param);
 		pageNavigation.setTotalCount(totalCount);
 		int totalPageCount = (totalCount - 1) / sizePerPage + 1;
 		pageNavigation.setTotalPageCount(totalPageCount);
