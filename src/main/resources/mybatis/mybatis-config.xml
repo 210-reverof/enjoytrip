@@ -11,6 +11,8 @@
   	<typeAlias type="ssafy.ws.trip.attraction.dto.AttractionDto" alias="AttractionDto"/>
   	<typeAlias type="ssafy.ws.trip.attraction.dto.SidoDto" alias="SidoDto"/>
   	<typeAlias type="ssafy.ws.trip.attraction.dto.GugunDto" alias="GugunDto"/>
+  	<typeAlias type="ssafy.ws.trip.route.dto.RouteDto" alias="RouteDto"/>
+  	<typeAlias type="ssafy.ws.trip.route.dto.RouteResDto" alias="RouteResDto"/>
   </typeAliases>
   
   <mappers>
@@ -18,6 +20,7 @@
     <mapper resource="mybatis/InformArticleMapper.xml"/>
     <mapper resource="mybatis/ShareArticleMapper.xml"/>
     <mapper resource="mybatis/UserMapper.xml"/>
+    <mapper resource="mybatis/RouteMapper.xml"/>
   </mappers>
 
 </configuration>
