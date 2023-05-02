@@ -14,6 +14,7 @@ const attractions = [];
 window.onload = init();
 
 function init() {
+	console.log("=======" + `${route.attractions}`);
     fetchAllAreas(areaUrl);
     var currSel = document.getElementById("search-area-sel")
     currAreaNum = 1;

@@ -1,13 +1,21 @@
 package ssafy.ws.trip.route.dto;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class RouteResDto {
 	int routeId;
 	String userId;
 	String title;
-	List<RouteAttrDto> attractions;
+	List<RouteAttrDto> attractions = new ArrayList<>();
 	String createdAt;
+	
+	public RouteResDto(int routeId, String userId, String title,  String createdAt) {
+		this.routeId = routeId;
+		this.userId = userId;
+		this.title = title;
+		this.createdAt = createdAt;
+	}
 
 	public RouteResDto(int routeId, String userId, String title, List<RouteAttrDto> attractions, String createdAt) {
 		this.routeId = routeId;

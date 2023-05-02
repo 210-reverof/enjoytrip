@@ -7,8 +7,41 @@
         INSERT INTO route(user_id, title, created_at) 
         VALUES(#{userId}, #{title}, now())
     </insert>
+    
     <insert id="insertRouteAttrs">
 	    INSERT INTO route_relation (route_id, attraction_id, `order`) 
 	    VALUES(#{routeId}, #{attractionId}, #{order})
   	</insert>
+  	
+  	<select id="selectMyList" parameterType="String" resultType="RouteDto">
+		SELECT route_id AS routeId, user_id AS userId, title, created_at AS createdAt
+		FROM route
+		WHERE user_id = #{userId}
+	</select>
+	
+	<select id="selectRoute" parameterType="int" resultType="RouteResDto">
+		SELECT route_id AS routeId, user_id AS userId, title, created_at AS createdAt
+		FROM route
+		WHERE route_id = #{routeId}
+	</select>
+	
+	<select id="selectRouteAttrs" parameterType="int" resultType="RouteAttrDto">
+		SELECT visited, r.`order` AS `number`, i.content_id AS contentId, content_type_id AS contentTypeId, overview, title, addr1, first_image AS firstImage, i.sido_code AS sidoCode, s.sido_name AS sidoName, i.gugun_code AS gugunCode, g.gugun_name AS gugunName, latitude, longitude
+		FROM route_relation r
+		JOIN attraction_info i on i.content_id = r.attraction_id
+		JOIN attraction_description d ON i.content_id = d.content_id 
+		JOIN sido s ON i.sido_code = s.sido_code
+		JOIN gugun g ON i.sido_code = g.sido_code AND i.gugun_code = g.gugun_code
+		WHERE r.route_id = #{routeId}
+	</select>
+	
+	<delete id="deleteRoute" parameterType="int">
+		DELETE FROM route
+		WHERE route_id = #{routeId}
+	</delete>
+	
+	<delete id="deleteRouteAttrs" parameterType="int">
+		DELETE FROM route_relation
+		WHERE route_id = #{routeId}
+	</delete>
 </mapper>
