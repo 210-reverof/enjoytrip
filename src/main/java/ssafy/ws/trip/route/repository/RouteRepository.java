@@ -12,6 +12,7 @@ public interface RouteRepository {
 	void insertRouteAttrs(int routeId, int attractionId, int order);
 	void updateRoute(RouteDto routes) throws Exception;
 	void deleteRoute(int routeId) throws Exception;
+	void deleteRouteAttrs(int routeId) throws Exception;
 	RouteResDto selectRoute(int routeId) throws Exception;
 	List<RouteAttrDto> selectRouteAttrs(int routeId);
 }

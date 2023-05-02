@@ -34,4 +34,14 @@
 		JOIN gugun g ON i.sido_code = g.sido_code AND i.gugun_code = g.gugun_code
 		WHERE r.route_id = #{routeId}
 	</select>
+	
+	<delete id="deleteRoute" parameterType="int">
+		DELETE FROM route
+		WHERE route_id = #{routeId}
+	</delete>
+	
+	<delete id="deleteRouteAttrs" parameterType="int">
+		DELETE FROM route_relation
+		WHERE route_id = #{routeId}
+	</delete>
 </mapper>

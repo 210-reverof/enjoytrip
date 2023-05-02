@@ -40,7 +40,7 @@ public class RouteController {
 		mv.addObject("myroute", routeService.selectMyList(user.getId()));
 		mv.setViewName("/trip/myroute");
 		return mv;
-	} 
+	}  
 	
 	@GetMapping("/mvinsertroute")
 	public ModelAndView mvinsertroute(HttpSession session) throws Exception {
@@ -67,11 +67,12 @@ public class RouteController {
 		return mv;
 	}
 	
-	@PostMapping("/delete")
-	public ModelAndView delete() throws Exception {
+	@GetMapping("/delete/{routeid}")
+	public ModelAndView delete(@PathVariable("routeid") int routeId) throws Exception {
 		ModelAndView mv = new ModelAndView();
+		routeService.deleteRoute(routeId);
 		
-		mv.setViewName("redirect:/mvroute");
+		mv.setViewName("redirect:/route/mvroute");
 		return mv;
 	}
 	

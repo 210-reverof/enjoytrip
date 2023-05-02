@@ -62,17 +62,16 @@
 				  </div>
             </c:forEach>
             </div>
-            </div>
           </div>
           <div class="d-flex justify-content-end">
             <div class="text-nowrap ms-2">
-              <a class="btn btn-outline-primary" href="${root}/sharearticle?pgno=1&key=&word=">
+              <a class="btn btn-outline-primary" href="${root}/route/mvroute">
                 <!-- <i class="fas fa-table me-1"></i> -->
                 <i class="fas fa-edit"></i> 글목록
               </a>
             </div>
             <c:if test="${not empty userinfo}">
-	            <c:if test="${userinfo.id eq article.userId}">
+	            <c:if test="${userinfo.id eq route.userId}">
 	                  <button type="button" id="btn-mv-modify" class="btn btn-outline-success mb-3 ms-1">
 	                    글수정
 	                  </button>
@@ -80,7 +79,6 @@
 	                    글삭제
 	                  </button>
 	                  <form id="form-no-param" method="get" action="">
-	                      <input type="hidden" id="articleno" name="articleno" value="${article.articleNo}">
 	                  </form>
 	                  <script>
 	                      document.querySelector("#btn-mv-modify").addEventListener("click", function () {
@@ -92,7 +90,7 @@
 	                    document.querySelector("#btn-delete").addEventListener("click", function () {
 	                        if(confirm("정말 삭제하시겠습니까?")) {
 	                            let form = document.querySelector("#form-no-param");
-	                       //         form.setAttribute("action", "${root}/sharearticle/delete");
+	                                form.setAttribute("action", "${root}/route/delete/${route.routeId}");
 	                              form.submit();
 	                        }
 	                    });

@@ -39,8 +39,8 @@ public class RouteServiceImpl implements RouteService {
 
 	@Override
 	public void deleteRoute(int routeId) throws Exception {
-		// TODO Auto-generated method stub
-		
+		session.getMapper(RouteRepository.class).deleteRouteAttrs(routeId);
+		session.getMapper(RouteRepository.class).deleteRoute(routeId);
 	}
 
 	@Override
