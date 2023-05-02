@@ -24,8 +24,8 @@
 	</sql>
 	
 	<insert id="writeArticle" parameterType="HotplaceArticleDto">
-		insert into hotplacearticle (user_id, title, content, hit, createdat)
-		values (#{userId}, #{title}, #{content}, 0, now())
+		insert into hotplacearticle (user_id, title, content, hit, createdat, filename, filepath)
+		values (#{userId}, #{title}, #{content}, 0, now(), #{filename}, #{filepath})
 	</insert>
 	
 	<select id="listArticle" resultMap="article">
@@ -46,7 +46,7 @@
 	</select>
 	
 	<select id="getArticle" parameterType="int" resultType="HotplaceArticleDto">
-		select b.article_no, b.user_id, b.title, b.content, b.hit, b.createdat, m.name 
+		select b.article_no, b.user_id, b.title, b.content, b.hit, b.createdat, b.filename, b.filepath, m.name 
 		from hotplacearticle b, user m
 		where b.user_id = m.id
 		and b.article_no = #{articleNo}
@@ -60,7 +60,7 @@
 	
 	<update id="modifyArticle" parameterType="HotplaceArticleDto">
 		update hotplacearticle
-		set title = #{title}, content = #{content}
+		set title = #{title}, content = #{content}, filename = #{filename}, filepath = #{filepath}
 		where article_no = #{articleNo}
 	</update>
 	

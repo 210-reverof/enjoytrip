@@ -95,7 +95,10 @@
                   placeholder="내용을 입력하세요."
                 ></textarea>
               </div>
-              <input type="file" name="file"> <!--name이름을 controller의 매개변수 이름과 동일하게 설정-->
+              <div class="pb-4">
+              	업로드
+              	<input type="file" name="file"> <!--name이름을 controller의 매개변수 이름과 동일하게 설정-->
+              </div>
             </form>
           </div>
           <div class="d-flex flex-column flex-sm-row justify-content-between">

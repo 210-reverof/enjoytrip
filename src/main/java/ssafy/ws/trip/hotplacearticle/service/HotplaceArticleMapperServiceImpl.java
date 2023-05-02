@@ -1,14 +1,17 @@
 package ssafy.ws.trip.hotplacearticle.service;
 
+import java.io.File;
+import java.io.IOException;
 import java.sql.SQLException;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.UUID;
 
 import org.apache.ibatis.session.SqlSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-
+import org.springframework.web.multipart.MultipartFile;
 
 import ssafy.ws.trip.config.PageNavigation;
 import ssafy.ws.trip.config.SizeConstant;
@@ -22,8 +25,24 @@ public class HotplaceArticleMapperServiceImpl implements HotplaceArticleService{
 	SqlSession session;
 	
 	@Override
-	public void writeArticle(HotplaceArticleDto hotplaceArticleDto) throws SQLException {
+	public void writeArticle(HotplaceArticleDto hotplaceArticleDto, MultipartFile file) throws Exception {
 		System.out.println("service writeArticle");
+		
+		/*우리의 프로젝트경로를 담아주게 된다 - 저장할 경로를 지정*/
+        String projectPath = System.getProperty("user.dir") + "\\src\\main\\resources\\static\\files";
+        /*식별자 . 랜덤으로 이름 만들어줌*/
+        UUID uuid = UUID.randomUUID();
+        /*랜덤식별자_원래파일이름 = 저장될 파일이름 지정*/
+        String fileName = uuid + "_" + file.getOriginalFilename();
+        /*빈 껍데기 생성*/
+        /*File을 생성할건데, 이름은 "name" 으로할거고, projectPath 라는 경로에 담긴다는 뜻*/
+        File saveFile = new File(projectPath, fileName);
+        file.transferTo(saveFile);
+        /*디비에 파일 넣기*/
+        hotplaceArticleDto.setFilename(fileName);
+        /*저장되는 경로*/
+        hotplaceArticleDto.setFilepath("/files/" + fileName); /*저장된파일의이름,저장된파일의경로*/
+        
 		session.getMapper(HotplaceArticleRepository.class).writeArticle(hotplaceArticleDto);
 	}
 
@@ -63,8 +82,25 @@ public class HotplaceArticleMapperServiceImpl implements HotplaceArticleService{
 	}
 
 	@Override
-	public void modifyArticle(HotplaceArticleDto hotplaceArticleDto) throws SQLException {
+	public void modifyArticle(HotplaceArticleDto hotplaceArticleDto, MultipartFile file) throws Exception {
 		System.out.println("service modifyArticle");
+		
+		/*우리의 프로젝트경로를 담아주게 된다 - 저장할 경로를 지정*/
+        String projectPath = System.getProperty("user.dir") + "\\src\\main\\resources\\static\\files";
+        /*식별자 . 랜덤으로 이름 만들어줌*/
+        UUID uuid = UUID.randomUUID();
+        /*랜덤식별자_원래파일이름 = 저장될 파일이름 지정*/
+        String fileName = uuid + "_" + file.getOriginalFilename();
+        /*빈 껍데기 생성*/
+        /*File을 생성할건데, 이름은 "name" 으로할거고, projectPath 라는 경로에 담긴다는 뜻*/
+        File saveFile = new File(projectPath, fileName);
+        file.transferTo(saveFile);
+        /*디비에 파일 넣기*/
+        hotplaceArticleDto.setFilename(fileName);
+        /*저장되는 경로*/
+        hotplaceArticleDto.setFilepath("/files/" + fileName); /*저장된파일의이름,저장된파일의경로*/
+        
+		
 		session.getMapper(HotplaceArticleRepository.class).modifyArticle(hotplaceArticleDto);
 	}
 

@@ -15,6 +15,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
@@ -90,11 +91,11 @@ public class HotplaceArticleController {
 	
 	@PostMapping("/write")
 	public String write(HotplaceArticleDto hotplaceArticleDto ,HttpSession session,
-			RedirectAttributes redirectAttributes) throws SQLException {
+			RedirectAttributes redirectAttributes, MultipartFile file) throws Exception {
 		System.out.println("post write " + hotplaceArticleDto.toString());
 		UserDto userDto = (UserDto) session.getAttribute("userinfo");
 		hotplaceArticleDto.setUserId(userDto.getId());
-		hotplaceArticleService.writeArticle(hotplaceArticleDto);
+		hotplaceArticleService.writeArticle(hotplaceArticleDto, file);
 		redirectAttributes.addAttribute("pgno", "1");
 		redirectAttributes.addAttribute("key", "");
 		redirectAttributes.addAttribute("word", "");
@@ -123,10 +124,10 @@ public class HotplaceArticleController {
 //
 	@PostMapping("/modify")
 	public String modify(HotplaceArticleDto hotplaceArticleDto, @RequestParam Map<String, String> map,
-			RedirectAttributes redirectAttributes) throws Exception {
+			RedirectAttributes redirectAttributes, MultipartFile file) throws Exception {
 		System.out.println("post modify parameter pgno : "+ map.get("pgno"));
 		System.out.println(":: post modify ::" + hotplaceArticleDto.toString());
-		hotplaceArticleService.modifyArticle(hotplaceArticleDto);
+		hotplaceArticleService.modifyArticle(hotplaceArticleDto, file);
 		redirectAttributes.addAttribute("pgno", map.get("pgno"));
 		redirectAttributes.addAttribute("key", map.get("key"));
 		redirectAttributes.addAttribute("word", map.get("word"));

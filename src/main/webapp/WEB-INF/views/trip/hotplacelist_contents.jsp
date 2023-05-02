@@ -85,6 +85,7 @@
             <div class="container rounded bg-white bg-opacity-50 fs-4 text-center">
               ${article.content}<br>
             </div>
+            <a href="${root}/${article.filepath}">다운로드</a>
           </div>
           <div class="d-flex justify-content-end">
             <div class="text-nowrap ms-2">
@@ -110,7 +111,7 @@
 	                  <script>
 	                      document.querySelector("#btn-mv-modify").addEventListener("click", function () {
 	                        let form = document.querySelector("#form-no-param");
-	                           form.setAttribute("action", "${root}/sharearticle/modify");
+	                           form.setAttribute("action", "${root}/hotplacearticle/modify");
 	                        form.submit();
 	                      });
 	                      
