@@ -36,6 +36,7 @@ public class HotplaceArticleMapperServiceImpl implements HotplaceArticleService{
         String fileName = uuid + "_" + file.getOriginalFilename();
         /*빈 껍데기 생성*/
         /*File을 생성할건데, 이름은 "name" 으로할거고, projectPath 라는 경로에 담긴다는 뜻*/
+        System.out.println(projectPath);
         File saveFile = new File(projectPath, fileName);
         file.transferTo(saveFile);
         /*디비에 파일 넣기*/
@@ -93,6 +94,7 @@ public class HotplaceArticleMapperServiceImpl implements HotplaceArticleService{
         String fileName = uuid + "_" + file.getOriginalFilename();
         /*빈 껍데기 생성*/
         /*File을 생성할건데, 이름은 "name" 으로할거고, projectPath 라는 경로에 담긴다는 뜻*/
+        System.out.println(projectPath);
         File saveFile = new File(projectPath, fileName);
         file.transferTo(saveFile);
         /*디비에 파일 넣기*/

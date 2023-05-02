@@ -89,6 +89,22 @@ public class HotplaceArticleController {
 		return "/trip/hotplacemakinglist";
 	}
 	
+//	@PostMapping("/write")
+//	public ModelAndView write(HotplaceArticleDto hotplaceArticleDto ,HttpSession session,
+//			RedirectAttributes redirectAttributes, MultipartFile file) throws Exception {
+//		System.out.println("post write " + hotplaceArticleDto.toString());
+//		UserDto userDto = (UserDto) session.getAttribute("userinfo");
+//		hotplaceArticleDto.setUserId(userDto.getId());
+//		hotplaceArticleService.writeArticle(hotplaceArticleDto, file);
+//		ModelAndView mav = new ModelAndView();
+//		mav.a
+//		mav.addObject("pgno", "1");
+//		mav.addObject("key", "");
+//		mav.addObject("word", "");
+//		mav.setViewName("/trip/hotplacelist_contents");
+//		return mav;
+//	}
+	
 	@PostMapping("/write")
 	public String write(HotplaceArticleDto hotplaceArticleDto ,HttpSession session,
 			RedirectAttributes redirectAttributes, MultipartFile file) throws Exception {
@@ -99,6 +115,7 @@ public class HotplaceArticleController {
 		redirectAttributes.addAttribute("pgno", "1");
 		redirectAttributes.addAttribute("key", "");
 		redirectAttributes.addAttribute("word", "");
+		
 		return "redirect:/hotplacearticle";
 	}
 	

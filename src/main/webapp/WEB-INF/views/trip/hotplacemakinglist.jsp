@@ -109,7 +109,7 @@
               </a>
             </div>
             <div class=" col-md-1 ms-2 text-nowrap">
-              <a class="btn btn-danger" href="<%= root %>/hotplacearticle?action=list">
+              <a class="btn btn-danger" href="${root }/hotplacearticle?pgno=1&key=&word=">
                 <!-- <i class="fas fa-table me-1"></i> -->
                 <i class="fas fa-edit"></i> 목록
               </a>
