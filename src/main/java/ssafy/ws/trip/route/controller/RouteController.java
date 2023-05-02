@@ -79,7 +79,7 @@ public class RouteController {
 	public ModelAndView view(@PathVariable("routeid") int routeId) throws Exception {
 		ModelAndView mv = new ModelAndView();
 		mv.addObject("route", routeService.selectRoute(routeId));
-		mv.setViewName("/viewroute");
+		mv.setViewName("/trip/viewroute");
 		return mv;
 	}
 
