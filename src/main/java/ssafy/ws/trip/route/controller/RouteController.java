@@ -36,11 +36,11 @@ public class RouteController {
 			mv.setViewName("redirect:/");
 			return mv;
 		}
-		
+		 
 		mv.addObject("myroute", routeService.selectMyList());
 		mv.setViewName("/trip/myroute");
 		return mv;
-	}
+	} 
 	
 	@GetMapping("/mvinsertroute")
 	public ModelAndView mvinsertroute(HttpSession session) throws Exception {
@@ -50,18 +50,15 @@ public class RouteController {
 	}
 	
 	@PostMapping("/insert")
-	public ModelAndView insert(@RequestBody Map<String, Object> requestBody, HttpSession session) throws Exception {
-		ModelAndView mv = new ModelAndView();
+	public String insert(@RequestBody Map<String, Object> requestBody, HttpSession session) throws Exception {
 		UserDto user = (UserDto) session.getAttribute("userinfo");
 		List<Integer> attrids = (List<Integer>) requestBody.get("attractions");
 	    String title = (String) requestBody.get("title");
-		System.out.println(new RouteDto(user.getId(), title, attrids));
 		
-		//routeService.insertRoute(new RouteDto(user.getId(), title, attrids));
-		mv.setViewName("redirect:/mvroute");
-		return mv;
+		routeService.insertRoute(new RouteDto(user.getId(), title, attrids));
+		return "redirect:/route/mvroute";
 	}
-	
+	 
 	@PostMapping("/update")
 	public ModelAndView update() throws Exception {
 		ModelAndView mv = new ModelAndView();

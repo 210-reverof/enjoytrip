@@ -16,7 +16,7 @@ public class RouteServiceImpl implements RouteService {
 	
 	@Autowired
 	private SqlSession session;
-
+ 
 	@Override
 	public List<RouteResDto> selectMyList() throws Exception {
 		// TODO Auto-generated method stub
@@ -25,7 +25,10 @@ public class RouteServiceImpl implements RouteService {
 
 	@Override
 	public void insertRoute(RouteDto routeDto) throws Exception {
-		session.getMapper(RouteRepository.class).insertRoute(routeDto);
+		int cnt = session.getMapper(RouteRepository.class).insertRoute(routeDto);
+		for (int i = 0; i < routeDto.getAttractions().size(); i++) {
+			session.getMapper(RouteRepository.class).insertRouteAttrs(routeDto.getRouteId(), routeDto.getAttractions().get(i), (i+1));
+		}
 	}
 
 	@Override

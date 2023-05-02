@@ -48,9 +48,7 @@ function insertButtonAction() {
         },
         body: JSON.stringify({ attractions, title })
       })
-      .then(response => response.json())
-      .then(data => console.log(data))
-      .catch(error => console.error(error));
+      .then(location.href = '/enjoytrip/route/mvroute');
 }
 
 function fetchAllAreas(areaUrl) {
