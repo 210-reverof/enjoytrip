@@ -37,7 +37,7 @@ public class RouteController {
 			return mv;
 		}
 		 
-		mv.addObject("myroute", routeService.selectMyList());
+		mv.addObject("myroute", routeService.selectMyList(user.getId()));
 		mv.setViewName("/trip/myroute");
 		return mv;
 	} 
@@ -62,7 +62,6 @@ public class RouteController {
 	@PostMapping("/update")
 	public ModelAndView update() throws Exception {
 		ModelAndView mv = new ModelAndView();
-		mv.addObject("myroute", routeService.selectMyList());
 		
 		mv.setViewName("redirect:/mvroute");
 		return mv;
@@ -71,18 +70,16 @@ public class RouteController {
 	@PostMapping("/delete")
 	public ModelAndView delete() throws Exception {
 		ModelAndView mv = new ModelAndView();
-		mv.addObject("myroute", routeService.selectMyList());
 		
 		mv.setViewName("redirect:/mvroute");
 		return mv;
 	}
 	
-	@PostMapping("/{routeid}")
+	@GetMapping("/{routeid}")
 	public ModelAndView view(@PathVariable("routeid") int routeId) throws Exception {
 		ModelAndView mv = new ModelAndView();
 		mv.addObject("route", routeService.selectRoute(routeId));
-		
-		mv.setViewName("redirect:/mvroute");
+		mv.setViewName("/viewroute");
 		return mv;
 	}
 

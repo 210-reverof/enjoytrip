@@ -6,6 +6,7 @@ import org.apache.ibatis.session.SqlSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import ssafy.ws.trip.route.dto.RouteAttrDto;
 import ssafy.ws.trip.route.dto.RouteDto;
 import ssafy.ws.trip.route.dto.RouteResDto;
 import ssafy.ws.trip.route.repository.RouteRepository;
@@ -15,15 +16,14 @@ import ssafy.ws.trip.user.repository.UserRepository;
 public class RouteServiceImpl implements RouteService {
 	
 	@Autowired
-	private SqlSession session;
+	private SqlSession session; 
  
 	@Override
-	public List<RouteResDto> selectMyList() throws Exception {
-		// TODO Auto-generated method stub
-		return null;
+	public List<RouteResDto> selectMyList(String userId) throws Exception {
+		return session.getMapper(RouteRepository.class).selectMyList(userId);
 	}
 
-	@Override
+	@Override 
 	public void insertRoute(RouteDto routeDto) throws Exception {
 		int cnt = session.getMapper(RouteRepository.class).insertRoute(routeDto);
 		for (int i = 0; i < routeDto.getAttractions().size(); i++) {
@@ -45,8 +45,9 @@ public class RouteServiceImpl implements RouteService {
 
 	@Override
 	public RouteResDto selectRoute(int routeId) throws Exception {
-		// TODO Auto-generated method stub
-		return null;
+		RouteResDto dto = session.getMapper(RouteRepository.class).selectRoute(routeId);
+		dto.setAttractions(session.getMapper(RouteRepository.class).selectRouteAttrs(routeId));
+		return dto;
 	}
 
 }

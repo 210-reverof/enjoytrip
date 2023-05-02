@@ -47,8 +47,9 @@ function insertButtonAction() {
           'Content-Type': 'application/json'
         },
         body: JSON.stringify({ attractions, title })
-      })
-      .then(location.href = '/enjoytrip/route/mvroute');
+      }).then (
+      	window.location.href = '/enjoytrip/route/mvroute'
+      );
 }
 
 function fetchAllAreas(areaUrl) {

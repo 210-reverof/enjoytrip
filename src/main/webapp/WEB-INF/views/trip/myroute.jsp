@@ -55,12 +55,12 @@
               </tr>
             </thead>
             <tbody>    
-				<c:forEach var="route" items="${routes}">    
+				<c:forEach var="route" items="${myroute}">    
 	              <tr class="text-center">
 	                <th scope="row">${route.routeId}</th>
 	                <td class="text-start">
 	                  <a
-	                    href="#"
+	                    href="${root}/route/${route.routeId}"
 	                    class="article-title link-dark"
 	                    data-no="${route.routeId}"
 	                    style="text-decoration: none"

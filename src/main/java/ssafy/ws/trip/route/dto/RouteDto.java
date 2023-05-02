@@ -9,6 +9,13 @@ public class RouteDto {
 	List<Integer> attractions;
 	String createdAt;
 	
+	public RouteDto(int routeId, String userId, String title, String createdAt) {
+		this.routeId = routeId;
+		this.userId = userId;
+		this.title = title;
+		this.createdAt = createdAt;
+	}
+	
 	public RouteDto(String userId, String title, List<Integer> attractions) {
 		this.userId = userId;
 		this.title = title;
