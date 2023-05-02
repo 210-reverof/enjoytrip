@@ -55,9 +55,8 @@ public class RouteController {
 		UserDto user = (UserDto) session.getAttribute("userinfo");
 		List<Integer> attrids = (List<Integer>) requestBody.get("attractions");
 	    String title = (String) requestBody.get("title");
-		System.out.println(new RouteDto(user.getId(), title, attrids));
 		
-		//routeService.insertRoute(new RouteDto(user.getId(), title, attrids));
+		routeService.insertRoute(new RouteDto(user.getId(), title, attrids));
 		mv.setViewName("redirect:/mvroute");
 		return mv;
 	}
