@@ -8,6 +8,7 @@
   	<typeAlias type="ssafy.ws.trip.user.dto.UserDto" alias="UserDto"/>
   	<typeAlias type="ssafy.ws.trip.informarticle.dto.InformArticleDto" alias="InformArticleDto"/>
   	<typeAlias type="ssafy.ws.trip.sharearticle.dto.ShareArticleDto" alias="ShareArticleDto"/>
+  	<typeAlias type="ssafy.ws.trip.hotplacearticle.dto.HotplaceArticleDto" alias="HotplaceArticleDto"/>
   	<typeAlias type="ssafy.ws.trip.attraction.dto.AttractionDto" alias="AttractionDto"/>
   	<typeAlias type="ssafy.ws.trip.attraction.dto.SidoDto" alias="SidoDto"/>
   	<typeAlias type="ssafy.ws.trip.attraction.dto.GugunDto" alias="GugunDto"/>
@@ -19,6 +20,7 @@
   <mappers>
   	<mapper resource="mybatis/AttractionMapper.xml"/>
     <mapper resource="mybatis/InformArticleMapper.xml"/>
+    <mapper resource="mybatis/HotplaceArticleMapper.xml"/>
     <mapper resource="mybatis/ShareArticleMapper.xml"/>
     <mapper resource="mybatis/UserMapper.xml"/>
     <mapper resource="mybatis/RouteMapper.xml"/>

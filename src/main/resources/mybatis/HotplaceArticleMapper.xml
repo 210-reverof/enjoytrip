@@ -1,0 +1,72 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="ssafy.ws.trip.hotplacearticle.repository.HotplaceArticleRepository">
+	<resultMap type="HotplaceArticleDto" id="article">
+		<result column="article_no" property="articleNo"/>
+		<result column="user_id" property="userId"/>
+		<result column="title" property="title"/>
+		<result column="content" property="content"/>
+		<result column="createdat" property="createdAt"/>
+		<result column="hit" property="hit"/>
+	</resultMap>
+	
+	<sql id="search">
+		<if test="word != null and word != ''">
+			<if test="key == 'title'">
+				and title like concat('%', #{word}, '%')
+			</if>
+			<if test="key != 'title'">
+				and ${key} = #{word}
+			</if>
+		</if>
+	</sql>
+	
+	<insert id="writeArticle" parameterType="HotplaceArticleDto">
+		insert into hotplacearticle (user_id, title, content, hit, createdat)
+		values (#{userId}, #{title}, #{content}, 0, now())
+	</insert>
+	
+	<select id="listArticle" resultMap="article">
+		select b.article_no, b.user_id, b.title, b.content, b.hit, b.createdat, m.name
+		from hotplacearticle b, user m 
+		where b.user_id = m.id
+		<include refid="search"></include>
+		order by b.article_no desc
+		limit #{start}, #{listsize}
+	</select>
+	
+	<select id="getTotalArticleCount" parameterType="map" resultType="int">
+		select count(article_no)
+		from hotplacearticle
+		<where>
+			<include refid="search"></include>
+		</where>
+	</select>
+	
+	<select id="getArticle" parameterType="int" resultType="HotplaceArticleDto">
+		select b.article_no, b.user_id, b.title, b.content, b.hit, b.createdat, m.name 
+		from hotplacearticle b, user m
+		where b.user_id = m.id
+		and b.article_no = #{articleNo}
+	</select>
+	
+	<update id="updateHit" parameterType="int">
+		update hotplacearticle
+		set hit = hit + 1
+		where article_no = #{articleNo}
+	</update>
+	
+	<update id="modifyArticle" parameterType="HotplaceArticleDto">
+		update hotplacearticle
+		set title = #{title}, content = #{content}
+		where article_no = #{articleNo}
+	</update>
+	
+	<delete id="deleteArticle" parameterType="int">
+		delete from hotplacearticle
+		where article_no = #{articleNo}
+	</delete>
+	
+</mapper>
