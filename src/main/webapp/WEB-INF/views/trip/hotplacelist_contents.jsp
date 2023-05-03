@@ -86,7 +86,7 @@
               ${article.content}<br>
             </div>
             <img alt="${root}/${article.filepath}" src="${root}/${article.filepath}" style="width: 100%; height: 100%;" />
-            <a href="${root}/${article.filepath}">다운로드</a>
+            <a href="${root}/${article.filepath}">"${root}/${article.filepath}"</a>
           </div>
           <div class="d-flex justify-content-end">
             <div class="text-nowrap ms-2">

@@ -38,11 +38,12 @@ public class HotplaceArticleMapperServiceImpl implements HotplaceArticleService{
         /*File을 생성할건데, 이름은 "name" 으로할거고, projectPath 라는 경로에 담긴다는 뜻*/
         System.out.println(projectPath);
         File saveFile = new File(projectPath, fileName);
+        System.out.println(saveFile.getName());
         file.transferTo(saveFile);
         /*디비에 파일 넣기*/
         hotplaceArticleDto.setFilename(fileName);
         /*저장되는 경로*/
-        hotplaceArticleDto.setFilepath("/files/" + fileName); /*저장된파일의이름,저장된파일의경로*/
+        hotplaceArticleDto.setFilepath("files/" + fileName); /*저장된파일의이름,저장된파일의경로*/
         
 		session.getMapper(HotplaceArticleRepository.class).writeArticle(hotplaceArticleDto);
 	}
@@ -100,7 +101,7 @@ public class HotplaceArticleMapperServiceImpl implements HotplaceArticleService{
         /*디비에 파일 넣기*/
         hotplaceArticleDto.setFilename(fileName);
         /*저장되는 경로*/
-        hotplaceArticleDto.setFilepath("/files/" + fileName); /*저장된파일의이름,저장된파일의경로*/
+        hotplaceArticleDto.setFilepath("files/" + fileName); /*저장된파일의이름,저장된파일의경로*/
         
 		
 		session.getMapper(HotplaceArticleRepository.class).modifyArticle(hotplaceArticleDto);

@@ -1,4 +1,4 @@
-package ssafy.ws.trip.informarticle.controller;
+package ssafy.ws.trip.hotplacearticle.controller;
 
 import java.sql.SQLException;
 import java.util.HashMap;
@@ -18,52 +18,52 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 
 import ssafy.ws.trip.config.PageNavigation;
-import ssafy.ws.trip.informarticle.dto.InformArticleDto;
-import ssafy.ws.trip.informarticle.service.InformArticleService;
+import ssafy.ws.trip.hotplacearticle.dto.HotplaceArticleDto;
+import ssafy.ws.trip.hotplacearticle.service.HotplaceArticleService;
 import ssafy.ws.trip.user.dto.UserDto;
 
-// http://localhost:8080/enjoytrip/informarticlerest/inform?pgno=1&key&word
+// http://localhost:8080/enjoytrip/hotplacearticlerest/hotplace?pgno=1&key&word
 
 
 @RestController
-@RequestMapping("/informarticlerest")
+@RequestMapping("/hotplacearticlerest")
 @CrossOrigin("*")
-public class InformArticleRestController {
+public class HotplaceArticleRestController {
 	
 	@Autowired
-	@Qualifier("InformArticleMapperServiceImpl")
-	private InformArticleService informArticleService;
+	@Qualifier("HotplaceArticleMapperServiceImpl")
+	private HotplaceArticleService hotplaceArticleService;
 	
-	@RequestMapping(value = "/inform", method = RequestMethod.GET, headers = { "Content-type=application/json" })
-	public Map<String, Object> informBoardList(@RequestParam Map<String, String> map) throws Exception {
-		List<InformArticleDto> list = informArticleService.listArticle(map);
-		PageNavigation pageNavigation = informArticleService.makePageNavigation(map);
+	@RequestMapping(value = "/hotplace", method = RequestMethod.GET, headers = { "Content-type=application/json" })
+	public Map<String, Object> hotplaceBoardList(@RequestParam Map<String, String> map) throws Exception {
+		List<HotplaceArticleDto> list = hotplaceArticleService.listArticle(map);
+		PageNavigation pageNavigation = hotplaceArticleService.makePageNavigation(map);
 		Map<String, Object> ret = new HashMap<String, Object>();
 		ret.put("articles", list);
 		ret.put("navigation", pageNavigation);
 		return ret;
 	}
-	
 
 	
-	@RequestMapping(value = "/inform/{articleno}", method = RequestMethod.GET, headers = { "Content-type=application/json" })
-	public Map<String, Object> informBoardView(@RequestParam Map<String, Object> map) throws Exception {
+	@RequestMapping(value = "/hotplace/{articleno}", method = RequestMethod.GET, headers = { "Content-type=application/json" })
+	public Map<String, Object> hotplaceBoardView(@RequestParam Map<String, Object> map) throws Exception {
 		int articleNo = (int)map.get("articleNo");
-		InformArticleDto informArticleDto = informArticleService.getArticle(articleNo);
+		HotplaceArticleDto hotplaceArticleDto = hotplaceArticleService.getArticle(articleNo);
 		UserDto userDto = (UserDto) map.get("userinfo");
 		if(userDto != null) {
-			informArticleDto.setUserId(userDto.getId());
+			hotplaceArticleDto.setUserId(userDto.getId());
 		}
-		informArticleDto.setArticleNo(articleNo);
-		System.out.println("view obj ::"+informArticleDto.toString());
-		informArticleService.updateHit(articleNo);
+		hotplaceArticleDto.setArticleNo(articleNo);
+		System.out.println("view obj ::"+hotplaceArticleDto.toString());
+		hotplaceArticleService.updateHit(articleNo);
 		Map<String, Object> ret = new HashMap<String, Object>();
-		ret.put("article", informArticleDto);
+		ret.put("article", hotplaceArticleDto);
 //		ret.put("pgno", map.get("pgno"));
 //		ret.put("key", map.get("key"));
 //		ret.put("word", map.get("word"));
@@ -71,12 +71,12 @@ public class InformArticleRestController {
 	}
 
 	
-	@RequestMapping(value = "/inform", method = RequestMethod.POST, headers = { "Content-type=application/json" })
-	public Map<String, Object> informBoardWrite(@RequestBody Map<String, Object> map) throws Exception {
-		InformArticleDto informArticleDto = (InformArticleDto) map.get("informArticleDto");
+	@RequestMapping(value = "/hotplace", method = RequestMethod.POST, headers = { "Content-type=application/json" })
+	public Map<String, Object> hotplaceBoardWrite(@RequestBody Map<String, Object> map) throws Exception {
+		HotplaceArticleDto hotplaceArticleDto = (HotplaceArticleDto) map.get("hotplaceArticleDto");
 		UserDto userDto = (UserDto) map.get("userinfo");
-		informArticleService.writeArticle(informArticleDto);
-		informArticleDto.setUserId(userDto.getId());
+		hotplaceArticleService.writeArticle(hotplaceArticleDto, (MultipartFile)map.get("file"));
+		hotplaceArticleDto.setUserId(userDto.getId());
 		Map<String, Object> ret = new HashMap<String, Object>();
 //		ret.put("pgno", map.get("pgno"));
 //		ret.put("key", map.get("key"));
@@ -84,12 +84,11 @@ public class InformArticleRestController {
 		return ret;
 	}
 	
-	
 
-	@RequestMapping(value = "/inform", method = RequestMethod.PUT, headers = { "Content-type=application/json" })
-	public Map<String, Object> informBoardModify(@RequestBody Map<String, Object> map) throws Exception {
-		InformArticleDto informArticleDto = (InformArticleDto) map.get("informArticleDto");
-		informArticleService.modifyArticle(informArticleDto);
+	@RequestMapping(value = "/hotplace", method = RequestMethod.PUT, headers = { "Content-type=application/json" })
+	public Map<String, Object> hotplaceBoardModify(@RequestBody Map<String, Object> map) throws Exception {
+		HotplaceArticleDto hotplaceArticleDto = (HotplaceArticleDto) map.get("hotplaceArticleDto");
+		hotplaceArticleService.modifyArticle(hotplaceArticleDto, (MultipartFile)map.get("file"));
 		Map<String, Object> ret = new HashMap<String, Object>();
 //		ret.put("pgno", map.get("pgno"));
 //		ret.put("key", map.get("key"));
@@ -98,10 +97,10 @@ public class InformArticleRestController {
 	}
 
 	
-	@RequestMapping(value = "/inform/{articleno}", method = RequestMethod.DELETE, headers = { "Content-type=application/json" })
-	public Map<String, Object> informBoardDelete(@RequestParam Map<String, Object> map) throws Exception {
+	@RequestMapping(value = "/hotplace/{articleno}", method = RequestMethod.DELETE, headers = { "Content-type=application/json" })
+	public Map<String, Object> hotplaceBoardDelete(@RequestParam Map<String, Object> map) throws Exception {
 		int articleNo = (int)map.get("articleNo");
-		informArticleService.deleteArticle(articleNo);
+		hotplaceArticleService.deleteArticle(articleNo);
 		Map<String, Object> ret = new HashMap<String, Object>();
 //		ret.put("pgno", map.get("pgno"));
 //		ret.put("key", map.get("key"));
@@ -117,14 +116,14 @@ public class InformArticleRestController {
 //	public ModelAndView list(@RequestParam Map<String, String> map) throws Exception {
 //		System.out.println("list parameter pgno : "+ map.get("pgno"));
 //		ModelAndView mav = new ModelAndView();
-//		List<InformArticleDto> list = informArticleService.listArticle(map);
-//		PageNavigation pageNavigation = informArticleService.makePageNavigation(map);
+//		List<hotplaceArticleDto> list = hotplaceArticleService.listArticle(map);
+//		PageNavigation pageNavigation = hotplaceArticleService.makePageNavigation(map);
 //		mav.addObject("articles", list);
 //		mav.addObject("navigation", pageNavigation);
 //		mav.addObject("pgno", map.get("pgno"));
 //		mav.addObject("key", map.get("key"));
 //		mav.addObject("word", map.get("word"));
-//		mav.setViewName("/trip/informlist");
+//		mav.setViewName("/trip/hotplacelist");
 //		return mav;
 //	}
 	
@@ -132,19 +131,19 @@ public class InformArticleRestController {
 //	public String view(@RequestParam("articleno") int articleNo, HttpSession session, @RequestParam Map<String, String> map, Model model)
 //			throws Exception {
 //		System.out.println("view articleNo : "+ articleNo);
-//		InformArticleDto informArticleDto = informArticleService.getArticle(articleNo);
+//		hotplaceArticleDto hotplaceArticleDto = hotplaceArticleService.getArticle(articleNo);
 //		UserDto userDto = (UserDto) session.getAttribute("userinfo");
 //		if(userDto != null) {
-//			informArticleDto.setUserId(userDto.getId());
+//			hotplaceArticleDto.setUserId(userDto.getId());
 //		}
-//		informArticleDto.setArticleNo(articleNo);
-//		System.out.println("view obj ::"+informArticleDto.toString());
-//		informArticleService.updateHit(articleNo);
-//		model.addAttribute("article", informArticleDto);
+//		hotplaceArticleDto.setArticleNo(articleNo);
+//		System.out.println("view obj ::"+hotplaceArticleDto.toString());
+//		hotplaceArticleService.updateHit(articleNo);
+//		model.addAttribute("article", hotplaceArticleDto);
 //		model.addAttribute("pgno", map.get("pgno"));
 //		model.addAttribute("key", map.get("key"));
 //		model.addAttribute("word", map.get("word"));
-//		return "/trip/informlist_contents";
+//		return "/trip/hotplacelist_contents";
 //	}
 	
 //	@GetMapping("/makinglist")
@@ -153,20 +152,20 @@ public class InformArticleRestController {
 //		model.addAttribute("pgno", map.get("pgno"));
 //		model.addAttribute("key", map.get("key"));
 //		model.addAttribute("word", map.get("word"));
-//		return "/trip/makinginformlist";
+//		return "/trip/makinghotplacelist";
 //	}
 	
 //	@PostMapping("/write")
-//	public String write(InformArticleDto informArticleDto ,HttpSession session,
+//	public String write(hotplaceArticleDto hotplaceArticleDto ,HttpSession session,
 //			RedirectAttributes redirectAttributes) throws SQLException {
-//		System.out.println("post write " + informArticleDto.toString());
+//		System.out.println("post write " + hotplaceArticleDto.toString());
 //		UserDto userDto = (UserDto) session.getAttribute("userinfo");
-//		informArticleDto.setUserId(userDto.getId());
-//		informArticleService.writeArticle(informArticleDto);
+//		hotplaceArticleDto.setUserId(userDto.getId());
+//		hotplaceArticleService.writeArticle(hotplaceArticleDto);
 //		redirectAttributes.addAttribute("pgno", "1");
 //		redirectAttributes.addAttribute("key", "");
 //		redirectAttributes.addAttribute("word", "");
-//		return "redirect:/informarticle";
+//		return "redirect:/hotplacearticle";
 //	}
 	
 //	@GetMapping("/modify")
@@ -174,41 +173,41 @@ public class InformArticleRestController {
 //			@RequestParam Map<String, String> map, Model model)
 //			throws Exception {
 //		System.out.println("modify parameter pgno : "+ map.get("pgno"));
-//		InformArticleDto informArticleDto = informArticleService.getArticle(articleNo);
-//		informArticleDto.setArticleNo(articleNo);
+//		hotplaceArticleDto hotplaceArticleDto = hotplaceArticleService.getArticle(articleNo);
+//		hotplaceArticleDto.setArticleNo(articleNo);
 //		UserDto userDto = (UserDto) session.getAttribute("userinfo");
 //		if(userDto != null) {
-//			informArticleDto.setUserId(userDto.getId());
+//			hotplaceArticleDto.setUserId(userDto.getId());
 //		}
-//		System.out.println(informArticleDto.toString());
-//		model.addAttribute("article", informArticleDto);
+//		System.out.println(hotplaceArticleDto.toString());
+//		model.addAttribute("article", hotplaceArticleDto);
 //		model.addAttribute("pgno", map.get("pgno"));
 //		model.addAttribute("key", map.get("key"));
 //		model.addAttribute("word", map.get("word"));
-//		return "trip/modifyinformlist";
+//		return "trip/modifyhotplacelist";
 //	}
 	
 //	@PostMapping("/modify")
-//	public String modify(InformArticleDto informArticleDto, @RequestParam Map<String, String> map,
+//	public String modify(hotplaceArticleDto hotplaceArticleDto, @RequestParam Map<String, String> map,
 //			RedirectAttributes redirectAttributes) throws Exception {
 //		System.out.println("post modify parameter pgno : "+ map.get("pgno"));
-//		System.out.println(":: post modify ::" + informArticleDto.toString());
-//		informArticleService.modifyArticle(informArticleDto);
+//		System.out.println(":: post modify ::" + hotplaceArticleDto.toString());
+//		hotplaceArticleService.modifyArticle(hotplaceArticleDto);
 //		redirectAttributes.addAttribute("pgno", map.get("pgno"));
 //		redirectAttributes.addAttribute("key", map.get("key"));
 //		redirectAttributes.addAttribute("word", map.get("word"));
-//		return "redirect:/informarticle";
+//		return "redirect:/hotplacearticle";
 //	}
 
 //	@GetMapping("/delete")
 //	public String delete(@RequestParam("articleno") int articleNo, @RequestParam Map<String, String> map,
 //			RedirectAttributes redirectAttributes) throws Exception {
 //		System.out.println("delete "+articleNo);
-//		informArticleService.deleteArticle(articleNo);
+//		hotplaceArticleService.deleteArticle(articleNo);
 //		redirectAttributes.addAttribute("pgno", map.get("pgno"));
 //		redirectAttributes.addAttribute("key", map.get("key"));
 //		redirectAttributes.addAttribute("word", map.get("word"));
-//		return "redirect:/informarticle";
+//		return "redirect:/hotplacearticle";
 //	}
 	
 }

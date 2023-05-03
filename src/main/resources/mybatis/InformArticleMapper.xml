@@ -48,8 +48,7 @@
 	<select id="getArticle" parameterType="int" resultType="InformArticleDto">
 		select b.article_no, b.user_id, b.title, b.content, b.hit, b.createdat, m.name 
 		from informarticle b, user m
-		where b.user_id = m.id
-		and b.article_no = #{articleNo}
+		where b.article_no = #{articleNo}
 	</select>
 	
 	<update id="updateHit" parameterType="int">

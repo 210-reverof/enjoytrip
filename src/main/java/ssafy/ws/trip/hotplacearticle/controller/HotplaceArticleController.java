@@ -35,16 +35,7 @@ public class HotplaceArticleController {
 	@Autowired
 	@Qualifier("HotplaceArticleMapperServiceImpl")
 	private HotplaceArticleService hotplaceArticleService;
-	
-//	@GetMapping("")
-//	public ModelAndView list() throws Exception {
-//		System.out.println("inform");
-//		ModelAndView mav = new ModelAndView();
-//		List<InformArticleDto> list = informArticleService.listArticle();
-//		mav.addObject("articles", list);
-//		mav.setViewName("/trip/informlist");
-//		return mav;
-//	}
+
 	
 	@GetMapping("")
 	public ModelAndView list(@RequestParam Map<String, String> map) throws Exception {
