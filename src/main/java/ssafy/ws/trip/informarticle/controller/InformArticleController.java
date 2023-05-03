@@ -19,7 +19,6 @@ import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 
-import ch.qos.logback.classic.spi.STEUtil;
 import ssafy.ws.trip.config.PageNavigation;
 import ssafy.ws.trip.informarticle.dto.InformArticleDto;
 import ssafy.ws.trip.informarticle.service.InformArticleService;
@@ -32,16 +31,6 @@ public class InformArticleController {
 	@Autowired
 	@Qualifier("InformArticleMapperServiceImpl")
 	private InformArticleService informArticleService;
-	
-//	@GetMapping("")
-//	public ModelAndView list() throws Exception {
-//		System.out.println("inform");
-//		ModelAndView mav = new ModelAndView();
-//		List<InformArticleDto> list = informArticleService.listArticle();
-//		mav.addObject("articles", list);
-//		mav.setViewName("/trip/informlist");
-//		return mav;
-//	}
 	
 	@GetMapping("")
 	public ModelAndView list(@RequestParam Map<String, String> map) throws Exception {
