@@ -38,7 +38,8 @@ public class HotplaceArticleMapperServiceImpl implements HotplaceArticleService{
         /*File을 생성할건데, 이름은 "name" 으로할거고, projectPath 라는 경로에 담긴다는 뜻*/
         System.out.println(projectPath);
         File saveFile = new File(projectPath, fileName);
-        System.out.println(saveFile.getName());
+        String filepath = projectPath + "\\" + fileName;
+        System.out.println(filepath);
         file.transferTo(saveFile);
         /*디비에 파일 넣기*/
         hotplaceArticleDto.setFilename(fileName);

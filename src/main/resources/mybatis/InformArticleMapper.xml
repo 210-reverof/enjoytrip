@@ -49,6 +49,7 @@
 		select b.article_no, b.user_id, b.title, b.content, b.hit, b.createdat, m.name 
 		from informarticle b, user m
 		where b.article_no = #{articleNo}
+		and b.user_id = m.id;
 	</select>
 	
 	<update id="updateHit" parameterType="int">
