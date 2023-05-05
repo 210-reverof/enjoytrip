@@ -38,12 +38,6 @@ public class UserRestController {
 		return user;
 	}
 	
-	@PostMapping("/logout")
-	public void logout() throws Exception {
-		
-		return ;
-	}
-	
 	@PutMapping("/")
 	public UserDto update(UserDto userDto) throws Exception {
 		UserDto user = userService.modifyUserInfo(userDto);
