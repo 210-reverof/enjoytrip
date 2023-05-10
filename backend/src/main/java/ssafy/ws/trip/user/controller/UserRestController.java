@@ -2,6 +2,9 @@ package ssafy.ws.trip.user.controller;
 
 import java.util.Map;
 
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -11,6 +14,7 @@ import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.servlet.ModelAndView;
 
 import ssafy.ws.trip.user.dto.UserDto;
 import ssafy.ws.trip.user.service.UserService;
@@ -33,21 +37,32 @@ public class UserRestController {
 	}
 	
 	@PostMapping("/login")
-	public UserDto login(UserDto userDto) throws Exception {
+	public UserDto login(UserDto userDto, HttpServletRequest req) throws Exception {
 		UserDto user = userService.loginUser(userDto.getId(), userDto.getPw());
+		HttpSession session = req.getSession();
+		session.setAttribute("userinfo", user);
 		return user;
 	}
 	
+	@GetMapping("/logout")
+	public void logout(HttpServletRequest req) throws Exception {
+		HttpSession session = req.getSession();
+		session.invalidate();
+	}
+	
 	@PutMapping("/")
-	public UserDto update(UserDto userDto) throws Exception {
+	public UserDto update(UserDto userDto, HttpServletRequest req) throws Exception {
 		UserDto user = userService.modifyUserInfo(userDto);
+		HttpSession session = req.getSession();
+		session.setAttribute("userinfo", user);
 		return user;
 	}
 	
 	@DeleteMapping("/{id}")
-	public void delete(@PathVariable("id") String userId) throws Exception {
+	public void delete(@PathVariable("id") String userId, HttpServletRequest req) throws Exception {
+		HttpSession session = req.getSession();
+		session.invalidate();
 		userService.deleteUser(userId);
-		
 	}
 	
 }
