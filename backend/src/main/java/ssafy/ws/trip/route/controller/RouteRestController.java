@@ -31,18 +31,18 @@ public class RouteRestController {
 	RouteService routeService;
 	
 	@GetMapping("/")
-	public List<RouteResDto> mvinsertroute(String userId) throws Exception {
+	public List<RouteResDto> list(String userId) throws Exception {
 		List<RouteResDto> list = routeService.selectMyList(userId);
 		return list;
 	}
 	
 	@PostMapping("/")
-	public void insert(@RequestBody Map<String, Object> requestBody) throws Exception {
-		String userId = (String) requestBody.get("userId");
+	public void insert(@RequestBody Map<String, Object> requestBody, HttpSession session) throws Exception {
+		UserDto user = (UserDto) session.getAttribute("userinfo");
 		List<Integer> attrids = (List<Integer>) requestBody.get("attractions");
 	    String title = (String) requestBody.get("title");
 		
-		routeService.insertRoute(new RouteDto(userId, title, attrids));
+		routeService.insertRoute(new RouteDto(user.getId(), title, attrids));
 	}
 	 
 	@PutMapping("/")
