@@ -5,7 +5,7 @@ import SearchView from '@/views/SearchView.vue'
 import MyRouteView from '@/views/MyRouteView.vue'
 import HotPlaceView from '@/views/HotPlaceView.vue'
 import ShareView from '@/views/ShareView.vue'
-import ConfirmView from '@/views/ConfirmView.vue'
+import InformView from '@/views/InformView.vue'
 
 Vue.use(VueRouter)
 
@@ -36,9 +36,9 @@ const routes = [
     component: ShareView
   },
   {
-    path: '/confirm',
-    name: 'confirm',
-    component: ConfirmView
+    path: '/inform',
+    name: 'inform',
+    component: InformView
   },
 ]
 
