@@ -9,8 +9,8 @@
       <div class="col-lg-8 col-md-10 col-sm-12">
         <div class="row align-self-center mb-2">
           <div class="col-md-2 text-start">
-            <c:if test="${not empty userinfo}">
-              <!-- makinglist로 이동하는 버튼 -->
+            <!-- makinglist로 이동하는 버튼 -->
+            <!-- <c:if test="${not empty userinfo}">
               <button
                 type="button"
                 id="btn-mv-register"
@@ -18,10 +18,15 @@
               >
                 글쓰기
               </button>
-            </c:if>
-            <!-- <button type="button" id="btn-mv-register" class="btn btn-outline-primary btn-sm">
-                	글쓰기
-              </button> -->
+            </c:if> -->
+            <button
+              type="button"
+              id="btn-mv-register"
+              class="btn btn-outline-primary btn-sm"
+            >
+              글쓰기
+            </button>
+            <!-- <button type="button" id="btn-mv-register" class="btn btn-outline-primary btn-sm">글쓰기 </button> -->
           </div>
           <div class="col-md-7 offset-3">
             <form class="d-flex" id="form-search" action="">
@@ -54,40 +59,49 @@
             </form>
           </div>
         </div>
-        <table class="table table-hover">
-          <thead>
-            <tr class="text-center">
-              <th scope="col">글번호</th>
-              <th scope="col">제목</th>
-              <th scope="col">작성자</th>
-              <th scope="col">조회수</th>
-              <th scope="col">작성일</th>
-            </tr>
-          </thead>
-          <tbody>
-            <!-- articleItem 따로 만들어서 호출 -->
-            <c:forEach var="article" items="${articles}">
+        <div v-if="informarticles.length">
+          <table class="table table-hover">
+            <thead>
               <tr class="text-center">
-                <th scope="row">${article.articleNo}</th>
+                <th scope="col">글번호</th>
+                <th scope="col">제목</th>
+                <th scope="col">작성자</th>
+                <th scope="col">조회수</th>
+                <th scope="col">작성일</th>
+              </tr>
+            </thead>
+            <tbody v-for="(article, i) in informarticles" :key="i">
+              <tr class="text-center">
+                <th scope="row">{{ article.articleNo }}</th>
                 <td class="text-start">
                   <a
                     href="#"
                     class="article-title link-dark"
-                    data-no="${article.articleNo}"
                     style="text-decoration: none"
+                    @click="
+                      $router.push({
+                        name: 'boardview',
+                        params: {
+                          no: article.articleNo,
+                          pgno: '1',
+                          key: '',
+                          word: '',
+                        },
+                      })
+                    "
                   >
-                    ${article.title}
+                    {{ article.title }}
                   </a>
                 </td>
-                <td>${article.userId}</td>
-                <td>${article.hit}</td>
-                <td>${article.createdAt}</td>
+                <td>{{ article.userId }}</td>
+                <td>{{ article.hit }}</td>
+                <td>{{ article.createdAt }}</td>
               </tr>
-            </c:forEach>
-          </tbody>
-        </table>
+            </tbody>
+          </table>
+        </div>
       </div>
-      <div class="row">${navigation.navigator}</div>
+      <!-- <div class="row">${navigation.navigator}</div> -->
     </div>
   </div>
   <!-- 다른 값들 넘길때 페이지번호, 검색어 등 같이 넘기기 -->
@@ -105,23 +119,23 @@
 </template>
 
 <script>
-import InformArticleListItem from "./InformArticleListItem.vue";
 import axios from "axios";
-export default {
-  name: "InformArticleList",
-  components: {
-    InformArticleListItem,
-  },
 
+export default {
+  name: "InformList",
+  components: {},
+  data() {
+    return {
+      informarticles: [],
+    };
+  },
   created() {
-    
-    axios
-      .get(
-        "http://localhost:8080/enjoytrip/informarticlerest/inform?pgno=1&key&word"
-      )
-      .then((res) => {
-        this.articles = res.data;
-      });
+    const url = `http://localhost:8080/enjoytrip/informarticlerest/inform?pgno=${this.$route.query.pgno}&key=${this.$route.query.key}&word=${this.$route.query.word}`;
+    axios.get(url).then((res) => {
+      // console.log(res)
+      this.informarticles = res.data.articles;
+      // console.log(this.informarticles);
+    });
   },
 };
 </script>

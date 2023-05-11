@@ -10,9 +10,11 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.CrossOrigin;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -39,7 +41,16 @@ public class InformArticleRestController {
 	@Qualifier("InformArticleMapperServiceImpl")
 	private InformArticleService informArticleService;
 	
-	@RequestMapping(value = "/inform", method = RequestMethod.GET, headers = { "Content-type=application/json" })
+//	@RequestMapping(value = "/inform", method = RequestMethod.GET, headers = { "Content-type=application/json" })
+//	public Map<String, Object> informBoardList(@RequestParam Map<String, String> map) throws Exception {
+//		List<InformArticleDto> list = informArticleService.listArticle(map);
+//		PageNavigation pageNavigation = informArticleService.makePageNavigation(map);
+//		Map<String, Object> ret = new HashMap<String, Object>();
+//		ret.put("articles", list);
+//		ret.put("navigation", pageNavigation);
+//		return ret;
+//	}
+	@GetMapping("/inform")
 	public Map<String, Object> informBoardList(@RequestParam Map<String, String> map) throws Exception {
 		List<InformArticleDto> list = informArticleService.listArticle(map);
 		PageNavigation pageNavigation = informArticleService.makePageNavigation(map);
@@ -51,14 +62,14 @@ public class InformArticleRestController {
 	
 
 	
-	@RequestMapping(value = "/inform/{articleno}", method = RequestMethod.GET, headers = { "Content-type=application/json" })
-	public Map<String, Object> informBoardView(@RequestParam Map<String, Object> map) throws Exception {
-		int articleNo = (int)map.get("articleNo");
+	@GetMapping("/inform/{articleno}")
+	public Map<String, Object> informBoardView(@PathVariable("articleno") int articleNo) throws Exception {
+		System.out.println(articleNo);
 		InformArticleDto informArticleDto = informArticleService.getArticle(articleNo);
-		UserDto userDto = (UserDto) map.get("userinfo");
-		if(userDto != null) {
-			informArticleDto.setUserId(userDto.getId());
-		}
+//		UserDto userDto = (UserDto) map.get("userinfo");
+//		if(userDto != null) {
+//			informArticleDto.setUserId(userDto.getId());
+//		}
 		informArticleDto.setArticleNo(articleNo);
 		System.out.println("view obj ::"+informArticleDto.toString());
 		informArticleService.updateHit(articleNo);
@@ -71,12 +82,13 @@ public class InformArticleRestController {
 	}
 
 	
-	@RequestMapping(value = "/inform", method = RequestMethod.POST, headers = { "Content-type=application/json" })
+	@PostMapping("/inform")
 	public Map<String, Object> informBoardWrite(@RequestBody Map<String, Object> map) throws Exception {
 		InformArticleDto informArticleDto = (InformArticleDto) map.get("informArticleDto");
 		UserDto userDto = (UserDto) map.get("userinfo");
 		informArticleService.writeArticle(informArticleDto);
-		informArticleDto.setUserId(userDto.getId());
+		if(userDto != null) informArticleDto.setUserId(userDto.getId());
+		else informArticleDto.setUserId("1234");
 		Map<String, Object> ret = new HashMap<String, Object>();
 //		ret.put("pgno", map.get("pgno"));
 //		ret.put("key", map.get("key"));
@@ -86,27 +98,26 @@ public class InformArticleRestController {
 	
 	
 
-	@RequestMapping(value = "/inform", method = RequestMethod.PUT, headers = { "Content-type=application/json" })
-	public Map<String, Object> informBoardModify(@RequestBody Map<String, Object> map) throws Exception {
+	@PutMapping("/inform")
+	public int informBoardModify(@RequestBody Map<String, Object> map) throws Exception {
 		InformArticleDto informArticleDto = (InformArticleDto) map.get("informArticleDto");
 		informArticleService.modifyArticle(informArticleDto);
-		Map<String, Object> ret = new HashMap<String, Object>();
 //		ret.put("pgno", map.get("pgno"));
 //		ret.put("key", map.get("key"));
 //		ret.put("word", map.get("word"));
-		return ret;
+		return informArticleDto.getArticleNo();
 	}
 
 	
-	@RequestMapping(value = "/inform/{articleno}", method = RequestMethod.DELETE, headers = { "Content-type=application/json" })
-	public Map<String, Object> informBoardDelete(@RequestParam Map<String, Object> map) throws Exception {
-		int articleNo = (int)map.get("articleNo");
+	@DeleteMapping("/inform/{articleno}")
+//	public Map<String, Object> informBoardDelete(@RequestParam Map<String, Object> map) throws Exception {
+	public void informBoardDelete(@PathVariable("articleno") int articleNo) throws Exception {
 		informArticleService.deleteArticle(articleNo);
-		Map<String, Object> ret = new HashMap<String, Object>();
+//		Map<String, Object> ret = new HashMap<String, Object>();
 //		ret.put("pgno", map.get("pgno"));
 //		ret.put("key", map.get("key"));
 //		ret.put("word", map.get("word"));
-		return ret;
+//		return ret;
 	}
 	
 	
