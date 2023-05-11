@@ -1,12 +1,24 @@
 <template>
   <div id="app">
-    <nav>
+    <!-- <nav>
       <router-link to="/">Home</router-link> |
       <router-link to="/about">About</router-link>
-    </nav>
+    </nav> -->
+    <confirm-header></confirm-header>
     <router-view/>
   </div>
 </template>
+
+<script>
+import ConfirmHeader from '@/components/ConfirmHeader.vue'
+
+export default {
+  components: {
+    ConfirmHeader
+  }
+}
+</script>
+
 
 <style>
 #app {
