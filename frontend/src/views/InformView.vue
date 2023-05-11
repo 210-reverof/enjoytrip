@@ -1,12 +1,13 @@
 <template>
-  <div class="confirm">
+  <div class="inform">
     <p>공지페이지</p>
+    <router-view>
   </div>
 </template>
 
 <script>
 
 export default {
-  name: 'ConfirmView'
+  name: 'InformView'
 }
 </script>
