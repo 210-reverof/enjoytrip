@@ -11,7 +11,6 @@ import InformView from '@/views/InformView.vue'
 import InformList from "@/components/InformArticle/InformList.vue";
 import InformDetail from "@/components/InformArticle/InformDetail.vue";
 import InformWrite from "@/components/InformArticle/InformWrite.vue";
-import InformResult from "@/components/InformArticle/InformResult.vue";
 import InformModify from "@/components/InformArticle/InformModify.vue";
 
 Vue.use(VueRouter)
@@ -62,11 +61,6 @@ const routes = [
         path: 'detail/:no',
         name: 'informdetail',
         component: InformDetail,
-      },
-      {
-        path: 'result/:no',
-        name: 'informresult',
-        component: InformResult,
       },
       {
         path: 'modify/:no',

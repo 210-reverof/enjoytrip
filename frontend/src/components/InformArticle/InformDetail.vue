@@ -7,12 +7,12 @@
           <div
             class="container rounded bg-secondary bg-opacity-25 text-secondary fs-2 p-4 mb-2"
           >
-            {{ article.title }}
+            {{ article.articleNo }} | {{ article.title }}
 
             <div class="row mt-2">
               <div class="col-1">
                 <img
-                  src="${root}/res/img/junimg04.png"
+                  src=""
                   class="rounded-circle w-100"
                   alt="noimg"
                 />
@@ -32,12 +32,7 @@
             <div class="text-nowrap ms-2">
               <a
                 class="btn btn-outline-primary"
-                @click="
-                  $router.push({
-                    name: 'inform',
-                    query: { pgno: '1', key: '', word: '' },
-                  })
-                "
+                @click="$router.push({name:'inform', query: {pgno:'1', key:'', word:''}})"
               >
                 <!-- <i class="fas fa-table me-1"></i> -->
                 <i class="fas fa-edit"></i> 글목록
@@ -49,12 +44,7 @@
               type="button"
               id="btn-mv-modify"
               class="btn btn-outline-success mb-3 ms-1"
-              @click="
-                $router.push({
-                  name: 'modify',
-                  params: { no: article.articleno },
-                })
-              "
+              @click="$router.push({name: 'informmodify', params: { no: article.articleNo }})"
             >
               글수정
             </button>
@@ -62,12 +52,7 @@
               type="button"
               id="btn-delete"
               class="btn btn-outline-danger mb-3 ms-1"
-              @click="
-                $router.push({
-                  name: 'delete',
-                  params: { no: article.articleno },
-                })
-              "
+              v-on:click="deleteArticle"
             >
               글삭제
             </button>
@@ -80,23 +65,34 @@
 </template>
 
 <script>
+import axios from "axios";
+
 export default {
   name: "InformDetail",
   components: {},
   data() {
     return {
-      article: Object,
+      article: {}
     };
   },
+ methods: {
+    // checkNo: function(){
+    //   no = CheckNo.data.no;
+    // },
+    deleteArticle: function(){
+      axios.delete(`http://localhost:8080/enjoytrip/informarticlerest/inform/${this.$route.params.no}`)
+      .then((res) => {this.article = res.data})
+      .then(this.$router.push({name:'inform', query: {pgno:'1', key:'', word:''}}))
+      .then(window.location.reload());
+    }
+  },
   created() {
-    const url = `http://localhost:8080/enjoytrip/informarticlerest/inform?pgno=${this.$route.query.pgno}&key=${this.$route.query.key}&word=${this.$route.query.word}`;
+    const url = `http://localhost:8080/enjoytrip/informarticlerest/inform/${this.$route.params.no}`;
     axios.get(url).then((res) => {
-      // console.log(res)
-      this.informarticles = res.data.articles;
-      // console.log(this.informarticles);
+      console.log(res)
+      this.article = res.data.article;
     });
   },
-  methods: {},
 };
 </script>
 

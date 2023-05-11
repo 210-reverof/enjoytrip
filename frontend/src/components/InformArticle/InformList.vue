@@ -23,6 +23,7 @@
               type="button"
               id="btn-mv-register"
               class="btn btn-outline-primary btn-sm"
+              @click="$router.push({name:'informwrite'})"
             >
               글쓰기
             </button>
@@ -78,17 +79,7 @@
                     href="#"
                     class="article-title link-dark"
                     style="text-decoration: none"
-                    @click="
-                      $router.push({
-                        name: 'boardview',
-                        params: {
-                          no: article.articleNo,
-                          pgno: '1',
-                          key: '',
-                          word: '',
-                        },
-                      })
-                    "
+                    @click="$router.push({name: 'informdetail', params: {no: article.articleNo}})"
                   >
                     {{ article.title }}
                   </a>
