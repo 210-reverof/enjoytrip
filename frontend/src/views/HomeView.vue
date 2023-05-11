@@ -1,13 +1,15 @@
 <template>
   <div class="home">
-    <img alt="Vue logo" src="../assets/logo.png">
-    <p>메인페이지</p>
+    <carousel-img></carousel-img>
   </div>
 </template>
 
 <script>
-
+import CarouselImg from '@/components/home/CarouselImg.vue';
 export default {
-  name: 'HomeView'
+  name: 'HomeView',
+  components: {
+    CarouselImg
+  }
 }
 </script>
