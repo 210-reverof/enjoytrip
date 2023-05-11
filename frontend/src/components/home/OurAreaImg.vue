@@ -18,11 +18,6 @@
 
 export default {
   name: "OurAreaImg",
-  mounted() {
-    const script = document.createElement('script')
-    script.src = 'https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js'
-    document.head.appendChild(script)
-  },
   created() {
     this.getOurTrips();
   },
