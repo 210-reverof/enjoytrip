@@ -18,6 +18,9 @@ import MyRouteList from "@/components/route/MyRouteList.vue";
 import MyRouteAdd from "@/components/route/MyRouteAdd.vue";
 import MyRouteDetail from "@/components/route/MyRouteDetail.vue";
 
+// Search
+import SearchArea from "@/components/search/SearchArea.vue";
+
 Vue.use(VueRouter)
 
 const routes = [
@@ -29,7 +32,15 @@ const routes = [
   {
     path: '/search',
     name: 'search',
-    component: SearchView
+    component: SearchView,
+    redirect: '/search/area',
+    children: [
+      {
+        path: 'area',
+        name: 'searcharea',
+        component: SearchArea,
+      }
+    ]
   },
   {
     path: '/myroute',
