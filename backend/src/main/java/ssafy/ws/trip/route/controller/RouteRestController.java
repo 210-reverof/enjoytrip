@@ -40,7 +40,6 @@ public class RouteRestController {
 	public void insert(@RequestBody Map<String, Object> requestBody, HttpSession session) throws Exception {
 		List<Integer> attrids = (List<Integer>) requestBody.get("attractions");
 	    String title = (String) requestBody.get("title");
-	    System.out.println(attrids + " " + title);
 		
 		routeService.insertRoute(new RouteDto("ww", title, attrids));
 	}
