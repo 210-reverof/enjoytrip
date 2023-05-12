@@ -37,7 +37,7 @@ public class UserRestController {
 	}
 	
 	@PostMapping("/login")
-	public UserDto login(UserDto userDto, HttpServletRequest req) throws Exception {
+	public UserDto login(@RequestBody UserDto userDto, HttpServletRequest req) throws Exception {
 		UserDto user = userService.loginUser(userDto.getId(), userDto.getPw());
 		HttpSession session = req.getSession();
 		session.setAttribute("userinfo", user);
@@ -49,6 +49,11 @@ public class UserRestController {
 		HttpSession session = req.getSession();
 		session.invalidate();
 	}
+	
+	@GetMapping("/userinfo")
+    public UserDto getUserInfo(HttpSession session) {
+        return (UserDto) session.getAttribute("userinfo");
+    }
 	
 	@PutMapping("/")
 	public UserDto update(UserDto userDto, HttpServletRequest req) throws Exception {
