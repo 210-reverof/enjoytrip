@@ -7,11 +7,24 @@ import HotPlaceView from '@/views/HotPlaceView.vue'
 import ShareView from '@/views/ShareView.vue'
 import InformView from '@/views/InformView.vue'
 
-// Inform
-import InformList from "@/components/InformArticle/InformList.vue";
-import InformDetail from "@/components/InformArticle/InformDetail.vue";
-import InformWrite from "@/components/InformArticle/InformWrite.vue";
-import InformModify from "@/components/InformArticle/InformModify.vue";
+// inform
+import InformList from "@/components/inform/InformList.vue";
+import InformDetail from "@/components/inform/InformDetail.vue";
+import InformWrite from "@/components/inform/InformWrite.vue";
+import InformModify from "@/components/inform/InformModify.vue";
+
+// share
+import ShareList from "@/components/share/ShareList.vue";
+import ShareDetail from "@/components/share/ShareDetail.vue";
+import ShareWrite from "@/components/share/ShareWrite.vue";
+import ShareModify from "@/components/share/ShareModify.vue";
+
+// hotplace
+import HotplaceList from "@/components/hotplace/HotplaceList.vue";
+import HotplaceDetail from "@/components/hotplace/HotplaceDetail.vue";
+import HotplaceWrite from "@/components/hotplace/HotplaceWrite.vue";
+import HotplaceModify from "@/components/hotplace/HotplaceModify.vue";
+
 
 Vue.use(VueRouter)
 
@@ -34,12 +47,58 @@ const routes = [
   {
     path: '/hotplace',
     name: 'hotplace',
-    component: HotPlaceView
+    component: HotPlaceView,
+    redirect: '/hotplace/list',
+    children: [
+      {
+        path: 'list',
+        name: 'hotplacelist',
+        component: HotplaceList,
+      },
+      {
+        path: 'write',
+        name: 'hotplacewrite',
+        component: HotplaceWrite,
+      },
+      {
+        path: 'detail/:no',
+        name: 'hotplacedetail',
+        component: HotplaceDetail,
+      },
+      {
+        path: 'modify/:no',
+        name: 'hotplacemodify',
+        component: HotplaceModify,
+      },
+    ]
   },
   {
     path: '/share',
     name: 'share',
-    component: ShareView
+    component: ShareView,
+    redirect: '/share/list',
+    children: [
+      {
+        path: 'list',
+        name: 'sharelist',
+        component: ShareList,
+      },
+      {
+        path: 'write',
+        name: 'sharewrite',
+        component: ShareWrite,
+      },
+      {
+        path: 'detail/:no',
+        name: 'sharedetail',
+        component: ShareDetail,
+      },
+      {
+        path: 'modify/:no',
+        name: 'sharemodify',
+        component: ShareModify,
+      },
+    ]
   },
   {
     path: '/inform',

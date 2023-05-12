@@ -41,6 +41,7 @@ public class InformArticleRestController {
 	
 	@RequestMapping(value = "/inform", method = RequestMethod.GET, headers = { "Content-type=application/json" })
 	public Map<String, Object> informBoardList(@RequestParam Map<String, String> map) throws Exception {
+		System.out.println("llllllllllllllllllllst");
 		List<InformArticleDto> list = informArticleService.listArticle(map);
 		PageNavigation pageNavigation = informArticleService.makePageNavigation(map);
 		Map<String, Object> ret = new HashMap<String, Object>();

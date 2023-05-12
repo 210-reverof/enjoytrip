@@ -30,10 +30,8 @@
             <!-- <button type="button" id="btn-mv-register" class="btn btn-outline-primary btn-sm">글쓰기 </button> -->
           </div>
           <div class="col-md-7 offset-3">
-            <form class="d-flex" id="form-search" action="">
-              <input type="hidden" name="action" value="list" />
-              <input type="hidden" name="pgno" value="1" />
               <!-- 검색창 -->
+            <!-- <form class="d-flex" id="form-search" action="">
               <select
                 name="key"
                 id="key"
@@ -41,7 +39,6 @@
                 aria-label="검색조건"
               >
                 <option selected>검색조건</option>
-                <!-- <option value="article_no">글번호</option> -->
                 <option value="title">제목</option>
                 <option value="user_id">작성자</option>
               </select>
@@ -57,7 +54,7 @@
                   검색
                 </button>
               </div>
-            </form>
+            </form> -->
           </div>
         </div>
         <div v-if="informarticles.length">
