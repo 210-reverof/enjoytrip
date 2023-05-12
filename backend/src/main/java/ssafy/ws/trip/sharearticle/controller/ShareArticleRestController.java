@@ -52,13 +52,8 @@ public class ShareArticleRestController {
 
 	
 	@RequestMapping(value = "/share/{articleno}", method = RequestMethod.GET, headers = { "Content-type=application/json" })
-	public Map<String, Object> shareBoardView(@RequestParam Map<String, Object> map) throws Exception {
-		int articleNo = (int)map.get("articleNo");
+	public Map<String, Object> shareBoardView(@PathVariable("articleno") int articleNo) throws Exception {
 		ShareArticleDto shareArticleDto = shareArticleService.getArticle(articleNo);
-		UserDto userDto = (UserDto) map.get("userinfo");
-		if(userDto != null) {
-			shareArticleDto.setUserId(userDto.getId());
-		}
 		shareArticleDto.setArticleNo(articleNo);
 		System.out.println("view obj ::"+shareArticleDto.toString());
 		shareArticleService.updateHit(articleNo);
@@ -73,10 +68,12 @@ public class ShareArticleRestController {
 	
 	@RequestMapping(value = "/share", method = RequestMethod.POST, headers = { "Content-type=application/json" })
 	public Map<String, Object> shareBoardWrite(@RequestBody Map<String, Object> map) throws Exception {
-		ShareArticleDto shareArticleDto = (ShareArticleDto) map.get("shareArticleDto");
-		UserDto userDto = (UserDto) map.get("userinfo");
+//		ShareArticleDto shareArticleDto = (ShareArticleDto) map.get("shareArticleDto");
+		ShareArticleDto shareArticleDto = new ShareArticleDto();
+		shareArticleDto.setUserId("1234");
+		shareArticleDto.setTitle((String)map.get("title"));
+		shareArticleDto.setContent((String)map.get("content"));
 		shareArticleService.writeArticle(shareArticleDto);
-		shareArticleDto.setUserId(userDto.getId());
 		Map<String, Object> ret = new HashMap<String, Object>();
 //		ret.put("pgno", map.get("pgno"));
 //		ret.put("key", map.get("key"));
@@ -88,7 +85,11 @@ public class ShareArticleRestController {
 
 	@RequestMapping(value = "/share", method = RequestMethod.PUT, headers = { "Content-type=application/json" })
 	public Map<String, Object> shareBoardModify(@RequestBody Map<String, Object> map) throws Exception {
-		ShareArticleDto shareArticleDto = (ShareArticleDto) map.get("shareArticleDto");
+		ShareArticleDto shareArticleDto = new ShareArticleDto();
+		shareArticleDto.setUserId("1234");
+		shareArticleDto.setArticleNo((int)map.get("articleNo"));
+		shareArticleDto.setTitle((String)map.get("title"));
+		shareArticleDto.setContent((String)map.get("content"));
 		shareArticleService.modifyArticle(shareArticleDto);
 		Map<String, Object> ret = new HashMap<String, Object>();
 //		ret.put("pgno", map.get("pgno"));
@@ -99,8 +100,7 @@ public class ShareArticleRestController {
 
 	
 	@RequestMapping(value = "/share/{articleno}", method = RequestMethod.DELETE, headers = { "Content-type=application/json" })
-	public Map<String, Object> shareBoardDelete(@RequestParam Map<String, Object> map) throws Exception {
-		int articleNo = (int)map.get("articleNo");
+	public Map<String, Object> shareBoardDelete(@PathVariable("articleno") int articleNo) throws Exception {
 		shareArticleService.deleteArticle(articleNo);
 		Map<String, Object> ret = new HashMap<String, Object>();
 //		ret.put("pgno", map.get("pgno"));

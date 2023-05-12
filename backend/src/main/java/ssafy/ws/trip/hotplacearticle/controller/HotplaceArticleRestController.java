@@ -52,13 +52,8 @@ public class HotplaceArticleRestController {
 
 	
 	@RequestMapping(value = "/hotplace/{articleno}", method = RequestMethod.GET, headers = { "Content-type=application/json" })
-	public Map<String, Object> hotplaceBoardView(@RequestParam Map<String, Object> map) throws Exception {
-		int articleNo = (int)map.get("articleNo");
+	public Map<String, Object> hotplaceBoardView(@PathVariable("articleno") int articleNo) throws Exception {
 		HotplaceArticleDto hotplaceArticleDto = hotplaceArticleService.getArticle(articleNo);
-		UserDto userDto = (UserDto) map.get("userinfo");
-		if(userDto != null) {
-			hotplaceArticleDto.setUserId(userDto.getId());
-		}
 		hotplaceArticleDto.setArticleNo(articleNo);
 		System.out.println("view obj ::"+hotplaceArticleDto.toString());
 		hotplaceArticleService.updateHit(articleNo);
@@ -73,10 +68,12 @@ public class HotplaceArticleRestController {
 	
 	@RequestMapping(value = "/hotplace", method = RequestMethod.POST, headers = { "Content-type=application/json" })
 	public Map<String, Object> hotplaceBoardWrite(@RequestBody Map<String, Object> map) throws Exception {
-		HotplaceArticleDto hotplaceArticleDto = (HotplaceArticleDto) map.get("hotplaceArticleDto");
-		UserDto userDto = (UserDto) map.get("userinfo");
-		hotplaceArticleService.writeArticle(hotplaceArticleDto, (MultipartFile)map.get("file"));
-		hotplaceArticleDto.setUserId(userDto.getId());
+		HotplaceArticleDto hotplaceArticleDto = new HotplaceArticleDto();
+		hotplaceArticleDto.setUserId("1234");
+		hotplaceArticleDto.setTitle((String)map.get("title"));
+		hotplaceArticleDto.setContent((String)map.get("content"));
+		hotplaceArticleService.writeArticle(hotplaceArticleDto);
+//		hotplaceArticleService.writeArticle(hotplaceArticleDto, (MultipartFile)map.get("file"));
 		Map<String, Object> ret = new HashMap<String, Object>();
 //		ret.put("pgno", map.get("pgno"));
 //		ret.put("key", map.get("key"));
@@ -87,8 +84,12 @@ public class HotplaceArticleRestController {
 
 	@RequestMapping(value = "/hotplace", method = RequestMethod.PUT, headers = { "Content-type=application/json" })
 	public Map<String, Object> hotplaceBoardModify(@RequestBody Map<String, Object> map) throws Exception {
-		HotplaceArticleDto hotplaceArticleDto = (HotplaceArticleDto) map.get("hotplaceArticleDto");
-		hotplaceArticleService.modifyArticle(hotplaceArticleDto, (MultipartFile)map.get("file"));
+		HotplaceArticleDto hotplaceArticleDto = new HotplaceArticleDto();
+		hotplaceArticleDto.setUserId("1234");
+		hotplaceArticleDto.setArticleNo((int)map.get("articleNo"));
+		hotplaceArticleDto.setTitle((String)map.get("title"));
+		hotplaceArticleDto.setContent((String)map.get("content"));
+		hotplaceArticleService.modifyArticle(hotplaceArticleDto);
 		Map<String, Object> ret = new HashMap<String, Object>();
 //		ret.put("pgno", map.get("pgno"));
 //		ret.put("key", map.get("key"));
@@ -98,8 +99,7 @@ public class HotplaceArticleRestController {
 
 	
 	@RequestMapping(value = "/hotplace/{articleno}", method = RequestMethod.DELETE, headers = { "Content-type=application/json" })
-	public Map<String, Object> hotplaceBoardDelete(@RequestParam Map<String, Object> map) throws Exception {
-		int articleNo = (int)map.get("articleNo");
+	public Map<String, Object> hotplaceBoardDelete(@PathVariable("articleno") int articleNo) throws Exception {
 		hotplaceArticleService.deleteArticle(articleNo);
 		Map<String, Object> ret = new HashMap<String, Object>();
 //		ret.put("pgno", map.get("pgno"));

@@ -3,7 +3,7 @@
     <div class="row justify-content-center">
       <div class="col-lg-8 col-md-10 col-sm-12">
         <h2 class="my-3 py-3 shadow-sm bg-light text-center">
-          <mark class="sky">공 지 사 항</mark>
+          <mark class="sky">핫플 자랑하기</mark>
         </h2>
       </div>
       <div class="col-lg-8 col-md-10 col-sm-12">
@@ -23,7 +23,7 @@
               type="button"
               id="btn-mv-register"
               class="btn btn-outline-primary btn-sm"
-              @click="$router.push({name:'informwrite'})"
+              @click="$router.push({name:'hotplacewrite'})"
             >
               글쓰기
             </button>
@@ -57,7 +57,7 @@
             </form> -->
           </div>
         </div>
-        <div v-if="informarticles.length">
+        <div v-if="hotplacearticles.length">
           <table class="table table-hover">
             <thead>
               <tr class="text-center">
@@ -68,7 +68,7 @@
                 <th scope="col">작성일</th>
               </tr>
             </thead>
-            <tbody v-for="(article, i) in informarticles" :key="i">
+            <tbody v-for="(article, i) in hotplacearticles" :key="i">
               <tr class="text-center">
                 <th scope="row">{{ article.articleNo }}</th>
                 <td class="text-start">
@@ -76,7 +76,7 @@
                     href="#"
                     class="article-title link-dark"
                     style="text-decoration: none"
-                    @click="$router.push({name: 'informdetail', params: {no: article.articleNo}})"
+                    @click="$router.push({name: 'hotplacedetail', params: {no: article.articleNo}})"
                   >
                     {{ article.title }}
                   </a>
@@ -98,7 +98,7 @@
       <input type="hidden" name="key" value="${key}">
       <input type="hidden" name="word" value="${word}">
     </form>
-    <form id="form-no-param" method="get" action="${root}/informarticle/view">
+    <form id="form-no-param" method="get" action="${root}/hotplacearticle/view">
       <input type="hidden" name="pgno" value="${pgno}">
       <input type="hidden" name="key" value="${key}">
       <input type="hidden" name="word" value="${word}">
@@ -110,19 +110,19 @@
 import axios from "axios";
 
 export default {
-  name: "InformList",
+  name: "HotplaceList",
   components: {},
   data() {
     return {
-      informarticles: [],
+      hotplacearticles: [],
     };
   },
   created() {
-    const url = `http://localhost:8080/enjoytrip/informarticlerest/inform?pgno=${this.$route.query.pgno}&key=${this.$route.query.key}&word=${this.$route.query.word}`;
+    const url = `http://localhost:8080/enjoytrip/hotplacearticlerest/hotplace?pgno=${this.$route.query.pgno}&key=${this.$route.query.key}&word=${this.$route.query.word}`;
     axios.get(url).then((res) => {
       // console.log(res)
-      this.informarticles = res.data.articles;
-      // console.log(this.informarticles);
+      this.hotplacearticles = res.data.articles;
+      // console.log(this.hotplacearticles);
     });
   },
 };

@@ -2,7 +2,7 @@
     <div class="sb-nav-fixed">
       <div class="mt-5 pt-5">
         <div class="container px-4">
-          <h1 class="mt-4 d-flex justify-content-center">공지사항</h1>
+          <h1 class="mt-4 d-flex justify-content-center">여행정보 공유</h1>
 
           <div
             class="container rounded bg-secondary bg-opacity-25 text-secondary fs-2 p-4 mb-2"
@@ -32,7 +32,7 @@
             <div class="text-nowrap ms-2">
               <a
                 class="btn btn-outline-primary"
-                @click="$router.push({name:'inform', query: {pgno:'1', key:'', word:''}})"
+                @click="$router.push({name:'share', query: {pgno:'1', key:'', word:''}})"
               >
                 <!-- <i class="fas fa-table me-1"></i> -->
                 <i class="fas fa-edit"></i> 글목록
@@ -44,7 +44,7 @@
               type="button"
               id="btn-mv-modify"
               class="btn btn-outline-success mb-3 ms-1"
-              @click="$router.push({name: 'informmodify', params: { no: article.articleNo }})"
+              @click="$router.push({name: 'sharemodify', params: { no: article.articleNo }})"
             >
               글수정
             </button>
@@ -68,7 +68,7 @@
 import axios from "axios";
 
 export default {
-  name: "InformDetail",
+  name: "ShareDetail",
   components: {},
   data() {
     return {
@@ -80,14 +80,14 @@ export default {
     //   no = CheckNo.data.no;
     // },
     deleteArticle: function(){
-      axios.delete(`http://localhost:8080/enjoytrip/informarticlerest/inform/${this.$route.params.no}`)
+      axios.delete(`http://localhost:8080/enjoytrip/sharearticlerest/share/${this.$route.params.no}`)
       .then((res) => {this.article = res.data})
       .then(this.$router.push({name:'inform', query: {pgno:'1', key:'', word:''}}))
       .then(window.location.reload());
     }
   },
   created() {
-    const url = `http://localhost:8080/enjoytrip/informarticlerest/inform/${this.$route.params.no}`;
+    const url = `http://localhost:8080/enjoytrip/sharearticlerest/share/${this.$route.params.no}`;
     axios.get(url).then((res) => {
       console.log(res)
       this.article = res.data.article;

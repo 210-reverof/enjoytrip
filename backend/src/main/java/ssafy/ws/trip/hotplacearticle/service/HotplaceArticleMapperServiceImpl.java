@@ -24,28 +24,29 @@ public class HotplaceArticleMapperServiceImpl implements HotplaceArticleService{
 	@Autowired
 	SqlSession session;
 	
+//	MultipartFile file
 	@Override
-	public void writeArticle(HotplaceArticleDto hotplaceArticleDto, MultipartFile file) throws Exception {
+	public void writeArticle(HotplaceArticleDto hotplaceArticleDto) throws Exception {
 		System.out.println("service writeArticle");
-		
-		/*우리의 프로젝트경로를 담아주게 된다 - 저장할 경로를 지정*/
-        String projectPath = System.getProperty("user.dir") + "\\src\\main\\resources\\static\\files";
-        /*식별자 . 랜덤으로 이름 만들어줌*/
-        UUID uuid = UUID.randomUUID();
-        /*랜덤식별자_원래파일이름 = 저장될 파일이름 지정*/
-        String fileName = uuid + "_" + file.getOriginalFilename();
-        /*빈 껍데기 생성*/
-        /*File을 생성할건데, 이름은 "name" 으로할거고, projectPath 라는 경로에 담긴다는 뜻*/
-        System.out.println(projectPath);
-        File saveFile = new File(projectPath, fileName);
-        String filepath = projectPath + "\\" + fileName;
-        System.out.println(filepath);
-        file.transferTo(saveFile);
-        /*디비에 파일 넣기*/
-        hotplaceArticleDto.setFilename(fileName);
-        /*저장되는 경로*/
-        hotplaceArticleDto.setFilepath("files/" + fileName); /*저장된파일의이름,저장된파일의경로*/
-        
+
+//		/*우리의 프로젝트경로를 담아주게 된다 - 저장할 경로를 지정*/
+//        String projectPath = System.getProperty("user.dir") + "\\src\\main\\resources\\static\\files";
+//        /*식별자 . 랜덤으로 이름 만들어줌*/
+//        UUID uuid = UUID.randomUUID();
+//        /*랜덤식별자_원래파일이름 = 저장될 파일이름 지정*/
+//        String fileName = uuid + "_" + file.getOriginalFilename();
+//        /*빈 껍데기 생성*/
+//        /*File을 생성할건데, 이름은 "name" 으로할거고, projectPath 라는 경로에 담긴다는 뜻*/
+//        System.out.println(projectPath);
+//        File saveFile = new File(projectPath, fileName);
+//        String filepath = projectPath + "\\" + fileName;
+//        System.out.println(filepath);
+//        file.transferTo(saveFile);
+//        /*디비에 파일 넣기*/
+//        hotplaceArticleDto.setFilename(fileName);
+//        /*저장되는 경로*/
+//        hotplaceArticleDto.setFilepath("files/" + fileName); /*저장된파일의이름,저장된파일의경로*/
+
 		session.getMapper(HotplaceArticleRepository.class).writeArticle(hotplaceArticleDto);
 	}
 
@@ -85,24 +86,24 @@ public class HotplaceArticleMapperServiceImpl implements HotplaceArticleService{
 	}
 
 	@Override
-	public void modifyArticle(HotplaceArticleDto hotplaceArticleDto, MultipartFile file) throws Exception {
+	public void modifyArticle(HotplaceArticleDto hotplaceArticleDto) throws Exception {
 		System.out.println("service modifyArticle");
 		
-		/*우리의 프로젝트경로를 담아주게 된다 - 저장할 경로를 지정*/
-        String projectPath = System.getProperty("user.dir") + "\\src\\main\\resources\\static\\files";
-        /*식별자 . 랜덤으로 이름 만들어줌*/
-        UUID uuid = UUID.randomUUID();
-        /*랜덤식별자_원래파일이름 = 저장될 파일이름 지정*/
-        String fileName = uuid + "_" + file.getOriginalFilename();
-        /*빈 껍데기 생성*/
-        /*File을 생성할건데, 이름은 "name" 으로할거고, projectPath 라는 경로에 담긴다는 뜻*/
-        System.out.println(projectPath);
-        File saveFile = new File(projectPath, fileName);
-        file.transferTo(saveFile);
-        /*디비에 파일 넣기*/
-        hotplaceArticleDto.setFilename(fileName);
-        /*저장되는 경로*/
-        hotplaceArticleDto.setFilepath("files/" + fileName); /*저장된파일의이름,저장된파일의경로*/
+//		/*우리의 프로젝트경로를 담아주게 된다 - 저장할 경로를 지정*/
+//        String projectPath = System.getProperty("user.dir") + "\\src\\main\\resources\\static\\files";
+//        /*식별자 . 랜덤으로 이름 만들어줌*/
+//        UUID uuid = UUID.randomUUID();
+//        /*랜덤식별자_원래파일이름 = 저장될 파일이름 지정*/
+//        String fileName = uuid + "_" + file.getOriginalFilename();
+//        /*빈 껍데기 생성*/
+//        /*File을 생성할건데, 이름은 "name" 으로할거고, projectPath 라는 경로에 담긴다는 뜻*/
+//        System.out.println(projectPath);
+//        File saveFile = new File(projectPath, fileName);
+//        file.transferTo(saveFile);
+//        /*디비에 파일 넣기*/
+//        hotplaceArticleDto.setFilename(fileName);
+//        /*저장되는 경로*/
+//        hotplaceArticleDto.setFilepath("files/" + fileName); /*저장된파일의이름,저장된파일의경로*/
         
 		
 		session.getMapper(HotplaceArticleRepository.class).modifyArticle(hotplaceArticleDto);

@@ -2,7 +2,7 @@
   <div class="sb-nav-fixed">
     <div class="mt-5 pt-5">
       <div class="container px-4">
-        <h1 class="mt-4 d-flex justify-content-center">공지사항</h1>
+        <h1 class="mt-4 d-flex justify-content-center">핫플 자랑하기</h1>
         <div
           class="container rounded bg-success bg-opacity-75 text-white text-center fs-2 p-4"
         >
@@ -38,7 +38,7 @@
               </a>
             </div>
             <div class=" col-md-1 ms-2 text-nowrap">
-              <a class="btn btn-danger" href="" @click="$router.push({name:'inform', query: {pgno:'1', key:'', word:''}})">
+              <a class="btn btn-danger" href="" @click="$router.push({name:'hotplace', query: {pgno:'1', key:'', word:''}})">
                 <!-- <i class="fas fa-table me-1"></i> -->
                 <i class="fas fa-edit"></i> 목록
               </a>
@@ -53,7 +53,7 @@
 import axios from "axios";
 
 export default {
-    name: "InformModify",
+    name: "HotplaceModify",
     components: {},
     data() {
         return {
@@ -76,7 +76,7 @@ export default {
     registArticle() {
       // 비동기
       console.log(this.article);
-      const url = `http://localhost:8080/enjoytrip/informarticlerest/inform`;
+      const url = `http://localhost:8080/enjoytrip/hotplacearticlerest/hotplace`;
       axios.put(url, {
         articleNo: this.$route.params.no,
         userId: this.article.userId,
@@ -84,12 +84,12 @@ export default {
         content: this.article.content,
         //페이지, 사용자
       }).then(response => this.data = response.data)
-      this.$router.push({name:'inform', query: {pgno:'1', key:'', word:''}});
+      this.$router.push({name:'hotplace', query: {pgno:'1', key:'', word:''}});
       window.location.reload();
     },
   },
     created() {
-        const url = `http://localhost:8080/enjoytrip/informarticlerest/inform/${this.$route.params.no}`;
+        const url = `http://localhost:8080/enjoytrip/hotplacearticlerest/hotplace/${this.$route.params.no}`;
         axios.get(url).then((res) => {
         this.article = res.data.article;
         console.log(res)

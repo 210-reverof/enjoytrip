@@ -2,7 +2,7 @@
   <div class="sb-nav-fixed">
     <div class="mt-5 pt-5">
       <div class="container px-4">
-        <h1 class="mt-4 d-flex justify-content-center">공지사항</h1>
+        <h1 class="mt-4 d-flex justify-content-center">여행정보 공유</h1>
         <div
           class="container rounded bg-success bg-opacity-75 text-white text-center fs-2 p-4"
         >
@@ -40,7 +40,7 @@
               </a>
             </div>
             <div class=" col-md-1 ms-2 text-nowrap">
-              <a class="btn btn-danger" href="" @click="$router.push({name:'inform', query: {pgno:'1', key:'', word:''}})">
+              <a class="btn btn-danger" href="" @click="$router.push({name:'share', query: {pgno:'1', key:'', word:''}})">
                 <!-- <i class="fas fa-table me-1"></i> -->
                 <i class="fas fa-edit"></i> 목록
               </a>
@@ -55,7 +55,7 @@
 import axios from "axios";
 
 export default {
-  name: "InformWrite",
+  name: "ShareWrite",
   components: {},
   data() {
     return {
@@ -76,7 +76,7 @@ export default {
     },
     registArticle() {
       // 비동기
-      const url = `http://localhost:8080/enjoytrip/informarticlerest/inform`;
+      const url = `http://localhost:8080/enjoytrip/sharearticlerest/share`;
       axios.post(url, {
         userId: this.userId,
         title: this.title,
@@ -84,7 +84,7 @@ export default {
         //페이지, 사용자
       }).then(response => this.data = response.data)
       console.log("글작성 하러가자!!!!");
-      this.$router.push({name:'inform', query: {pgno:'1', key:'', word:''}});
+      this.$router.push({name:'share', query: {pgno:'1', key:'', word:''}});
       window.location.reload();
     },
   },

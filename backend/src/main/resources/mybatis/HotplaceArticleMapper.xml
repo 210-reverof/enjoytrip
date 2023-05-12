@@ -23,9 +23,13 @@
 		</if>
 	</sql>
 	
-	<insert id="writeArticle" parameterType="HotplaceArticleDto">
+<!-- 	<insert id="writeArticle" parameterType="HotplaceArticleDto">
 		insert into hotplacearticle (user_id, title, content, hit, createdat, filename, filepath)
 		values (#{userId}, #{title}, #{content}, 0, now(), #{filename}, #{filepath})
+	</insert> -->
+	<insert id="writeArticle" parameterType="HotplaceArticleDto">
+		insert into hotplacearticle (user_id, title, content, hit, createdat)
+		values (#{userId}, #{title}, #{content}, 0, now())
 	</insert>
 	
 	<select id="listArticle" resultMap="article">
@@ -45,8 +49,14 @@
 		</where>
 	</select>
 	
-	<select id="getArticle" parameterType="int" resultType="HotplaceArticleDto">
+	<!-- <select id="getArticle" parameterType="int" resultType="HotplaceArticleDto">
 		select b.article_no, b.user_id, b.title, b.content, b.hit, b.createdat, b.filename, b.filepath, m.name 
+		from hotplacearticle b, user m
+		where b.article_no = #{articleNo}
+		and b.user_id = m.id;
+	</select> -->
+	<select id="getArticle" parameterType="int" resultType="HotplaceArticleDto">
+		select b.article_no, b.user_id, b.title, b.content, b.hit, b.createdat, m.name 
 		from hotplacearticle b, user m
 		where b.article_no = #{articleNo}
 		and b.user_id = m.id;
@@ -58,9 +68,14 @@
 		where article_no = #{articleNo}
 	</update>
 	
-	<update id="modifyArticle" parameterType="HotplaceArticleDto">
+	<!-- <update id="modifyArticle" parameterType="HotplaceArticleDto">
 		update hotplacearticle
 		set title = #{title}, content = #{content}, filename = #{filename}, filepath = #{filepath}
+		where article_no = #{articleNo}
+	</update> -->
+	<update id="modifyArticle" parameterType="HotplaceArticleDto">
+		update hotplacearticle
+		set title = #{title}, content = #{content},
 		where article_no = #{articleNo}
 	</update>
 	
