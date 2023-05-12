@@ -22,15 +22,33 @@
                         <router-link :to="{name:'inform', query: {pgno:'1', key:'', word:''}}" class="nav-link ps-5 px-2 fs-5" style="color: Plum">공지사항</router-link>
                     </li>
                 </ul>
+                <div v-if="userinfo">
+                    <button>logout</button>
+                </div>
+                <div v-else>
+                    <login-comp></login-comp>
+                </div>
             </div>
         </div>
     </header>
 </template>
 
 <script>
+import LoginComp from '@/components/LoginComp.vue';
 
 export default {
-    
+    name: "ConfirmHeader",
+    components: {
+        LoginComp
+    },
+    data() {
+        return {
+            userinfo: null
+        };
+    },
+    created() {
+        
+    }
 }
 
 </script>
