@@ -26,6 +26,11 @@ import HotplaceWrite from "@/components/hotplace/HotplaceWrite.vue";
 import HotplaceModify from "@/components/hotplace/HotplaceModify.vue";
 
 
+// Route
+import MyRouteList from "@/components/route/MyRouteList.vue";
+import MyRouteAdd from "@/components/route/MyRouteAdd.vue";
+import MyRouteDetail from "@/components/route/MyRouteDetail.vue";
+
 Vue.use(VueRouter)
 
 const routes = [
@@ -42,7 +47,25 @@ const routes = [
   {
     path: '/myroute',
     name: 'myroute',
-    component: MyRouteView
+    component: MyRouteView,
+    redirect: '/myroute/list',
+    children: [
+      {
+        path: 'list',
+        name: 'myroutelist',
+        component: MyRouteList,
+      },
+      {
+        path: 'add',
+        name: 'myrouteadd',
+        component: MyRouteAdd,
+      },
+      {
+        path: 'detail/:routeId',
+        name: 'myroutedetail',
+        component: MyRouteDetail,
+      }
+    ]
   },
   {
     path: '/hotplace',
