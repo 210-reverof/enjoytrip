@@ -19,7 +19,7 @@
                         <router-link to="/share" class="nav-link ps-5 px-2 fs-5" style="color: Plum">여행정보공유</router-link>
                     </li>
                     <li>
-                        <router-link to="/inform" class="nav-link ps-5 px-2 fs-5" style="color: Plum">공지사항</router-link>
+                        <router-link :to="{name:'inform', query: {pgno:'1', key:'', word:''}}" class="nav-link ps-5 px-2 fs-5" style="color: Plum">공지사항</router-link>
                     </li>
                 </ul>
             </div>

@@ -7,6 +7,12 @@ import HotPlaceView from '@/views/HotPlaceView.vue'
 import ShareView from '@/views/ShareView.vue'
 import InformView from '@/views/InformView.vue'
 
+// Inform
+import InformList from "@/components/InformArticle/InformList.vue";
+import InformDetail from "@/components/InformArticle/InformDetail.vue";
+import InformWrite from "@/components/InformArticle/InformWrite.vue";
+import InformModify from "@/components/InformArticle/InformModify.vue";
+
 Vue.use(VueRouter)
 
 const routes = [
@@ -38,7 +44,30 @@ const routes = [
   {
     path: '/inform',
     name: 'inform',
-    component: InformView
+    component: InformView,
+    redirect: '/inform/list',
+    children: [
+      {
+        path: 'list',
+        name: 'informlist',
+        component: InformList,
+      },
+      {
+        path: 'write',
+        name: 'informwrite',
+        component: InformWrite,
+      },
+      {
+        path: 'detail/:no',
+        name: 'informdetail',
+        component: InformDetail,
+      },
+      {
+        path: 'modify/:no',
+        name: 'informmodify',
+        component: InformModify,
+      },
+    ]
   },
 ]
 
