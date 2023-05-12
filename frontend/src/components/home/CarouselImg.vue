@@ -37,3 +37,23 @@ export default {
     }
 }
 </script>
+
+
+<style>
+  .carousel-inner {
+    width: 100%;
+    height: 400px;
+    /* 이미지 높이 변경 */
+  }
+
+  .carousel-item {
+    width: 100%;
+    height: 100%;
+  }
+
+  .d-block {
+    display: block;
+    width: 100%;
+    height: 100%;
+  }
+</style>

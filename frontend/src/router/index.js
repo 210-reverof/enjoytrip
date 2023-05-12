@@ -13,6 +13,10 @@ import InformDetail from "@/components/InformArticle/InformDetail.vue";
 import InformWrite from "@/components/InformArticle/InformWrite.vue";
 import InformModify from "@/components/InformArticle/InformModify.vue";
 
+// Route
+import MyRouteList from "@/components/route/MyRouteList.vue";
+import MyRouteAdd from "@/components/route/MyRouteAdd.vue";
+
 Vue.use(VueRouter)
 
 const routes = [
@@ -29,7 +33,20 @@ const routes = [
   {
     path: '/myroute',
     name: 'myroute',
-    component: MyRouteView
+    component: MyRouteView,
+    redirect: '/myroute/list',
+    children: [
+      {
+        path: 'list',
+        name: 'myroutelist',
+        component: MyRouteList,
+      },
+      {
+        path: 'add',
+        name: 'myrouteadd',
+        component: MyRouteAdd,
+      }
+    ]
   },
   {
     path: '/hotplace',
