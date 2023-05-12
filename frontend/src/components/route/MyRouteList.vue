@@ -8,9 +8,9 @@
     <div class="col-lg-8 col-md-10 col-sm-12">
       <div class="row align-self-center mb-2">
         <div class="col-md-2 text-start">
-          <a href="#" class="btn btn-outline-primary btn-sm">
+          <button class="btn btn-outline-primary btn-sm" @click="movePage">
             여행 경로 추가하기
-          </a>
+          </button>
         </div>
       </div>
       <table class="table table-hover">
@@ -60,7 +60,6 @@ export default {
       axios
         .request(config)
         .then((response) => {
-            console.log(response.data);
           this.routes = response.data;
         })
     },

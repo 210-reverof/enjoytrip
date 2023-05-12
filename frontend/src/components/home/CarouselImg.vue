@@ -43,7 +43,6 @@ export default {
   .carousel-inner {
     width: 100%;
     height: 400px;
-    /* 이미지 높이 변경 */
   }
 
   .carousel-item {
