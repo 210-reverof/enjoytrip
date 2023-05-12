@@ -16,6 +16,7 @@ import InformModify from "@/components/InformArticle/InformModify.vue";
 // Route
 import MyRouteList from "@/components/route/MyRouteList.vue";
 import MyRouteAdd from "@/components/route/MyRouteAdd.vue";
+import MyRouteDetail from "@/components/route/MyRouteDetail.vue";
 
 Vue.use(VueRouter)
 
@@ -45,6 +46,11 @@ const routes = [
         path: 'add',
         name: 'myrouteadd',
         component: MyRouteAdd,
+      },
+      {
+        path: 'detail/:routeId',
+        name: 'myroutedetail',
+        component: MyRouteDetail,
       }
     ]
   },

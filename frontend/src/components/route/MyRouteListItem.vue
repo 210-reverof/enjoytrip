@@ -15,7 +15,7 @@
     },
     methods: {
       moveDetail() {
-        //this.$router.push('/board/detail/' + this.article.articleno)
+        this.$router.push('/myroute/detail/' + this.route.routeId)
       }
     }
   };
