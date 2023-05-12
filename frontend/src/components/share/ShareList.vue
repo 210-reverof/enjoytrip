@@ -3,7 +3,7 @@
     <div class="row justify-content-center">
       <div class="col-lg-8 col-md-10 col-sm-12">
         <h2 class="my-3 py-3 shadow-sm bg-light text-center">
-          <mark class="sky">공 지 사 항</mark>
+          <mark class="sky">여행정보 공유</mark>
         </h2>
       </div>
       <div class="col-lg-8 col-md-10 col-sm-12">
@@ -23,17 +23,15 @@
               type="button"
               id="btn-mv-register"
               class="btn btn-outline-primary btn-sm"
-              @click="$router.push({name:'informwrite'})"
+              @click="$router.push({name:'sharewrite'})"
             >
               글쓰기
             </button>
             <!-- <button type="button" id="btn-mv-register" class="btn btn-outline-primary btn-sm">글쓰기 </button> -->
           </div>
           <div class="col-md-7 offset-3">
-            <form class="d-flex" id="form-search" action="">
-              <input type="hidden" name="action" value="list" />
-              <input type="hidden" name="pgno" value="1" />
               <!-- 검색창 -->
+            <!-- <form class="d-flex" id="form-search" action="">
               <select
                 name="key"
                 id="key"
@@ -41,7 +39,6 @@
                 aria-label="검색조건"
               >
                 <option selected>검색조건</option>
-                <!-- <option value="article_no">글번호</option> -->
                 <option value="title">제목</option>
                 <option value="user_id">작성자</option>
               </select>
@@ -57,10 +54,10 @@
                   검색
                 </button>
               </div>
-            </form>
+            </form> -->
           </div>
         </div>
-        <div v-if="informarticles.length">
+        <div v-if="sharearticles.length">
           <table class="table table-hover">
             <thead>
               <tr class="text-center">
@@ -71,7 +68,7 @@
                 <th scope="col">작성일</th>
               </tr>
             </thead>
-            <tbody v-for="(article, i) in informarticles" :key="i">
+            <tbody v-for="(article, i) in sharearticles" :key="i">
               <tr class="text-center">
                 <th scope="row">{{ article.articleNo }}</th>
                 <td class="text-start">
@@ -79,7 +76,7 @@
                     href="#"
                     class="article-title link-dark"
                     style="text-decoration: none"
-                    @click="$router.push({name: 'informdetail', params: {no: article.articleNo}})"
+                    @click="$router.push({name: 'sharedetail', params: {no: article.articleNo}})"
                   >
                     {{ article.title }}
                   </a>
@@ -113,18 +110,18 @@
 import axios from "axios";
 
 export default {
-  name: "InformList",
+  name: "ShareList",
   components: {},
   data() {
     return {
-      informarticles: [],
+      sharearticles: [],
     };
   },
   created() {
-    const url = `http://localhost:8080/enjoytrip/informarticlerest/inform?pgno=${this.$route.query.pgno}&key=${this.$route.query.key}&word=${this.$route.query.word}`;
+    const url = `http://localhost:8080/enjoytrip/sharearticlerest/share?pgno=${this.$route.query.pgno}&key=${this.$route.query.key}&word=${this.$route.query.word}`;
     axios.get(url).then((res) => {
       // console.log(res)
-      this.informarticles = res.data.articles;
+      this.sharearticles = res.data.articles;
       // console.log(this.informarticles);
     });
   },
